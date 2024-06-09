@@ -1,11 +1,8 @@
 package dk.dtu.compute.se.pisd.RoboSpring.Controller;
 import dk.dtu.compute.se.pisd.RoboSpring.Model.Board;
-import dk.dtu.compute.se.pisd.RoboSpring.Model.CompleteBoard;
-import dk.dtu.compute.se.pisd.RoboSpring.Model.EnergyCube;
 import dk.dtu.compute.se.pisd.RoboSpring.Repository.BoardRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

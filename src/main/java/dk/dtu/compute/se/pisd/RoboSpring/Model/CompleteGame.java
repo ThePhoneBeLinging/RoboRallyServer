@@ -2,7 +2,6 @@ package dk.dtu.compute.se.pisd.RoboSpring.Model;
 
 import dk.dtu.compute.se.pisd.RoboSpring.Model.Player.Card;
 import dk.dtu.compute.se.pisd.RoboSpring.Model.Player.Player;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,10 +13,10 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CompleteBoard
+public class CompleteGame
 {
-    private Long boardID;
-    private Long playerID;
+    private Long gameID;
+    private Long senderID;
     private Board board;
     private List<EnergyCube> energyCubes;
     private List<Player> playerList;

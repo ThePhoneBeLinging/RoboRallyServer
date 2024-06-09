@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface EnergyRepository extends JpaRepository<EnergyCube, Long> {
 
-    public List<EnergyCube> findEnergyCubesByBoardID(Long boardID);
+    public List<EnergyCube> findEnergyCubesByGameID(Long gameID);
 }

@@ -1,4 +1,4 @@
-package dk.dtu.compute.se.pisd.RoboSpring.Model.Player;
+package dk.dtu.compute.se.pisd.RoboSpring.Model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -7,18 +7,16 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "activeCards")
+@Table(name = "lobbies")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Card
+public class LobbyObject
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private long gameID;
-    private long playerID;
-    private String command;
-    private String location;
+    private Long gameID;
+    private Long playerID;
 }

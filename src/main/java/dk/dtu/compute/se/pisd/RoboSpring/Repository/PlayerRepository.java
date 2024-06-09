@@ -9,5 +9,5 @@ import java.util.List;
 public interface PlayerRepository extends JpaRepository<Player, Long> {
 
     public Player findPlayerById(Long id);
-    public List<Player> findPlayersByBoardID(Long id);
+    public List<Player> findPlayersByGameID(Long id);
 }

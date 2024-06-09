@@ -21,7 +21,7 @@ public class Player
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private long boardID;
+    private long gameID;
     private int x;
     private int y;
     public int lastVisitedCheckpoint;

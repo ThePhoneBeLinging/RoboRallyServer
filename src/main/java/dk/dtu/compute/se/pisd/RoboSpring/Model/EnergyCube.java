@@ -17,7 +17,7 @@ public class EnergyCube
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long boardID;
+    private Long gameID;
     private int x;
     private int y;
 }

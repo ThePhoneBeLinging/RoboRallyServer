@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface CardsRepository extends JpaRepository<Card, Long> {
     public List<Card> findAllByPlayerID(Long playerID);
+    public List<Card> findAllByGameID(Long gameID);
 }
