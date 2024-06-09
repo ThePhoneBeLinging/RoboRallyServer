@@ -1,4 +1,5 @@
 package dk.dtu.compute.se.pisd.RoboSpring.Controller;
+
 import dk.dtu.compute.se.pisd.RoboSpring.Model.Board;
 import dk.dtu.compute.se.pisd.RoboSpring.Repository.BoardRepository;
 import org.springframework.http.ResponseEntity;
@@ -13,16 +14,18 @@ import java.util.List;
 @RequestMapping("get/boards")
 public class BoardController
 {
-    private BoardRepository boardRepository;
+    private final BoardRepository boardRepository;
 
-    public BoardController(BoardRepository boardRepository) {
+    public BoardController(BoardRepository boardRepository)
+    {
         this.boardRepository = boardRepository;
     }
 
     @GetMapping
     //Specific endpoint for the method
     @RequestMapping(value = "")
-    public ResponseEntity<List<Board>> getBoards(){
+    public ResponseEntity<List<Board>> getBoards()
+    {
         List<Board> boardList = boardRepository.findAll();
         return ResponseEntity.ok(boardList);
     }

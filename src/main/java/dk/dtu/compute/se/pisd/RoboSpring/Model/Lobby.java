@@ -16,6 +16,7 @@ public class Lobby
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private Long gameID;
     private Long playerID;
 }
