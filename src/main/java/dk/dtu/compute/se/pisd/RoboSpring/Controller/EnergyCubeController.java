@@ -25,8 +25,8 @@ public class EnergyCubeController
     @GetMapping
     //Specific endpoint for the method
     @RequestMapping(value = "")
-    public ResponseEntity<List<EnergyCube>> getBoards(){
-        List<EnergyCube> energyCubeList = energyRepository.findAll();
+    public ResponseEntity<List<EnergyCube>> getEnergyCubes(){
+        List<EnergyCube> energyCubeList = energyRepository.findEnergyCubesByBoardID(2L);
         return ResponseEntity.ok(energyCubeList);
     }
 }

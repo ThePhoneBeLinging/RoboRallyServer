@@ -4,7 +4,9 @@ import dk.dtu.compute.se.pisd.RoboSpring.Model.Board;
 import dk.dtu.compute.se.pisd.RoboSpring.Model.EnergyCube;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 public interface EnergyRepository extends JpaRepository<EnergyCube, Long> {
 
-    public EnergyCube findEnergyCubesByBoard(Board board);
+    public List<EnergyCube> findEnergyCubesByBoardID(Long boardID);
 }

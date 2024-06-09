@@ -8,21 +8,14 @@ import lombok.Setter;
 
 import java.util.List;
 
-@Entity
-@Table(name = "boards")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Board
+public class CompleteBoard
 {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String boardname;
-    private int step;
-    private String phase;
+    private Board board;
+    private List<EnergyCube> energyCubes;
 
 
 }
