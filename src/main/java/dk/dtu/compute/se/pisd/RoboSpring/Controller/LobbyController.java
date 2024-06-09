@@ -9,6 +9,7 @@ import dk.dtu.compute.se.pisd.RoboSpring.Repository.PlayerRepository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -83,9 +84,32 @@ public class LobbyController
             player.setGameID(gameID);
             player.setPlayerID(lobby.getPlayerID());
             playerRepository.save(player);
+            lobbyRepository.deleteAll(lobbyRepository.findLobbiesByGameID(gameID));
         }
-
-
         return true;
+    }
+
+    @RequestMapping(value = "lobby/deleteLobby")
+    public boolean deleteLobby(Long gameID)
+    {
+        boardRepository.deleteById(gameID);
+        List<Player> playerList = playerRepository.findPlayersByGameID(gameID);
+        playerRepository.deleteAll(playerList);
+        return true;
+    }
+
+    @RequestMapping(value = "lobby/getAll")
+    public List<Long> getLobbies()
+    {
+        List<Long> lobbyToReturn = new ArrayList<>();
+        List<Lobby> lobbyToTakeFrom = lobbyRepository.findAll();
+        for (Lobby lobby : lobbyToTakeFrom)
+        {
+            if (!lobbyToReturn.contains(lobby.getGameID()))
+            {
+                lobbyToReturn.add(lobby.getGameID());
+            }
+        }
+        return lobbyToReturn;
     }
 }
