@@ -6,8 +6,6 @@ import dk.dtu.compute.se.pisd.RoboSpring.Model.Player.Player;
 import dk.dtu.compute.se.pisd.RoboSpring.Repository.BoardRepository;
 import dk.dtu.compute.se.pisd.RoboSpring.Repository.EnergyRepository;
 import dk.dtu.compute.se.pisd.RoboSpring.Repository.PlayerRepository;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,20 +14,18 @@ import java.util.List;
 
 @RestController
 //Base endpoint
-public class BoardSaver
+public class BoardSaveLoad
 {
     private BoardRepository boardRepository;
     private EnergyRepository energyRepository;
     private PlayerRepository playerRepository;
 
-    public BoardSaver(BoardRepository boardRepository, EnergyRepository energyRepository, PlayerRepository playerRepository) {
+    public BoardSaveLoad(BoardRepository boardRepository, EnergyRepository energyRepository, PlayerRepository playerRepository) {
         this.boardRepository = boardRepository;
         this.energyRepository = energyRepository;
         this.playerRepository = playerRepository;
     }
 
-
-    @GetMapping
     @RequestMapping(value = "set/boards")
     public CompleteBoard saveBoard(@RequestBody CompleteBoard completeBoard)
     {
@@ -44,6 +40,20 @@ public class BoardSaver
         {
             player.setBoardID(boardToSave.getId());
             playerRepository.save(player);
+        }
+        return completeBoard;
+    }
+    @RequestMapping(value = "get/boards/single")
+    public CompleteBoard loadBoard(Long boardID, Long playerID)
+    {
+        CompleteBoard completeBoard = new CompleteBoard();
+        completeBoard.setBoard(boardRepository.findBoardById(boardID));
+        List<Player> playerList = playerRepository.findPlayersByBoardID(boardID);
+        completeBoard.setPlayerList(playerList);
+        completeBoard.setEnergyCubes(energyRepository.findEnergyCubesByBoardID(boardID));
+        if (completeBoard.getBoard() == null || completeBoard.getPlayerList() == null || completeBoard.getEnergyCubes() == null)
+        {
+            return null;
         }
         return completeBoard;
     }
