@@ -65,7 +65,7 @@ public class BoardSaveLoad
         List<Player> playerList = playerRepository.findPlayersByGameID(gameID);
         completeGame.setPlayerList(playerList);
         completeGame.setEnergyCubes(energyRepository.findEnergyCubesByGameID(gameID));
-        completeGame.setCards(cardsRepository.findAllByPlayerID(playerID));
+        completeGame.setCards(cardsRepository.findAllByPlayerIDAndGameID(playerID,gameID));
         if (completeGame.getBoard() == null || completeGame.getPlayerList() == null || completeGame.getEnergyCubes() == null || completeGame.getCards() == null)
         {
             return null;
