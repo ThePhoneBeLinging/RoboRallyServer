@@ -4,6 +4,7 @@ import dk.dtu.compute.se.pisd.RoboSpring.Model.CompleteBoard;
 import dk.dtu.compute.se.pisd.RoboSpring.Model.EnergyCube;
 import dk.dtu.compute.se.pisd.RoboSpring.Repository.BoardRepository;
 import dk.dtu.compute.se.pisd.RoboSpring.Repository.EnergyRepository;
+import dk.dtu.compute.se.pisd.RoboSpring.Repository.PlayerRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,10 +19,12 @@ public class BoardSaver
 {
     private BoardRepository boardRepository;
     private EnergyRepository energyRepository;
+    private PlayerRepository playerRepository;
 
-    public BoardSaver(BoardRepository boardRepository, EnergyRepository energyRepository) {
+    public BoardSaver(BoardRepository boardRepository, EnergyRepository energyRepository, PlayerRepository playerRepository) {
         this.boardRepository = boardRepository;
         this.energyRepository = energyRepository;
+        this.playerRepository = playerRepository;
     }
 
 

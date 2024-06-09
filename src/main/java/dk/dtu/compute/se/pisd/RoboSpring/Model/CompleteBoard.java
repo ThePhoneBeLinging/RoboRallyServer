@@ -1,5 +1,6 @@
 package dk.dtu.compute.se.pisd.RoboSpring.Model;
 
+import dk.dtu.compute.se.pisd.RoboSpring.Model.Player.Player;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,6 +17,5 @@ public class CompleteBoard
 {
     private Board board;
     private List<EnergyCube> energyCubes;
-
-
+    private List<Player> playerList;
 }

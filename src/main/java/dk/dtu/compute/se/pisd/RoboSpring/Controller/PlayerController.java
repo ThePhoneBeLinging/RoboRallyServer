@@ -4,6 +4,7 @@ import dk.dtu.compute.se.pisd.RoboSpring.Model.Player.Player;
 import dk.dtu.compute.se.pisd.RoboSpring.Model.Player.PlayerCards;
 import dk.dtu.compute.se.pisd.RoboSpring.Repository.PlayerRepository;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,6 +25,13 @@ public class PlayerController
     public List<Player> getPlayers()
     {
         return playerRepository.findAll();
+    }
+
+    @GetMapping
+    @RequestMapping(value = "/insertPlayer")
+    public Player insertPlayer(Player player)
+    {
+        return playerRepository.save(player);
     }
 
 }
