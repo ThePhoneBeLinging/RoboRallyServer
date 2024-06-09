@@ -14,7 +14,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class discardedCards
 {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 //Base endpoint
-@RequestMapping("/boards/cubes")
+@RequestMapping("get/boards/cubes")
 public class EnergyCubeController
 {
     private EnergyRepository energyRepository;

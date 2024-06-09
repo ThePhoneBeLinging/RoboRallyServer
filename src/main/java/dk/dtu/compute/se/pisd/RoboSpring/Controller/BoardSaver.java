@@ -30,7 +30,7 @@ public class BoardSaver
 
 
     @GetMapping
-    @RequestMapping(value = "boards/save")
+    @RequestMapping(value = "set/boards")
     public CompleteBoard saveBoard(@RequestBody CompleteBoard completeBoard)
     {
         Board boardToSave = boardRepository.save(completeBoard.getBoard());

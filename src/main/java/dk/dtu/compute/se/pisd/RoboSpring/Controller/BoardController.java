@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 //Base endpoint
-@RequestMapping("/boards")
+@RequestMapping("get/boards")
 public class BoardController
 {
     private BoardRepository boardRepository;
