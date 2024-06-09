@@ -2,8 +2,10 @@ package dk.dtu.compute.se.pisd.RoboSpring.Controller;
 
 import dk.dtu.compute.se.pisd.RoboSpring.Model.Board;
 import dk.dtu.compute.se.pisd.RoboSpring.Model.Lobby;
+import dk.dtu.compute.se.pisd.RoboSpring.Model.Player.Player;
 import dk.dtu.compute.se.pisd.RoboSpring.Repository.BoardRepository;
 import dk.dtu.compute.se.pisd.RoboSpring.Repository.LobbyRepository;
+import dk.dtu.compute.se.pisd.RoboSpring.Repository.PlayerRepository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,11 +16,13 @@ public class LobbyController
 {
     private final LobbyRepository lobbyRepository;
     private final BoardRepository boardRepository;
+    private final PlayerRepository playerRepository;
 
-    LobbyController(LobbyRepository lobbyRepository, BoardRepository boardRepository)
+    LobbyController(LobbyRepository lobbyRepository, BoardRepository boardRepository, PlayerRepository playerRepository)
     {
         this.lobbyRepository = lobbyRepository;
         this.boardRepository = boardRepository;
+        this.playerRepository = playerRepository;
     }
 
     @RequestMapping(value = "lobby/create")
@@ -35,14 +39,10 @@ public class LobbyController
             gameID++;
 
         }
-        Lobby lobby = new Lobby();
-        lobby.setGameID(gameID);
-        lobby.setPlayerID(1L);
         Board board = new Board();
         board.setGameID(gameID);
         boardRepository.save(board);
-        lobby = lobbyRepository.save(lobby);
-        return lobby;
+        return joinLobby(gameID);
     }
 
     @RequestMapping(value = "lobby/join")
@@ -62,6 +62,30 @@ public class LobbyController
         boardRepository.delete(board);
         board.setBoardname(boardName);
         boardRepository.save(board);
+        return true;
+    }
+
+    @RequestMapping(value = "lobby/startGame")
+    public boolean startGame(Long gameID)
+    {
+        Board board = boardRepository.findBoardByGameID(gameID);
+        boardRepository.delete(board);
+        board.setPhase("PROGRAMMING");
+        if (board.getBoardname() == null)
+        {
+            board.setBoardname("default");
+        }
+        boardRepository.save(board);
+        List<Lobby> lobbies = lobbyRepository.findLobbiesByGameID(gameID);
+        for (Lobby lobby : lobbies)
+        {
+            Player player = new Player();
+            player.setGameID(gameID);
+            player.setPlayerID(lobby.getPlayerID());
+            playerRepository.save(player);
+        }
+
+
         return true;
     }
 }
