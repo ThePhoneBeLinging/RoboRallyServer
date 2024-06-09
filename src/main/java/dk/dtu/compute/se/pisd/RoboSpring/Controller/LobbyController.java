@@ -95,6 +95,7 @@ public class LobbyController
         boardRepository.deleteById(gameID);
         List<Player> playerList = playerRepository.findPlayersByGameID(gameID);
         playerRepository.deleteAll(playerList);
+        lobbyRepository.deleteAll(lobbyRepository.findLobbiesByGameID(gameID));
         return true;
     }
 
