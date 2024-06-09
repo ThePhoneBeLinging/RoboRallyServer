@@ -8,4 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface LobbyRepository extends JpaRepository<LobbyObject, Long> {
 
     public LobbyObject findLobbyObjectByGameID(Long id);
+    public int countLobbyObjectsByGameID(Long gameID);
 }
