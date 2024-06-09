@@ -2,6 +2,7 @@ package dk.dtu.compute.se.pisd.RoboSpring.Controller;
 import dk.dtu.compute.se.pisd.RoboSpring.Model.Board;
 import dk.dtu.compute.se.pisd.RoboSpring.Model.CompleteBoard;
 import dk.dtu.compute.se.pisd.RoboSpring.Model.EnergyCube;
+import dk.dtu.compute.se.pisd.RoboSpring.Model.Player.Player;
 import dk.dtu.compute.se.pisd.RoboSpring.Repository.BoardRepository;
 import dk.dtu.compute.se.pisd.RoboSpring.Repository.EnergyRepository;
 import dk.dtu.compute.se.pisd.RoboSpring.Repository.PlayerRepository;
@@ -38,6 +39,11 @@ public class BoardSaver
         {
             energyCube.setBoardID(boardToSave.getId());
             energyRepository.save(energyCube);
+        }
+        for (Player player : completeBoard.getPlayerList())
+        {
+            player.setBoardID(boardToSave.getId());
+            playerRepository.save(player);
         }
         return completeBoard;
     }
