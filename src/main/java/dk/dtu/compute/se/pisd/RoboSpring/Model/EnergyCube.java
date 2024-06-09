@@ -6,25 +6,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Entity
-@Table(name = "boards")
+@Table(name = "energycubes")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Board
+public class EnergyCube
 {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String boardname;
-    private int step;
-    private String phase;
-    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<EnergyCube> energyCubes;
-
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "board_id", nullable = false)
+    private Board board;
+    private int x;
+    private int y;
 }
