@@ -57,6 +57,12 @@ public class BoardSaveLoad
         }
         return completeBoard;
     }
+    @RequestMapping(value = "set/boards/delete")
+    public void deleteBoard(Long boardID)
+    {
+        List<Player> playerList = playerRepository.findPlayersByBoardID(boardID);
+        boardRepository.deleteById(boardID);
+    }
 
 
 

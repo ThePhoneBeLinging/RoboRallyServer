@@ -1,17 +1,14 @@
 package dk.dtu.compute.se.pisd.RoboSpring.Controller;
 
 import dk.dtu.compute.se.pisd.RoboSpring.Model.Player.Player;
-import dk.dtu.compute.se.pisd.RoboSpring.Model.Player.PlayerCards;
 import dk.dtu.compute.se.pisd.RoboSpring.Repository.PlayerRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("get/players")
+
 public class PlayerController
 {
     private PlayerRepository playerRepository;
@@ -21,17 +18,10 @@ public class PlayerController
         this.playerRepository = playerRepository;
     }
 
-    @GetMapping
+    @RequestMapping("get/players")
     public List<Player> getPlayers()
     {
         return playerRepository.findAll();
-    }
-
-    @GetMapping
-    @RequestMapping(value = "/insertPlayer")
-    public Player insertPlayer(Player player)
-    {
-        return playerRepository.save(player);
     }
 
 }

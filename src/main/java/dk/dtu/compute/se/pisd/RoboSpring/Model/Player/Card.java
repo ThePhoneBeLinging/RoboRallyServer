@@ -7,18 +7,18 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "upgradeCards")
+@Table(name = "activeCards")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UpgradeCards
+public class Card
 {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private long boardID;
     private long playerID;
-    private String name;
+    private String command;
+    private String location;
 }
