@@ -19,7 +19,7 @@ public class Board
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String boardName;
+    private String boardname;
     private int width;
     private int height;
     private int step;
