@@ -58,10 +58,13 @@ public class BoardSaveLoad
     public CompleteBoard loadBoard(Long boardID, Long playerID)
     {
         CompleteBoard completeBoard = new CompleteBoard();
+        completeBoard.setBoardID(boardID);
+        completeBoard.setPlayerID(playerID);
         completeBoard.setBoard(boardRepository.findBoardById(boardID));
         List<Player> playerList = playerRepository.findPlayersByBoardID(boardID);
         completeBoard.setPlayerList(playerList);
         completeBoard.setEnergyCubes(energyRepository.findEnergyCubesByBoardID(boardID));
+        completeBoard.setCards(cardsRepository.findAllByPlayerID(playerID));
         if (completeBoard.getBoard() == null || completeBoard.getPlayerList() == null || completeBoard.getEnergyCubes() == null || completeBoard.getCards() == null)
         {
             return null;
