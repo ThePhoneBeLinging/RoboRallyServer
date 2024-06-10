@@ -32,8 +32,9 @@ public class LobbyController
         Long gameID = 1L;
         while (true)
         {
-            List<Lobby> lobbyList = lobbyRepository.findLobbiesByGameID(gameID);
-            if (lobbyList.isEmpty())
+            //TODO insert check for lobby as well
+            Board board = boardRepository.findBoardByGameID(gameID);
+            if (board == null)
             {
                 break;
             }
