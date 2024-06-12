@@ -26,7 +26,7 @@ import dk.dtu.compute.se.pisd.RoboSpring.designpatterns.observer.Subject;
 import dk.dtu.compute.se.pisd.RoboSpring.roborally.RoboRally;
 import dk.dtu.compute.se.pisd.RoboSpring.roborally.fileaccess.LoadBoard;
 import dk.dtu.compute.se.pisd.RoboSpring.roborally.fileaccess.LoadSaveGameState;
-import dk.dtu.compute.se.pisd.RoboSpring.Roboally.model.Board;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Board;
 import dk.dtu.compute.se.pisd.RoboSpring.Roborally.model.Player;
 import javafx.application.Platform;
 import javafx.scene.control.*;
