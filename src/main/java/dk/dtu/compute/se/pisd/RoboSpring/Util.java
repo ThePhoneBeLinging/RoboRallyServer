@@ -1,10 +1,12 @@
 package dk.dtu.compute.se.pisd.RoboSpring;
 
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.CompleteGame;
+import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Player.Card;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Player.Player;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.controller.GameController;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.fileaccess.LoadBoard;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Board;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Command;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Heading;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Phase;
 
@@ -31,6 +33,41 @@ public class Util
             gameBoardPlayer.setMovedByConveyorThisTurn(player.isMovedByConveyorThisTurn());
             gameBoardPlayer.setEnergyCubes(player.getEnergyCubes());
             gameBoardPlayer.setThisPlayerTurn(player.isPlayersTurn());
+        }
+        for (Card card : serverBoard.getCards())
+        {
+            dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Card cardToAdd =
+                    new dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Card(Command.valueOf(card.getCommand()));
+            for (int i = 0; i < gameBoard.getPlayersNumber(); i++)
+            {
+                dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Player gamePlayer = gameBoard.getPlayer(i);
+                if (gamePlayer.getPlayerID() == card.getPlayerID())
+                {
+                    switch (card.getLocation())
+                    {
+                        case "REGISTER":
+                            int k = 0;
+                            while (gamePlayer.getProgramField(k) == null)
+                            {
+                                k++;
+                            }
+                            gamePlayer.getProgramField(k).setCard(cardToAdd);
+                            break;
+                        case "HAND":
+                            int j = 0;
+                            while (gamePlayer.getCardField(j) == null)
+                            {
+                                j++;
+                            }
+                            gamePlayer.getCardField(j).setCard(cardToAdd);
+                            break;
+                        case "ACTIVE":
+                            gamePlayer.activeCardsPile.playerCards.add(cardToAdd);
+                        case "DISCARD":
+                            gamePlayer.discardedCardsPile.playerCards.add(cardToAdd);
+                    }
+                }
+            }
         }
         return gameBoard;
     }
