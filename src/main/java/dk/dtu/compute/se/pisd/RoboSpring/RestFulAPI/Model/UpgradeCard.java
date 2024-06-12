@@ -18,7 +18,7 @@ public class UpgradeCard {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long gameID;
+    private Long playerID;
     private String cardName;
     private int price;
-    private Boolean isBought;
 }
