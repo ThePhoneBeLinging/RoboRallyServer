@@ -22,7 +22,6 @@
 package dk.dtu.compute.se.pisd.RoboSpring.RoboRally.controller;
 
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.*;
-import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.view.UpgradeShopView;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -34,7 +33,6 @@ public class GameController
     final public MoveController moveController;
 
     /**
-     * @param board
      * @author Elias
      */
     public GameController(@NotNull Board board)
@@ -50,11 +48,6 @@ public class GameController
      * @Author Emil
      */
     // XXX: implemented in the current version
-    public void openShop()
-    {
-        UpgradeShopView upgradeShopView = new UpgradeShopView(board.getCurrentPlayer());
-        upgradeShopView.showAndWait();
-    }
 
     /**
      * Method to finish the programming phase, used after the players have used programming cards.

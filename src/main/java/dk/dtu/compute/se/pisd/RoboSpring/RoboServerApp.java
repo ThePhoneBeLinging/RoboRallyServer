@@ -7,8 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class RoboServerApp
 {
 
-	public static void main(String[] args) {
-		SpringApplication.run(RoboServerApp.class, args);
-	}
+    public static void main(String[] args)
+    {
+        SpringApplication.run(RoboServerApp.class, args);
+    }
 
 }
