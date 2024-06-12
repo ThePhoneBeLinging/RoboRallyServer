@@ -1,6 +1,7 @@
 package dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Controller;
 
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Board;
+import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.CompleteGame;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.EnergyCube;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Player.Card;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Player.Player;
@@ -26,13 +27,14 @@ public class BoardController
     private final CardsRepository cardsRepository;
 
     public BoardController(BoardRepository boardRepository, EnergyRepository energyRepository,
-                         PlayerRepository playerRepository, CardsRepository cardsRepository)
+                           PlayerRepository playerRepository, CardsRepository cardsRepository)
     {
         this.boardRepository = boardRepository;
         this.energyRepository = energyRepository;
         this.playerRepository = playerRepository;
         this.cardsRepository = cardsRepository;
     }
+
     @GetMapping
     //Specific endpoint for the method
     @RequestMapping(value = "")
@@ -53,5 +55,20 @@ public class BoardController
         energyRepository.deleteAll(energyCubeList);
         boardRepository.delete(boardRepository.findBoardByGameID(gameID));
         return true;
+    }
+
+    @RequestMapping(value = "get/boards/single")
+    public CompleteGame getBoard(Long gameID, Long playerID)
+    {
+        CompleteGame completeGame = BoardSaveLoad.loadBoard(gameID);
+        assert completeGame != null;
+        for (Card card : completeGame.getCards())
+        {
+            if (card.getPlayerID() != playerID)
+            {
+                completeGame.getCards().remove(card);
+            }
+        }
+        return completeGame;
     }
 }
