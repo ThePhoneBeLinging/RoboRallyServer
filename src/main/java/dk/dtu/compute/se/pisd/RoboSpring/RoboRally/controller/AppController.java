@@ -64,6 +64,7 @@ public class AppController implements Observer
     {
         // XXX needs to be implemented eventually
         // for now, we just create a new game
+        //TODO Create gamecontroller based on gameID and data gathered from the tables using that gameID.
         roboRally.createBoardView(gameController);
     }
 
@@ -200,6 +201,7 @@ public class AppController implements Observer
     {
         // XXX needs to be implemented eventually
         //LoadSaveGameState.saveGameState(gameController, "default");
+        //TODO Save gameState in database.
     }
 
     /**
