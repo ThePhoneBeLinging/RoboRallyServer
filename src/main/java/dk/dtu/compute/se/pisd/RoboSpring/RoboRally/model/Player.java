@@ -59,6 +59,7 @@ public class Player extends Subject
     private boolean movedByConveyorThisTurn;
     private int energyCubes;
     private boolean thisPlayerTurn = false;
+    private Long playerID;
 
     /**
      * @param board the board to which this player belongs
@@ -500,5 +501,15 @@ public class Player extends Subject
                 space.playerChanged();
             }
         }
+    }
+
+    public Long getPlayerID()
+    {
+        return playerID;
+    }
+
+    public void setPlayerID(Long playerID)
+    {
+        this.playerID = playerID;
     }
 }
