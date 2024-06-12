@@ -1,6 +1,6 @@
-package dk.dtu.compute.se.pisd.RoboSpring.Repository;
+package dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Repository;
 
-import dk.dtu.compute.se.pisd.RoboSpring.Model.Lobby;
+import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Lobby;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

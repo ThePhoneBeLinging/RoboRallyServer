@@ -1,4 +1,4 @@
-package dk.dtu.compute.se.pisd.RoboSpring.Model.Player;
+package dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Player;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

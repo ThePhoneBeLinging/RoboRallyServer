@@ -1,7 +1,7 @@
-package dk.dtu.compute.se.pisd.RoboSpring.Model;
+package dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model;
 
-import dk.dtu.compute.se.pisd.RoboSpring.Model.Player.Card;
-import dk.dtu.compute.se.pisd.RoboSpring.Model.Player.Player;
+import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Player.Card;
+import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Player.Player;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
