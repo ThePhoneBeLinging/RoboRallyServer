@@ -1,7 +1,13 @@
 package dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Controller;
 
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Board;
+import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.EnergyCube;
+import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Player.Card;
+import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Player.Player;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Repository.BoardRepository;
+import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Repository.CardsRepository;
+import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Repository.EnergyRepository;
+import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Repository.PlayerRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,12 +21,18 @@ import java.util.List;
 public class BoardController
 {
     private final BoardRepository boardRepository;
+    private final EnergyRepository energyRepository;
+    private final PlayerRepository playerRepository;
+    private final CardsRepository cardsRepository;
 
-    public BoardController(BoardRepository boardRepository)
+    public BoardController(BoardRepository boardRepository, EnergyRepository energyRepository,
+                         PlayerRepository playerRepository, CardsRepository cardsRepository)
     {
         this.boardRepository = boardRepository;
+        this.energyRepository = energyRepository;
+        this.playerRepository = playerRepository;
+        this.cardsRepository = cardsRepository;
     }
-
     @GetMapping
     //Specific endpoint for the method
     @RequestMapping(value = "")
@@ -30,5 +42,16 @@ public class BoardController
         return ResponseEntity.ok(boardList);
     }
 
-
+    @RequestMapping(value = "set/boards/single/delete")
+    public boolean deleteBoard(Long gameID)
+    {
+        List<Player> playerList = playerRepository.findPlayersByGameID(gameID);
+        List<Card> cardList = cardsRepository.findAllByGameID(gameID);
+        cardsRepository.deleteAll(cardList);
+        List<EnergyCube> energyCubeList = energyRepository.findEnergyCubesByGameID(gameID);
+        playerRepository.deleteAll(playerList);
+        energyRepository.deleteAll(energyCubeList);
+        boardRepository.delete(boardRepository.findBoardByGameID(gameID));
+        return true;
+    }
 }

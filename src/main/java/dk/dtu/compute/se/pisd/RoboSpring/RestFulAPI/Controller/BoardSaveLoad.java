@@ -17,7 +17,6 @@ import java.util.List;
 
 import static dk.dtu.compute.se.pisd.RoboSpring.Util.fromServerBoardToGameBoard;
 
-@RestController
 //Base endpoint
 public class BoardSaveLoad
 {
@@ -35,8 +34,7 @@ public class BoardSaveLoad
         this.cardsRepository = cardsRepository;
     }
 
-    @RequestMapping(value = "set/boards")
-    public CompleteGame saveBoard(@RequestBody CompleteGame completeGame)
+    public CompleteGame saveBoard(CompleteGame completeGame)
     {
         completeGame.getBoard().setGameID(completeGame.getGameID());
         Board boardToSave = boardRepository.save(completeGame.getBoard());
@@ -61,7 +59,6 @@ public class BoardSaveLoad
         return completeGame;
     }
 
-    @RequestMapping(value = "get/boards/single")
     public CompleteGame loadBoard(Long gameID, Long playerID)
     {
         CompleteGame completeGame = new CompleteGame();
@@ -78,19 +75,4 @@ public class BoardSaveLoad
         }
         return completeGame;
     }
-
-    @RequestMapping(value = "set/boards/single/delete")
-    public boolean deleteBoard(Long gameID)
-    {
-        List<Player> playerList = playerRepository.findPlayersByGameID(gameID);
-        List<Card> cardList = cardsRepository.findAllByGameID(gameID);
-        cardsRepository.deleteAll(cardList);
-        List<EnergyCube> energyCubeList = energyRepository.findEnergyCubesByGameID(gameID);
-        playerRepository.deleteAll(playerList);
-        energyRepository.deleteAll(energyCubeList);
-        boardRepository.delete(boardRepository.findBoardByGameID(gameID));
-        return true;
-    }
-
-
 }
