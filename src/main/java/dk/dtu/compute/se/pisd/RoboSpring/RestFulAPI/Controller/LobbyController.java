@@ -1,11 +1,11 @@
-package dk.dtu.compute.se.pisd.RoboSpring.Controller;
+package dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Controller;
 
-import dk.dtu.compute.se.pisd.RoboSpring.Model.Board;
-import dk.dtu.compute.se.pisd.RoboSpring.Model.Lobby;
-import dk.dtu.compute.se.pisd.RoboSpring.Model.Player.Player;
-import dk.dtu.compute.se.pisd.RoboSpring.Repository.BoardRepository;
-import dk.dtu.compute.se.pisd.RoboSpring.Repository.LobbyRepository;
-import dk.dtu.compute.se.pisd.RoboSpring.Repository.PlayerRepository;
+import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Board;
+import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Lobby;
+import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Player.Player;
+import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Repository.BoardRepository;
+import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Repository.LobbyRepository;
+import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Repository.PlayerRepository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

@@ -1,7 +1,7 @@
-package dk.dtu.compute.se.pisd.RoboSpring.Controller;
+package dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Controller;
 
-import dk.dtu.compute.se.pisd.RoboSpring.Model.Board;
-import dk.dtu.compute.se.pisd.RoboSpring.Repository.BoardRepository;
+import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Board;
+import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Repository.BoardRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

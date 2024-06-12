@@ -1,4 +1,4 @@
-package dk.dtu.compute.se.pisd.RoboSpring.Model;
+package dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -7,16 +7,17 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "lobbies")
+@Table(name = "energycubes")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Lobby
+public class EnergyCube
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long gameID;
-    private Long playerID;
+    private int x;
+    private int y;
 }
