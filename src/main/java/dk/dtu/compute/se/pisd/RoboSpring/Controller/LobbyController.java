@@ -90,7 +90,7 @@ public class LobbyController
         return true;
     }
 
-    @RequestMapping(value = "lobby/deleteLobby")
+    @RequestMapping(value = "lobby/delete")
     public boolean deleteLobby(Long gameID)
     {
         boardRepository.deleteById(gameID);
