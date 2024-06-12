@@ -16,7 +16,6 @@ public class Pit extends NullBoardElement
     {
         super(space);
         space.board.addBoardElement(Board.NOT_ACTIVATE_ABLE_INDEX, this);
-        this.setImage(new Image("file:src/main/Resources/Images/pit.png"));
     }
 
     @Override

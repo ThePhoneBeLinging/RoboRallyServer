@@ -24,14 +24,7 @@ public class CornerWall extends BoardElement
         {
             this.heading2 = heading2;
             space.board.addBoardElement(Board.NOT_ACTIVATE_ABLE_INDEX, this);
-            if (heading1.next() == heading2)
-            {
-                setImage(new Image("file:src/main/resources/Images/cornerWall.png"));
-            }
-            else
-            {
-                setImage(new Image("file:src/main/resources/Images/cornerWall2.png"));
-            }
+
         }
 
     }

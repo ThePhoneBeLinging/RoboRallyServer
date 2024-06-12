@@ -15,7 +15,6 @@ public class PushPanel extends BoardElement
     {
         super(heading, true, space);
         space.board.addBoardElement(Board.PUSH_PANELS_INDEX, this);
-        setImage(new Image("file:src/main/resources/images/push135.png"));
     }
 
     /**

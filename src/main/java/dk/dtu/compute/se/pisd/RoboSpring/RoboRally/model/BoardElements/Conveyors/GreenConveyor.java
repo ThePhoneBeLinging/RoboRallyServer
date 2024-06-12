@@ -14,6 +14,5 @@ public class GreenConveyor extends Conveyor
     {
         super(orientation, 1, space);
         space.board.addBoardElement(Board.GREEN_CONVEYOR_INDEX, this);
-        setImage(new Image("file:src/main/resources/images/green.png"));
     }
 }

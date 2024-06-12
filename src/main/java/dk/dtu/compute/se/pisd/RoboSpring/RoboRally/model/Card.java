@@ -34,7 +34,6 @@ public class Card extends Subject
 {
 
     public Command command;
-    private Image image;
 
     /**
      * @param command the command represented by this card
@@ -44,7 +43,6 @@ public class Card extends Subject
     {
 
         this.command = command;
-        this.image = getImageBasedOnCommand(command);
     }
 
     /**
@@ -52,43 +50,7 @@ public class Card extends Subject
      * @return
      * @author Elias, Mustafa & Frederik
      */
-    private Image getImageBasedOnCommand(Command command)
-    {
-        switch (command)
-        {
-            case FORWARD:
-                return new Image("file:src/main/Resources/Images/move1.png");
-            case FAST_FORWARD:
-                return new Image("file:src/main/Resources/Images/move2.png");
-            case LEFT:
-                return new Image("file:src/main/Resources/Images/turnL.png");
-            case RIGHT:
-                return new Image("file:src/main/Resources/Images/turnR.png");
-            case OPTION_LEFT_RIGHT:
-                return new Image("file:src/main/Resources/Images/turnLorR.png");
-            case SPAM:
-                return new Image("file:src/main/Resources/Images/SPAM.png");
-            case TROJAN_HORSE:
-                return new Image("file:src/main/Resources/Images/TROJANH.png");
-            case WORM:
-                return new Image("file:src/main/Resources/Images/WORM.png");
-            case VIRUS:
-                return new Image("file:src/main/Resources/Images/VIRUS.png");
-            case AGAIN:
-                return new Image("file:src/main/Resources/Images/AGAIN.png");
-            case MOVE_THREE:
-                return new Image("file:src/main/Resources/Images/move3.png");
-            case MOVE_BACK:
-                return new Image("file:src/main/Resources/Images/moveBack.png");
-            case U_TURN:
-                return new Image("file:src/main/Resources/Images/uTurn.png");
-            case POWER_UP:
-                return new Image("file:src/main/Resources/Images/POWERUP.png");
 
-            default:
-                return null;
-        }
-    }
 
     /**
      * @param command
@@ -98,7 +60,6 @@ public class Card extends Subject
     public Card(@NotNull Command command, Image image)
     {
         this.command = command;
-        this.image = image;
     }
 
     /**
@@ -114,24 +75,5 @@ public class Card extends Subject
      * @return
      * @author Elias
      */
-    public Image getImage()
-    {
-        return image;
-    }
 
-    /**
-     * @param image
-     * @author Mustafa
-     */
-    public void setImage(Image image)
-    {
-        if (image == null)
-        {
-            this.image = new Image("file:src/main/Resources/Images/facedownCard.png");
-        }
-        else
-        {
-            this.image = image;
-        }
-    }
 }

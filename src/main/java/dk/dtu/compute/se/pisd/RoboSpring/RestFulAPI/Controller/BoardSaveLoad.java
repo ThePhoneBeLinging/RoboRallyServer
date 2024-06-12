@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import static dk.dtu.compute.se.pisd.RoboSpring.Util.fromServerBoardToGameBoard;
+
 @RestController
 //Base endpoint
 public class BoardSaveLoad
@@ -55,6 +57,7 @@ public class BoardSaveLoad
             card.setPlayerID(completeGame.getSenderID());
             cardsRepository.save(card);
         }
+        fromServerBoardToGameBoard(completeGame);
         return completeGame;
     }
 

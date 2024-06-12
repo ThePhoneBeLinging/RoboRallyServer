@@ -111,6 +111,7 @@ public class Board extends Subject
         this.activateBoardElements();
 
         this.upgradeCards = UpgradeCardsFactory.createUpgradeCards();
+        System.out.println("Dean Phar was here");
 
     }
 

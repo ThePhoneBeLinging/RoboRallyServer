@@ -20,7 +20,6 @@ public class EnergyCube extends NullBoardElement
     {
         super(space);
         space.board.addBoardElement(Board.ENERGY_SPACE_INDEX, this);
-        setImage(new Image("file:src/main/resources/images/energyCube.png"));
     }
 
     /**

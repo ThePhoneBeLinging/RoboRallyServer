@@ -20,14 +20,7 @@ public class Gear extends NullBoardElement
     {
         super(true, space);
         this.isClockwise = isClockwise;
-        if (this.isClockwise)
-        {
-            setImage(new Image("file:src/main/resources/images/gearRight.png"));
-        }
-        else
-        {
-            setImage(new Image("file:src/main/resources/images/gearLeft.png"));
-        }
+
         space.board.addBoardElement(Board.GEARS_INDEX, this);
     }
 

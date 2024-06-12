@@ -17,7 +17,6 @@ public class BoardLaser extends BoardElement
     {
         super(heading, true, space);
         space.board.addBoardElement(Board.BOARD_LASER_INDEX, this);
-        setImage(new Image("file:src/main/resources/images/laserStart.png"));
     }
 
     /**
