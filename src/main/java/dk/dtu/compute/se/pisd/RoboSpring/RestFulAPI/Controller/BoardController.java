@@ -18,7 +18,6 @@ import java.util.List;
 
 @RestController
 //Base endpoint
-@RequestMapping("get/boards")
 public class BoardController
 {
     private final BoardRepository boardRepository;
