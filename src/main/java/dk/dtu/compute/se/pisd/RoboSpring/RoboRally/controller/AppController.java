@@ -21,19 +21,17 @@
  */
 package dk.dtu.compute.se.pisd.RoboSpring.RoboRally.controller;
 
-import dk.dtu.compute.se.pisd.RoboSpring.designpatterns.observer.Observer;
-import dk.dtu.compute.se.pisd.RoboSpring.designpatterns.observer.Subject;
-import dk.dtu.compute.se.pisd.RoboSpring.roborally.RoboRally;
-import dk.dtu.compute.se.pisd.RoboSpring.roborally.fileaccess.LoadBoard;
-import dk.dtu.compute.se.pisd.RoboSpring.roborally.fileaccess.LoadSaveGameState;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.RoboRally;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.fileaccess.LoadBoard;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Board;
-import dk.dtu.compute.se.pisd.RoboSpring.Roborally.model.Player;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Player;
+import dk.dtu.compute.se.pisd.RoboSpring.observer.Observer;
+import dk.dtu.compute.se.pisd.RoboSpring.observer.Subject;
 import javafx.application.Platform;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
@@ -66,7 +64,6 @@ public class AppController implements Observer
     {
         // XXX needs to be implemented eventually
         // for now, we just create a new game
-        this.gameController = LoadSaveGameState.loadGameState("default");
         roboRally.createBoardView(gameController);
     }
 
@@ -114,7 +111,8 @@ public class AppController implements Observer
             HBox box = new HBox();
             box.setSpacing(10);
 
-            for (Map.Entry<String, Image> entry : mapImages.entrySet()) {
+            for (Map.Entry<String, Image> entry : mapImages.entrySet())
+            {
                 ImageView imageView = new ImageView(entry.getValue());
                 imageView.setFitHeight(200);
                 imageView.setPreserveRatio(true);
@@ -126,7 +124,8 @@ public class AppController implements Observer
 
             Optional<String> mapResult = mapDialog.showAndWait();
             Board board = null;
-            if (mapResult.isPresent()) {
+            if (mapResult.isPresent())
+            {
                 board = LoadBoard.loadBoard(mapResult.get());
                 gameController = new GameController(board);
 
@@ -200,7 +199,7 @@ public class AppController implements Observer
     public void saveGame()
     {
         // XXX needs to be implemented eventually
-        LoadSaveGameState.saveGameState(gameController, "default");
+        //LoadSaveGameState.saveGameState(gameController, "default");
     }
 
     /**

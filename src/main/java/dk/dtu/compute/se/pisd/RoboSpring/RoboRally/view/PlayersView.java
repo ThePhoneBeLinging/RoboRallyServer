@@ -21,10 +21,10 @@
  */
 package dk.dtu.compute.se.pisd.RoboSpring.RoboRally.view;
 
-import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
-import dk.dtu.compute.se.pisd.roborally.controller.GameController;
-import dk.dtu.compute.se.pisd.roborally.model.Board;
-import dk.dtu.compute.se.pisd.roborally.model.Player;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.controller.GameController;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Board;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Player;
+import dk.dtu.compute.se.pisd.RoboSpring.observer.Subject;
 import javafx.scene.control.TabPane;
 
 /**

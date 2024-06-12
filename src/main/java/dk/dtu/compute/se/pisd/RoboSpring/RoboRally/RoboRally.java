@@ -21,12 +21,12 @@
  */
 package dk.dtu.compute.se.pisd.RoboSpring.RoboRally;
 
-import dk.dtu.compute.se.pisd.roborally.controller.AppController;
-import dk.dtu.compute.se.pisd.roborally.controller.GameController;
-import dk.dtu.compute.se.pisd.roborally.controller.SoundController;
-import dk.dtu.compute.se.pisd.roborally.view.BoardView;
-import dk.dtu.compute.se.pisd.roborally.view.MainMenuView;
-import dk.dtu.compute.se.pisd.roborally.view.RoboRallyMenuBar;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.controller.AppController;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.controller.GameController;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.controller.SoundController;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.view.BoardView;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.view.MainMenuView;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.view.RoboRallyMenuBar;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -168,7 +168,8 @@ public class RoboRally extends Application
         }
     }
 
-    public Stage getStage() {
+    public Stage getStage()
+    {
         return this.stage;
     }
 

@@ -1,6 +1,6 @@
 package dk.dtu.compute.se.pisd.RoboSpring.RoboRally.fileaccess.model;
 
-import dk.dtu.compute.se.pisd.roborally.model.Phase;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Phase;
 
 public class GameStateInfo
 {

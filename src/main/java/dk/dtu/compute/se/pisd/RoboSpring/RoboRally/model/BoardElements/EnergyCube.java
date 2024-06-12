@@ -1,9 +1,9 @@
 package dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.BoardElements;
 
-import dk.dtu.compute.se.pisd.roborally.controller.SoundController;
-import dk.dtu.compute.se.pisd.roborally.model.Board;
-import dk.dtu.compute.se.pisd.roborally.model.Player;
-import dk.dtu.compute.se.pisd.roborally.model.Space;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.controller.SoundController;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Board;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Player;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Space;
 import javafx.scene.image.Image;
 
 /**

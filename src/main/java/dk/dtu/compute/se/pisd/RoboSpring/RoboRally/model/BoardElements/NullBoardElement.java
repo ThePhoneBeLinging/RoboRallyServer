@@ -1,7 +1,7 @@
 package dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.BoardElements;
 
-import dk.dtu.compute.se.pisd.roborally.model.Heading;
-import dk.dtu.compute.se.pisd.roborally.model.Space;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Heading;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Space;
 
 /**
  * @author Elias

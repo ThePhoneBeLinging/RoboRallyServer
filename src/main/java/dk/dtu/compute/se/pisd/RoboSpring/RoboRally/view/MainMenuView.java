@@ -1,6 +1,6 @@
 package dk.dtu.compute.se.pisd.RoboSpring.RoboRally.view;
 
-import dk.dtu.compute.se.pisd.roborally.controller.AppController;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.controller.AppController;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -16,13 +16,13 @@ public class MainMenuView extends VBox
     /**
      * @param appController The controller for the application
      * @author Elias
-     *
      */
     public MainMenuView(AppController appController)
     {
         Image backgroundImage = new Image("file:src/main/resources/Images/dizzyHighway.png");
         BackgroundSize backgroundSize = new BackgroundSize(600.0, 1500.0, true, true, false, true);
-        BackgroundImage backgroundImg = new BackgroundImage(backgroundImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, backgroundSize);
+        BackgroundImage backgroundImg = new BackgroundImage(backgroundImage, BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, backgroundSize);
         this.setBackground(new Background(backgroundImg));
 
         // Move all elements 50 pixels down.
@@ -54,7 +54,9 @@ public class MainMenuView extends VBox
         VBox.setVgrow(exitGameButton, Priority.ALWAYS);
 
     }
-    private Button createButton(String imagePath, String tooltipText) {
+
+    private Button createButton(String imagePath, String tooltipText)
+    {
         Button button = new Button();
         Image image = new Image(imagePath);
         ImageView imageView = new ImageView(image);
@@ -64,7 +66,9 @@ public class MainMenuView extends VBox
         button.setGraphic(imageView);
         return button;
     }
-    private Label createLabel(String imagePath, String tooltipText) {
+
+    private Label createLabel(String imagePath, String tooltipText)
+    {
         Label label = new Label();
         Image image = new Image(imagePath);
         ImageView imageView = new ImageView(image);

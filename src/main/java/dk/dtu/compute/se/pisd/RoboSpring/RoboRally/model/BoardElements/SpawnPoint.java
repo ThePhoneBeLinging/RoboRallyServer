@@ -1,7 +1,7 @@
 package dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.BoardElements;
 
-import dk.dtu.compute.se.pisd.roborally.model.Board;
-import dk.dtu.compute.se.pisd.roborally.model.Space;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Board;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Space;
 
 /**
  * This class represents a spawn point on the board.
@@ -12,9 +12,11 @@ import dk.dtu.compute.se.pisd.roborally.model.Space;
  * @author Frederik
  */
 
-public class SpawnPoint extends NullBoardElement {
+public class SpawnPoint extends NullBoardElement
+{
 
-    public SpawnPoint(Space space) {
+    public SpawnPoint(Space space)
+    {
         super(space);
         space.board.addBoardElement(Board.NOT_ACTIVATE_ABLE_INDEX, this);
     }

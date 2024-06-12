@@ -21,11 +21,11 @@
  */
 package dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model;
 
-import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.observer.Subject;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.controller.MoveController;
-import dk.dtu.compute.se.pisd.roborally.controller.SoundController;
-import dk.dtu.compute.se.pisd.roborally.model.BoardElements.Checkpoint;
-import dk.dtu.compute.se.pisd.roborally.model.BoardElements.NullBoardElement;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.controller.SoundController;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.BoardElements.Checkpoint;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.BoardElements.NullBoardElement;
+import dk.dtu.compute.se.pisd.RoboSpring.observer.Subject;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;

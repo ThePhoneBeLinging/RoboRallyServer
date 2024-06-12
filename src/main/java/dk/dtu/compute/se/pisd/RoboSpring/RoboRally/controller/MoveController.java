@@ -1,6 +1,6 @@
 package dk.dtu.compute.se.pisd.RoboSpring.RoboRally.controller;
 
-import dk.dtu.compute.se.pisd.roborally.model.*;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.*;
 import org.jetbrains.annotations.NotNull;
 
 public class MoveController

@@ -21,9 +21,9 @@
  */
 package dk.dtu.compute.se.pisd.RoboSpring.RoboRally.view;
 
-import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
-import dk.dtu.compute.se.pisd.roborally.controller.GameController;
-import dk.dtu.compute.se.pisd.roborally.model.*;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.controller.GameController;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.*;
+import dk.dtu.compute.se.pisd.RoboSpring.observer.Subject;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -91,7 +91,7 @@ public class PlayerView extends Tab implements ViewObserver
 
         energyCubesLabel = new Label("Energy Cubes: " + player.getEnergyCubes());
         rightPanel.getChildren().addAll(energyCubesLabel, upgradeCardsLabel);
-        horizontal.getChildren().addAll(top ,rightPanel);
+        horizontal.getChildren().addAll(top, rightPanel);
 
         this.setContent(horizontal);
 

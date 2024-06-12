@@ -21,17 +21,17 @@
  */
 package dk.dtu.compute.se.pisd.RoboSpring.RoboRally.view;
 
-import dk.dtu.compute.se.pisd.designpatterns.observer.Observer;
-import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
+import dk.dtu.compute.se.pisd.RoboSpring.observer.Observer;
+import dk.dtu.compute.se.pisd.RoboSpring.observer.Subject;
 import javafx.application.Platform;
 
 /**
  * ...
  *
  * @author Ekkart Kindler, ekki@dtu.dk
- *
  */
-public interface ViewObserver extends Observer {
+public interface ViewObserver extends Observer
+{
 
     /**
      * @param subject
@@ -44,13 +44,17 @@ public interface ViewObserver extends Observer {
      * @author
      */
     @Override
-    default void update(Subject subject) {
+    default void update(Subject subject)
+    {
         // This default implementation of the update method makes sure that ViewObserver implementations
         // are doing the update only in the FX application thread. The update of the view is instead
         // done in the updateView() method;
-        if (Platform.isFxApplicationThread()) {
+        if (Platform.isFxApplicationThread())
+        {
             updateView(subject);
-        } else {
+        }
+        else
+        {
             Platform.runLater(() -> updateView(subject));
         }
     }

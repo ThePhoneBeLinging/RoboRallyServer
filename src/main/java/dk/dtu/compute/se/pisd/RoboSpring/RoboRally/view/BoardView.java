@@ -21,11 +21,11 @@
  */
 package dk.dtu.compute.se.pisd.RoboSpring.RoboRally.view;
 
-import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
-import dk.dtu.compute.se.pisd.roborally.controller.GameController;
-import dk.dtu.compute.se.pisd.roborally.model.Board;
-import dk.dtu.compute.se.pisd.roborally.model.Phase;
-import dk.dtu.compute.se.pisd.roborally.model.Space;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.controller.GameController;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Board;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Phase;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Space;
+import dk.dtu.compute.se.pisd.RoboSpring.observer.Subject;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -104,7 +104,8 @@ public class BoardView extends VBox implements ViewObserver
      * @author Frederik
      */
     // one line is currently commented out as our moveCurrentPlayerToSpace is in MoveController
-    private class SpaceEventHandler implements EventHandler<MouseEvent> {
+    private class SpaceEventHandler implements EventHandler<MouseEvent>
+    {
 
         final public GameController gameController;
 
@@ -112,7 +113,8 @@ public class BoardView extends VBox implements ViewObserver
          * @param gameController
          * @author
          */
-        public SpaceEventHandler(@NotNull GameController gameController) {
+        public SpaceEventHandler(@NotNull GameController gameController)
+        {
             this.gameController = gameController;
         }
 
@@ -121,14 +123,16 @@ public class BoardView extends VBox implements ViewObserver
          * @author Frederik
          */
         @Override
-        public void handle(MouseEvent event) {
+        public void handle(MouseEvent event)
+        {
             Object source = event.getSource();
-            if (source instanceof SpaceView) {
-                SpaceView spaceView = (SpaceView) source;
+            if (source instanceof SpaceView spaceView)
+            {
                 Space space = spaceView.space;
                 Board board = space.board;
 
-                if (board == gameController.board) {
+                if (board == gameController.board)
+                {
                     // gameController.moveCurrentPlayerToSpace(space);
                     event.consume();
                 }

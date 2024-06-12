@@ -1,9 +1,9 @@
 package dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.BoardElements;
 
-import dk.dtu.compute.se.pisd.roborally.model.Command;
-import dk.dtu.compute.se.pisd.roborally.model.Heading;
-import dk.dtu.compute.se.pisd.roborally.model.Player;
-import dk.dtu.compute.se.pisd.roborally.model.Space;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Command;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Heading;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Player;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Space;
 import javafx.scene.image.Image;
 
 /**

@@ -1,6 +1,6 @@
 package dk.dtu.compute.se.pisd.RoboSpring.RoboRally.fileaccess.model;
 
-import dk.dtu.compute.se.pisd.roborally.model.Heading;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Heading;
 
 /**
  * @author Elias

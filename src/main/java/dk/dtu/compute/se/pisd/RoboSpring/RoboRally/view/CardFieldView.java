@@ -21,12 +21,12 @@
  */
 package dk.dtu.compute.se.pisd.RoboSpring.RoboRally.view;
 
-import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
-import dk.dtu.compute.se.pisd.roborally.controller.GameController;
-import dk.dtu.compute.se.pisd.roborally.model.Card;
-import dk.dtu.compute.se.pisd.roborally.model.CardField;
-import dk.dtu.compute.se.pisd.roborally.model.Phase;
-import dk.dtu.compute.se.pisd.roborally.model.Player;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.controller.GameController;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Card;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.CardField;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Phase;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Player;
+import dk.dtu.compute.se.pisd.RoboSpring.observer.Subject;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

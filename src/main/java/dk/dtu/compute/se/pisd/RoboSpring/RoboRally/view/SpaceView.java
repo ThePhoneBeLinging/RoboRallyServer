@@ -21,10 +21,10 @@
  */
 package dk.dtu.compute.se.pisd.RoboSpring.RoboRally.view;
 
-import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
-import dk.dtu.compute.se.pisd.roborally.model.Heading;
-import dk.dtu.compute.se.pisd.roborally.model.Player;
-import dk.dtu.compute.se.pisd.roborally.model.Space;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Heading;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Player;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Space;
+import dk.dtu.compute.se.pisd.RoboSpring.observer.Subject;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
@@ -107,11 +107,16 @@ public class SpaceView extends StackPane implements ViewObserver
     {
         this.getChildren().add(imageView);
         imageView.setImage(this.space.getBoardElement().getImage());
-        if(this.space.getBoardElement().getHeading()==Heading.NORTH){
+        if (this.space.getBoardElement().getHeading() == Heading.NORTH)
+        {
             imageView.setRotate(90);
-        }if(this.space.getBoardElement().getHeading()==Heading.EAST){
+        }
+        if (this.space.getBoardElement().getHeading() == Heading.EAST)
+        {
             imageView.setRotate(180);
-        }if(this.space.getBoardElement().getHeading()==Heading.SOUTH){
+        }
+        if (this.space.getBoardElement().getHeading() == Heading.SOUTH)
+        {
             imageView.setRotate(270);
         }
     }

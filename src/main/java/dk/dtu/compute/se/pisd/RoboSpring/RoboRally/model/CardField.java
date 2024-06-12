@@ -21,15 +21,15 @@
  */
 package dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model;
 
-import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
+import dk.dtu.compute.se.pisd.RoboSpring.observer.Subject;
 
 /**
  * ...
  *
  * @author Ekkart Kindler, ekki@dtu.dk
- *
  */
-public class CardField extends Subject {
+public class CardField extends Subject
+{
 
     final public Player player;
 
@@ -41,7 +41,8 @@ public class CardField extends Subject {
      * @param player the player to which this field belongs
      * @author Elias & Frederik
      */
-    public CardField(Player player) {
+    public CardField(Player player)
+    {
         this.player = player;
         this.card = null;
         this.visible = true;
@@ -51,7 +52,8 @@ public class CardField extends Subject {
      * @return the card in this field
      * @author Frederik
      */
-    public Card getCard() {
+    public Card getCard()
+    {
         return card;
     }
 
@@ -59,8 +61,10 @@ public class CardField extends Subject {
      * @param card the card to be placed in this field
      * @author Elias
      */
-    public void setCard(Card card) {
-        if (card != this.card) {
+    public void setCard(Card card)
+    {
+        if (card != this.card)
+        {
             this.card = card;
             notifyChange();
         }
@@ -70,7 +74,8 @@ public class CardField extends Subject {
      * @return whether the card in this field is visible
      * @author Elias
      */
-    public boolean isVisible() {
+    public boolean isVisible()
+    {
         return visible;
     }
 
@@ -78,8 +83,10 @@ public class CardField extends Subject {
      * @param visible whether the card in this field should be visible
      * @author Elias
      */
-    public void setVisible(boolean visible) {
-        if (visible != this.visible) {
+    public void setVisible(boolean visible)
+    {
+        if (visible != this.visible)
+        {
             this.visible = visible;
             notifyChange();
         }

@@ -21,7 +21,7 @@
  */
 package dk.dtu.compute.se.pisd.RoboSpring.RoboRally.fileaccess.model;
 
-import dk.dtu.compute.se.pisd.roborally.model.Board;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Board;
 
 import java.util.ArrayList;
 

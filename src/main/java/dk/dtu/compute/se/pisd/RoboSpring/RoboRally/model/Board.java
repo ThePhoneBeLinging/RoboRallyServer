@@ -21,17 +21,17 @@
  */
 package dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model;
 
-import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
-import dk.dtu.compute.se.pisd.roborally.model.BoardElements.BoardElement;
-import dk.dtu.compute.se.pisd.roborally.model.BoardElements.Checkpoint;
-import dk.dtu.compute.se.pisd.roborally.model.BoardElements.RebootToken;
-import dk.dtu.compute.se.pisd.roborally.model.BoardElements.SpawnPoint;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.BoardElements.BoardElement;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.BoardElements.Checkpoint;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.BoardElements.RebootToken;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.BoardElements.SpawnPoint;
+import dk.dtu.compute.se.pisd.RoboSpring.observer.Subject;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static dk.dtu.compute.se.pisd.roborally.model.Phase.INITIALISATION;
+import static dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Phase.INITIALISATION;
 
 /**
  * ...
@@ -564,14 +564,18 @@ public class Board extends Subject
         }
     }
 
-    public Space getAvailableSpawnPoint() {
+    public Space getAvailableSpawnPoint()
+    {
         ArrayList<BoardElement> notactivateables = this.getBoardElementsWithIndex(Board.NOT_ACTIVATE_ABLE_INDEX);
         Space lowestYSpace = null;
-        for (BoardElement element : notactivateables) {
-            if (element instanceof SpawnPoint) {
-                SpawnPoint spawnPoint = (SpawnPoint) element;
-                if (spawnPoint.getSpace().getPlayer() == null) {
-                    if (lowestYSpace == null || spawnPoint.getSpace().y < lowestYSpace.y) {
+        for (BoardElement element : notactivateables)
+        {
+            if (element instanceof SpawnPoint spawnPoint)
+            {
+                if (spawnPoint.getSpace().getPlayer() == null)
+                {
+                    if (lowestYSpace == null || spawnPoint.getSpace().y < lowestYSpace.y)
+                    {
                         lowestYSpace = spawnPoint.getSpace();
                     }
                 }
