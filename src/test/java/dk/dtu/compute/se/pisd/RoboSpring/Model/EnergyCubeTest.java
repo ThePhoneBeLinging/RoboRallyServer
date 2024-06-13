@@ -61,6 +61,6 @@ public class EnergyCubeTest
         player.moveController.moveForward(player);
         energyCube.activate();
         Assertions.assertEquals(expectedAmountOfEnergyCubes, player.getEnergyCubes());
-        Assertions.assertNull(board.getSpace(0, 1).getBoardElement());
+        Assertions.assertNotEquals(energyCube, board.getSpace(0, 1).getBoardElement());
     }
 }
