@@ -7,6 +7,7 @@ import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Player.Player;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Repository.BoardRepository;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Repository.LobbyRepository;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Repository.PlayerRepository;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Space;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -81,7 +82,7 @@ public class LobbyController
         board.setTurnID(0);
         if (board.getBoardname() == null)
         {
-            board.setBoardname("default");
+            board.setBoardname("dizzyHighway");
         }
         boardRepository.save(board);
         List<Lobby> lobbies = lobbyRepository.findLobbiesByGameID(gameID);
@@ -109,12 +110,16 @@ public class LobbyController
         newGame.setEnergyCubes(new ArrayList<>());
         dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Board gameBoard =
                 dk.dtu.compute.se.pisd.RoboSpring.Util.fromServerBoardToGameBoard(newGame);
-
+        List<Player> players = playerRepository.findPlayersByGameIDAndTurnID(gameID, 0);
+        playerRepository.deleteAll(players);
         for (int i = 0; i < gameBoard.getPlayersNumber(); i++)
         {
-            gameBoard.getPlayer(i).setSpace(gameBoard.getAvailableSpawnPoint());
-
+            Space space = gameBoard.getAvailableSpawnPoint();
+            players.get(i).setX(space.x);
+            players.get(i).setY(space.y);
+            gameBoard.getPlayer(i).setSpace(space);
         }
+        playerRepository.saveAll(players);
         //newGame = fromGameBoardToServerBoard(gameBoard);
         return true;
     }
