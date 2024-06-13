@@ -8,22 +8,37 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("get/boards/upgradeCards")
-public class UpgradeCardController {
+public class UpgradeCardController
+{
 
-    private UpgradeCardRepository upgradeCardRepository;
+    private final UpgradeCardRepository upgradeCardRepository;
 
-    public UpgradeCardController(UpgradeCardRepository upgradeCardRepository) {
+    public UpgradeCardController(UpgradeCardRepository upgradeCardRepository)
+    {
         this.upgradeCardRepository = upgradeCardRepository;
     }
 
-    @RequestMapping(value = "/shop")
-    public List<UpgradeCard> getUpgradeCards() {
+    @RequestMapping(value = "get/boards/upgradeCards/shop")
+    public List<UpgradeCard> getUpgradeCards()
+    {
         return upgradeCardRepository.findByPlayerIDIsNullAndGameID(1L);
     }
 
-    @RequestMapping(value = "/active")
-    public List<UpgradeCard> getActiveUpgradeCards() {
-        return upgradeCardRepository.findActiveUpgradeCardsByPlayerIDAndGameID(1L, 1L);
+    @RequestMapping(value = "get/boards/upgradeCards/active")
+    public List<UpgradeCard> getActiveUpgradeCards(Long gameID, Long playerID)
+    {
+        return upgradeCardRepository.findActiveUpgradeCardsByPlayerIDAndGameID(playerID, gameID);
+    }
+
+    @RequestMapping(value = "set/boards/upgradeCards/addToPlayer")
+    public boolean getUpgradeCards(Long gameID, Long playerID, String upgradeCardName, int price)
+    {
+        UpgradeCard upgradeCard = new UpgradeCard();
+        upgradeCard.setGameID(gameID);
+        upgradeCard.setPlayerID(playerID);
+        upgradeCard.setCardName(upgradeCardName);
+        upgradeCard.setPrice(price);
+        upgradeCardRepository.save(upgradeCard);
+        return true;
     }
 }
