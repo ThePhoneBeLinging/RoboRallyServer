@@ -33,7 +33,7 @@ public class LobbyController {
         Long gameID = 1L;
         while (true) {
             //TODO insert check for lobby as well
-            Board board = boardRepository.findBoardByGameID(gameID);
+            Board board = boardRepository.findBoardByGameIDAndTurnID(gameID, 0);
             if (board == null) {
                 break;
             }
@@ -57,7 +57,7 @@ public class LobbyController {
 
     @RequestMapping(value = "lobby/changeBoard")
     public boolean changeMap(Long gameID, String boardName) {
-        Board board = boardRepository.findBoardByGameID(gameID);
+        Board board = boardRepository.findBoardByGameIDAndTurnID(gameID, 0);
         boardRepository.delete(board);
         board.setBoardname(boardName);
         boardRepository.save(board);
@@ -67,7 +67,7 @@ public class LobbyController {
     @RequestMapping(value = "lobby/startGame")
     public boolean startGame(Long gameID) {
         CompleteGame newGame = new CompleteGame();
-        Board board = boardRepository.findBoardByGameID(gameID);
+        Board board = boardRepository.findBoardByGameIDAndTurnID(gameID, 0);
         boardRepository.delete(board);
         board.setPhase("PROGRAMMING");
         if (board.getBoardname() == null) {
@@ -86,7 +86,7 @@ public class LobbyController {
         }
         newGame.setBoard(board);
         newGame.setGameID(gameID);
-        newGame.setPlayerList(playerRepository.findPlayersByGameID(gameID));
+        newGame.setPlayerList(playerRepository.findPlayersByGameIDAndTurnID(gameID, 0));
         newGame.setCards(new ArrayList<>());
         newGame.setEnergyCubes(new ArrayList<>());
         dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Board gameBoard = dk.dtu.compute.se.pisd.RoboSpring.Util.fromServerBoardToGameBoard(newGame);
