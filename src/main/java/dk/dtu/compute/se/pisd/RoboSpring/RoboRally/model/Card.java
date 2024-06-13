@@ -22,7 +22,6 @@
 package dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model;
 
 import dk.dtu.compute.se.pisd.RoboSpring.observer.Subject;
-import javafx.scene.image.Image;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -50,18 +49,7 @@ public class Card extends Subject
      * @return
      * @author Elias, Mustafa & Frederik
      */
-
-
-    /**
-     * @param command
-     * @param image
-     * @author Mustafa
-     */
-    public Card(@NotNull Command command, Image image)
-    {
-        this.command = command;
-    }
-
+    
     /**
      * @return the name of the command represented by this card
      * @author Elias

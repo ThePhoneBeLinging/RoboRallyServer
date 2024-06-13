@@ -2,7 +2,6 @@ package dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.BoardElements;
 
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Board;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Space;
-import javafx.scene.image.Image;
 
 /**
  * @author Frederik

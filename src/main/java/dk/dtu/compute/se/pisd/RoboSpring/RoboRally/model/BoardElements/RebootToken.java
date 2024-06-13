@@ -4,7 +4,6 @@ import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Command;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Heading;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Player;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Space;
-import javafx.scene.image.Image;
 
 /**
  * @author Elias, Adel & Frederik
