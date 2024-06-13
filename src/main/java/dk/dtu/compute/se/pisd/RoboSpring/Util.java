@@ -96,6 +96,7 @@ public class Util
             serverPlayer.setEnergyCubes(gameBoardPlayer.getEnergyCubes());
             serverPlayer.setPlayersTurn(gameBoardPlayer.isThisPlayerTurn());
             completeServerBoard.getPlayerList().add(serverPlayer);
+            i++;
         }
         return completeServerBoard;
     }
