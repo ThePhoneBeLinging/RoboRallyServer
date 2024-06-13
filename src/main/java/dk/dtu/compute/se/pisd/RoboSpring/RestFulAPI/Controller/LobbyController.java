@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
-import static dk.dtu.compute.se.pisd.RoboSpring.Util.fromGameBoardToServerBoard;
-
 @RestController
 public class LobbyController
 {
@@ -99,6 +97,11 @@ public class LobbyController
         newGame.setBoard(board);
         newGame.setGameID(gameID);
         newGame.setPlayerList(playerRepository.findPlayersByGameIDAndTurnID(gameID, 0));
+        for (Player player : newGame.getPlayerList())
+        {
+            player.setName("Player" + player.getPlayerID());
+            player.setHeading("SOUTH");
+        }
         newGame.setCards(new ArrayList<>());
         newGame.setEnergyCubes(new ArrayList<>());
         dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Board gameBoard =
@@ -109,7 +112,7 @@ public class LobbyController
             gameBoard.getPlayer(i).setSpace(gameBoard.getAvailableSpawnPoint());
 
         }
-        newGame = fromGameBoardToServerBoard(gameBoard);
+        //newGame = fromGameBoardToServerBoard(gameBoard);
         return true;
     }
 
