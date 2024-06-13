@@ -1,6 +1,5 @@
 package dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.BoardElements;
 
-import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.controller.SoundController;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Board;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Heading;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Space;
@@ -40,11 +39,6 @@ public class BoardLaser extends BoardElement
                 break;
             }
             spaceToCheck = nextSpace;
-        }
-        if (this.getSpace().board.isStepMode())
-        {
-            SoundController sc = SoundController.getInstance();
-            sc.playSound("laser_sound");
         }
     }
 }

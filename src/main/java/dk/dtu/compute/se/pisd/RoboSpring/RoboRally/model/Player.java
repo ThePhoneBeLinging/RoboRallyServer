@@ -22,7 +22,6 @@
 package dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model;
 
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.controller.MoveController;
-import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.controller.SoundController;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.BoardElements.Checkpoint;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.BoardElements.NullBoardElement;
 import dk.dtu.compute.se.pisd.RoboSpring.observer.Subject;
@@ -405,11 +404,6 @@ public class Player extends Subject
                 break;
             }
             spaceToCheck = nextSpace;
-        }
-        if (this.getSpace().board.isStepMode())
-        {
-            SoundController sc = SoundController.getInstance();
-            sc.playSound("laser_sound");
         }
     }
 

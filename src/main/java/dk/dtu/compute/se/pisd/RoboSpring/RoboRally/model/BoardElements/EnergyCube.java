@@ -1,6 +1,5 @@
 package dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.BoardElements;
 
-import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.controller.SoundController;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Board;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Player;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Space;
@@ -32,8 +31,6 @@ public class EnergyCube extends NullBoardElement
         {
             this.getSpace().getPlayer().pickUpEnergyCube();
             this.getSpace().setBoardElement(new NullBoardElement(this.getSpace()));
-            SoundController sc = SoundController.getInstance();
-            sc.playSound("pickup");
         }
 
     }

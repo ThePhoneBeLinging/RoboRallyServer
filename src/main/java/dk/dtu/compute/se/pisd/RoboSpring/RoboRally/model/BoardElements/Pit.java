@@ -1,6 +1,5 @@
 package dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.BoardElements;
 
-import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.controller.SoundController;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Board;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Player;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Space;
@@ -37,7 +36,6 @@ public class Pit extends NullBoardElement
         }
         if (!player.checkIfOwnsUpgradeCard("HOVER UNIT"))
         {
-            SoundController.getInstance().playSound("falling");
             player.die();
         }
     }
