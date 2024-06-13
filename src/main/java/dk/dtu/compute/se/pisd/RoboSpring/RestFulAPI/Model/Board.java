@@ -18,7 +18,9 @@ public class Board
 {
 
     @Id
+    private Long id;
     private Long gameID;
+    private int turnID;
     private String boardname;
     private int step;
     private String phase;

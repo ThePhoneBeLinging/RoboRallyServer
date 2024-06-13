@@ -33,16 +33,19 @@ public class BoardSaveLoad
     public static CompleteGame saveBoard(CompleteGame completeGame)
     {
         completeGame.getBoard().setGameID(completeGame.getGameID());
+        completeGame.getBoard().setTurnID(completeGame.getTurnID());
         Board boardToSave = boardRepository.save(completeGame.getBoard());
         List<EnergyCube> energyCubes = completeGame.getEnergyCubes();
         for (EnergyCube energyCube : energyCubes)
         {
             energyCube.setGameID(completeGame.getGameID());
+            energyCube.setTurnID(completeGame.getTurnID());
             energyRepository.save(energyCube);
         }
         for (Player player : completeGame.getPlayerList())
         {
             player.setGameID(completeGame.getGameID());
+            player.setTurnID(completeGame.getTurnID());
             playerRepository.save(player);
         }
         for (Card card : completeGame.getCards())
@@ -54,14 +57,14 @@ public class BoardSaveLoad
         return completeGame;
     }
 
-    public static CompleteGame loadBoard(Long gameID)
+    public static CompleteGame loadBoard(Long gameID, int turnID)
     {
         CompleteGame completeGame = new CompleteGame();
         completeGame.setGameID(gameID);
-        completeGame.setBoard(boardRepository.findBoardByGameID(gameID));
-        List<Player> playerList = playerRepository.findPlayersByGameID(gameID);
+        completeGame.setBoard(boardRepository.findBoardByGameIDAndTurnID(gameID, turnID));
+        List<Player> playerList = playerRepository.findPlayersByGameIDAndTurnID(gameID, turnID);
         completeGame.setPlayerList(playerList);
-        completeGame.setEnergyCubes(energyRepository.findEnergyCubesByGameID(gameID));
+        completeGame.setEnergyCubes(energyRepository.findEnergyCubesByGameIDAndTurnID(gameID, turnID));
         completeGame.setCards(cardsRepository.findAllByGameID(gameID));
         if (completeGame.getBoard() == null || completeGame.getPlayerList() == null || completeGame.getEnergyCubes() == null || completeGame.getCards() == null)
         {

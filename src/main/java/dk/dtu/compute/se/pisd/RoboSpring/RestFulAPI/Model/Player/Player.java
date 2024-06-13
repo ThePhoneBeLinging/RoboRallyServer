@@ -20,6 +20,7 @@ public class Player
     private Long id;
     private Long playerID;
     private long gameID;
+    private int turnID;
     private int x;
     private int y;
     public int lastVisitedCheckpoint;

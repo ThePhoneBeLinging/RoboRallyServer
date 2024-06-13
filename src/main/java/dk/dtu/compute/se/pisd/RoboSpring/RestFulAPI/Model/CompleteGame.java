@@ -16,6 +16,7 @@ import java.util.List;
 public class CompleteGame
 {
     private Long gameID;
+    private int turnID;
     private Board board;
     private List<EnergyCube> energyCubes;
     private List<Player> playerList;
