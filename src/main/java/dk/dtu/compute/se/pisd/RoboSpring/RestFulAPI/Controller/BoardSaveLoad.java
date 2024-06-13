@@ -32,6 +32,10 @@ public class BoardSaveLoad
 
     public static CompleteGame saveBoard(CompleteGame completeGame)
     {
+        // Deletes previous board with same gameID and turnID
+        BoardController boardController = new BoardController(boardRepository, energyRepository, playerRepository, cardsRepository);
+        boardController.deleteBoard(completeGame.getGameID(), completeGame.getTurnID());
+
         completeGame.getBoard().setGameID(completeGame.getGameID());
         completeGame.getBoard().setTurnID(completeGame.getTurnID());
         Board boardToSave = boardRepository.save(completeGame.getBoard());

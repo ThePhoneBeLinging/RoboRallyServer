@@ -44,22 +44,22 @@ public class BoardController
     }
 
     @RequestMapping(value = "set/boards/single/delete")
-    public boolean deleteBoard(Long gameID)
+    public boolean deleteBoard(Long gameID, int TurnID)
     {
-        List<Player> playerList = playerRepository.findPlayersByGameID(gameID);
+        List<Player> playerList = playerRepository.findPlayersByGameIDAndTurnID(gameID, TurnID);
         List<Card> cardList = cardsRepository.findAllByGameID(gameID);
         cardsRepository.deleteAll(cardList);
-        List<EnergyCube> energyCubeList = energyRepository.findEnergyCubesByGameID(gameID);
+        List<EnergyCube> energyCubeList = energyRepository.findEnergyCubesByGameIDAndTurnID(gameID, TurnID);
         playerRepository.deleteAll(playerList);
         energyRepository.deleteAll(energyCubeList);
-        boardRepository.delete(boardRepository.findBoardByGameID(gameID));
+        boardRepository.delete(boardRepository.findBoardByGameIDAndTurnID(gameID, TurnID));
         return true;
     }
 
     @RequestMapping(value = "get/boards/single")
-    public CompleteGame getBoard(Long gameID, Long playerID)
+    public CompleteGame getBoard(Long gameID, int TurnID, Long playerID)
     {
-        CompleteGame completeGame = BoardSaveLoad.loadBoard(gameID);
+        CompleteGame completeGame = BoardSaveLoad.loadBoard(gameID, TurnID);
         assert completeGame != null;
         for (Card card : completeGame.getCards())
         {
