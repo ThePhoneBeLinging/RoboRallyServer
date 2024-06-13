@@ -3,7 +3,6 @@ package dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Controller;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Board;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.CompleteGame;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Lobby;
-import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Player.Card;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Player.Player;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Repository.BoardRepository;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Repository.LobbyRepository;
@@ -17,24 +16,32 @@ import java.util.List;
 import static dk.dtu.compute.se.pisd.RoboSpring.Util.fromGameBoardToServerBoard;
 
 @RestController
-public class LobbyController {
+public class LobbyController
+{
     private final LobbyRepository lobbyRepository;
     private final BoardRepository boardRepository;
     private final PlayerRepository playerRepository;
+    private final BoardController boardController;
 
-    LobbyController(LobbyRepository lobbyRepository, BoardRepository boardRepository, PlayerRepository playerRepository) {
+    LobbyController(LobbyRepository lobbyRepository, BoardRepository boardRepository,
+                    PlayerRepository playerRepository, BoardController boardController)
+    {
         this.lobbyRepository = lobbyRepository;
         this.boardRepository = boardRepository;
         this.playerRepository = playerRepository;
+        this.boardController = boardController;
     }
 
     @RequestMapping(value = "lobby/create")
-    public Lobby createLobby() {
+    public Lobby createLobby()
+    {
         Long gameID = 1L;
-        while (true) {
+        while (true)
+        {
             //TODO insert check for lobby as well
             Board board = boardRepository.findBoardByGameIDAndTurnID(gameID, 0);
-            if (board == null) {
+            if (board == null)
+            {
                 break;
             }
             gameID++;
@@ -47,7 +54,8 @@ public class LobbyController {
     }
 
     @RequestMapping(value = "lobby/join")
-    public Lobby joinLobby(Long gameID) {
+    public Lobby joinLobby(Long gameID)
+    {
         Lobby lobby = new Lobby();
         lobby.setPlayerID(1L + lobbyRepository.countLobbyObjectsByGameID(gameID));
         lobby.setGameID(gameID);
@@ -56,7 +64,8 @@ public class LobbyController {
     }
 
     @RequestMapping(value = "lobby/changeBoard")
-    public boolean changeMap(Long gameID, String boardName) {
+    public boolean changeMap(Long gameID, String boardName)
+    {
         Board board = boardRepository.findBoardByGameIDAndTurnID(gameID, 0);
         boardRepository.delete(board);
         board.setBoardname(boardName);
@@ -65,17 +74,20 @@ public class LobbyController {
     }
 
     @RequestMapping(value = "lobby/startGame")
-    public boolean startGame(Long gameID) {
+    public boolean startGame(Long gameID)
+    {
         CompleteGame newGame = new CompleteGame();
         Board board = boardRepository.findBoardByGameIDAndTurnID(gameID, 0);
         boardRepository.delete(board);
         board.setPhase("PROGRAMMING");
-        if (board.getBoardname() == null) {
+        if (board.getBoardname() == null)
+        {
             board.setBoardname("default");
         }
         boardRepository.save(board);
         List<Lobby> lobbies = lobbyRepository.findLobbiesByGameID(gameID);
-        for (Lobby lobby : lobbies) {
+        for (Lobby lobby : lobbies)
+        {
             Player player = new Player();
             player.setGameID(gameID);
             player.setPlayerID(lobby.getPlayerID());
@@ -89,9 +101,11 @@ public class LobbyController {
         newGame.setPlayerList(playerRepository.findPlayersByGameIDAndTurnID(gameID, 0));
         newGame.setCards(new ArrayList<>());
         newGame.setEnergyCubes(new ArrayList<>());
-        dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Board gameBoard = dk.dtu.compute.se.pisd.RoboSpring.Util.fromServerBoardToGameBoard(newGame);
+        dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Board gameBoard =
+                dk.dtu.compute.se.pisd.RoboSpring.Util.fromServerBoardToGameBoard(newGame);
 
-        for (int i = 0; i < gameBoard.getPlayersNumber(); i++) {
+        for (int i = 0; i < gameBoard.getPlayersNumber(); i++)
+        {
             gameBoard.getPlayer(i).setSpace(gameBoard.getAvailableSpawnPoint());
 
         }
@@ -100,18 +114,25 @@ public class LobbyController {
     }
 
     @RequestMapping(value = "lobby/delete")
-    public boolean deleteLobby(Long gameID) {
-        boardRepository.deleteById(gameID);
+    public boolean deleteLobby(Long gameID)
+    {
+        for (int i = 0; i < 31; i++)
+        {
+            boardController.deleteBoard(gameID, i);
+        }
         lobbyRepository.deleteAll(lobbyRepository.findLobbiesByGameID(gameID));
         return true;
     }
 
     @RequestMapping(value = "lobby/getAll")
-    public List<Long> getLobbies() {
+    public List<Long> getLobbies()
+    {
         List<Long> lobbyToReturn = new ArrayList<>();
         List<Lobby> lobbyToTakeFrom = lobbyRepository.findAll();
-        for (Lobby lobby : lobbyToTakeFrom) {
-            if (!lobbyToReturn.contains(lobby.getGameID())) {
+        for (Lobby lobby : lobbyToTakeFrom)
+        {
+            if (!lobbyToReturn.contains(lobby.getGameID()))
+            {
                 lobbyToReturn.add(lobby.getGameID());
             }
         }
