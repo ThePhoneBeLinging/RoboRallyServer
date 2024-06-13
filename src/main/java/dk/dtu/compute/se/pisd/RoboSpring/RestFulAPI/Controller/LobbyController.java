@@ -93,6 +93,7 @@ public class LobbyController
             player.setTurnID(0);
             player.setY(0);
             player.setX(0);
+            player.setHeading("SOUTH");
             playerRepository.save(player);
             lobbyRepository.deleteAll(lobbyRepository.findLobbiesByGameID(gameID));
         }
