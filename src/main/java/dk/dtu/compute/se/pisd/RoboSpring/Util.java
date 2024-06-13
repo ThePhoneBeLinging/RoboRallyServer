@@ -1,10 +1,12 @@
 package dk.dtu.compute.se.pisd.RoboSpring;
 
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.CompleteGame;
+import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Player.Card;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Player.Player;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.controller.GameController;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.fileaccess.LoadBoard;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Board;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Command;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Heading;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Phase;
 
@@ -32,7 +34,7 @@ public class Util
             gameBoardPlayer.setEnergyCubes(player.getEnergyCubes());
             gameBoardPlayer.setThisPlayerTurn(player.isPlayersTurn());
         }
-        /*
+
         for (Card card : serverBoard.getCards())
         {
             dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Card cardToAdd =
@@ -67,7 +69,7 @@ public class Util
                     }
                 }
             }
-        }*/
+        }
         return gameBoard;
     }
 
