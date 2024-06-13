@@ -52,7 +52,7 @@ public class CardField extends Subject
      * @return the card in this field
      * @author Frederik
      */
-    public Card getCard()
+    public Card getProgrammingCard()
     {
         return card;
     }

@@ -145,7 +145,7 @@ public class GameController
             int step = board.getStep();
             if (step >= 0 && step < Player.NO_REGISTERS)
             {
-                Card card = currentPlayer.getProgramField(step).getCard();
+                Card card = currentPlayer.getProgramField(step).getProgrammingCard();
                 if (card != null)
                 {
                     if (card.command.isInteractive())
@@ -211,16 +211,16 @@ public class GameController
                 for (int j = 0; j < Player.NO_REGISTERS; j++)
                 {
                     CardField field = player.getProgramField(j);
-                    player.addCardToDiscardPile(field.getCard());
+                    player.addCardToDiscardPile(field.getProgrammingCard());
                     field.setCard(null);
                     field.setVisible(true);
                 }
                 for (int j = 0; j < Player.NO_CARDS; j++)
                 {
                     CardField field = player.getCardField(j);
-                    if (player.getCardField(j).getCard() != null)
+                    if (player.getCardField(j).getProgrammingCard() != null)
                     {
-                        player.addDamageCardToPile(player.getCardField(j).getCard().command, 1);
+                        player.addDamageCardToPile(player.getCardField(j).getProgrammingCard().command, 1);
                     }
                     field.setCard(player.drawTopCard());
                     field.setVisible(true);
@@ -297,8 +297,8 @@ public class GameController
      */
     public boolean moveCards(@NotNull CardField source, @NotNull CardField target)
     {
-        Card sourceCard = source.getCard();
-        Card targetCard = target.getCard();
+        Card sourceCard = source.getProgrammingCard();
+        Card targetCard = target.getProgrammingCard();
         if (sourceCard != null && targetCard == null)
         {
             target.setCard(sourceCard);

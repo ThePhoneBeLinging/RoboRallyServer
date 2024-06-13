@@ -174,7 +174,7 @@ public class MoveController
         if (player.getSpace().board.getStep() > 0)
         {
             int index = player.getSpace().board.getStep() - 1;
-            Command command = player.getProgramField(index).getCard().command;
+            Command command = player.getProgramField(index).getProgrammingCard().command;
             while (command == Command.AGAIN)
             {
                 index--;
@@ -182,7 +182,7 @@ public class MoveController
                 {
                     return;
                 }
-                command = player.getProgramField(index).getCard().command;
+                command = player.getProgramField(index).getProgrammingCard().command;
             }
             executeCommand(player, command);
         }
@@ -309,9 +309,12 @@ public class MoveController
                 player.setSpace(newSpace);
                 newSpace.getBoardElement().onWalkOver(player);
             }
-            if (player.getProgramField(0).getCard().command == Command.DEATH)
+            if (player.getProgramField(0).getProgrammingCard() != null)
             {
-                break;
+                if (player.getProgramField(0).getProgrammingCard().command == Command.DEATH)
+                {
+                    break;
+                }
             }
         }
     }

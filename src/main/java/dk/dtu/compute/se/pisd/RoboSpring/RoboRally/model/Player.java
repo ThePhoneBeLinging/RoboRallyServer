@@ -197,24 +197,24 @@ public class Player extends Subject
         for (int i = 0; i < Player.NO_CARDS; i++)
         {
             CardField cardField = this.getCardField(i);
-            if (cardField != null && cardField.getCard() != null)
+            if (cardField != null && cardField.getProgrammingCard() != null)
             {
-                if (cardField.getCard().command == cmd)
+                if (cardField.getProgrammingCard().command == cmd)
                 {
-                    cardField.getCard().command = newCommand;
-                    cardField.getCard().notifyAll();
+                    cardField.getProgrammingCard().command = newCommand;
+                    cardField.getProgrammingCard().notifyAll();
                 }
             }
         }
         for (int i = 0; i < Player.NO_REGISTERS; i++)
         {
             CardField cardField = this.getProgramField(i);
-            if (cardField != null && cardField.getCard() != null)
+            if (cardField != null && cardField.getProgrammingCard() != null)
             {
-                if (cardField.getCard().command == cmd)
+                if (cardField.getProgrammingCard().command == cmd)
                 {
-                    cardField.getCard().command = newCommand;
-                    cardField.getCard().notifyAll();
+                    cardField.getProgrammingCard().command = newCommand;
+                    cardField.getProgrammingCard().notifyAll();
                 }
             }
         }
@@ -303,7 +303,7 @@ public class Player extends Subject
     {
         for (int i = 0; i < program.length; i++)
         {
-            this.addCardToDiscardPile(program[i].getCard());
+            this.addCardToDiscardPile(program[i].getProgrammingCard());
             program[i].setCard(new Card(DEATH));
         }
         this.discardedCardsPile.playerCards.add(new Card((SPAM)));
