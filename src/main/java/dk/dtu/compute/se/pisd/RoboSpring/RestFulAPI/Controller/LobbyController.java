@@ -78,6 +78,7 @@ public class LobbyController
         Board board = boardRepository.findBoardByGameIDAndTurnID(gameID, 0);
         boardRepository.delete(board);
         board.setPhase("PROGRAMMING");
+        board.setTurnID(0);
         if (board.getBoardname() == null)
         {
             board.setBoardname("default");
@@ -89,6 +90,7 @@ public class LobbyController
             Player player = new Player();
             player.setGameID(gameID);
             player.setPlayerID(lobby.getPlayerID());
+            player.setTurnID(0);
             player.setY(0);
             player.setX(0);
             playerRepository.save(player);

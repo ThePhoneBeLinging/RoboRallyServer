@@ -59,7 +59,9 @@ public class BoardController
     @RequestMapping(value = "get/boards/single")
     public CompleteGame getBoard(Long gameID, int TurnID, Long playerID)
     {
-        CompleteGame completeGame = BoardSaveLoad.loadBoard(gameID, TurnID);
+        BoardSaveLoad boardSaveLoad = new BoardSaveLoad(boardRepository, energyRepository, playerRepository,
+                cardsRepository);
+        CompleteGame completeGame = boardSaveLoad.loadBoard(gameID, TurnID);
         assert completeGame != null;
         for (Card card : completeGame.getCards())
         {

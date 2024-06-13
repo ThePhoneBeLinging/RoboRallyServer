@@ -16,24 +16,25 @@ import static dk.dtu.compute.se.pisd.RoboSpring.Util.fromServerBoardToGameBoard;
 
 public class BoardSaveLoad
 {
-    private static BoardRepository boardRepository;
-    private static EnergyRepository energyRepository;
-    private static PlayerRepository playerRepository;
-    private static CardsRepository cardsRepository;
+    private final BoardRepository boardRepository;
+    private final EnergyRepository energyRepository;
+    private final PlayerRepository playerRepository;
+    private final CardsRepository cardsRepository;
 
     public BoardSaveLoad(BoardRepository boardRepository, EnergyRepository energyRepository,
                          PlayerRepository playerRepository, CardsRepository cardsRepository)
     {
-        BoardSaveLoad.boardRepository = boardRepository;
-        BoardSaveLoad.energyRepository = energyRepository;
-        BoardSaveLoad.playerRepository = playerRepository;
-        BoardSaveLoad.cardsRepository = cardsRepository;
+        this.boardRepository = boardRepository;
+        this.energyRepository = energyRepository;
+        this.playerRepository = playerRepository;
+        this.cardsRepository = cardsRepository;
     }
 
-    public static CompleteGame saveBoard(CompleteGame completeGame)
+    public CompleteGame saveBoard(CompleteGame completeGame)
     {
         // Deletes previous board with same gameID and turnID
-        BoardController boardController = new BoardController(boardRepository, energyRepository, playerRepository, cardsRepository);
+        BoardController boardController = new BoardController(boardRepository, energyRepository, playerRepository,
+                cardsRepository);
         boardController.deleteBoard(completeGame.getGameID(), completeGame.getTurnID());
 
         completeGame.getBoard().setGameID(completeGame.getGameID());
@@ -61,7 +62,7 @@ public class BoardSaveLoad
         return completeGame;
     }
 
-    public static CompleteGame loadBoard(Long gameID, int turnID)
+    public CompleteGame loadBoard(Long gameID, int turnID)
     {
         CompleteGame completeGame = new CompleteGame();
         completeGame.setGameID(gameID);

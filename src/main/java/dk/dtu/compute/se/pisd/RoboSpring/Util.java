@@ -64,8 +64,10 @@ public class Util
                             break;
                         case "ACTIVE":
                             gamePlayer.activeCardsPile.playerCards.add(cardToAdd);
+                            break;
                         case "DISCARD":
                             gamePlayer.discardedCardsPile.playerCards.add(cardToAdd);
+                            break;
                     }
                 }
             }
