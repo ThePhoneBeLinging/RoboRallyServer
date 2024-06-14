@@ -110,15 +110,16 @@ public class CardsController {
             playerCards.add(card);
         }
 
-        for (int i = 0; i < amountOfOptionLeftOrRight; i++)
-        {
-            Card card = new Card();
-            card.setCommand("OPTION_LEFT_OR_RIGHT");
-            card.setPlayerID(player.getPlayerID());
-            card.setGameID(player.getGameID());
-            playerCards.add(card);
-        }
         shuffleDeck(playerCards);
+
+        for (int i = 0; i < playerCards.size(); i++)
+        {
+            if (i < 8) {
+                playerCards.get(i).setLocation("HAND");
+            } else {
+                playerCards.get(i).setLocation("ACTIVE");
+            }
+        }
 
         return playerCards;
     }
