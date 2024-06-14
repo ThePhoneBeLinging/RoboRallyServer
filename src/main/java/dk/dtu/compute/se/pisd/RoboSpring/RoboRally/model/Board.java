@@ -64,6 +64,18 @@ public class Board extends Subject
     private boolean stepMode;
     private ArrayList<UpgradeCard> upgradeCards = new ArrayList<>();
 
+    public int getTurnID()
+    {
+        return turnID;
+    }
+
+    public void setTurnID(int turnID)
+    {
+        this.turnID = turnID;
+    }
+
+    private int turnID;
+
     /**
      * @param width  the width of the board
      * @param height the height of the board
@@ -298,7 +310,6 @@ public class Board extends Subject
      */
     public Player getPlayer(int i)
     {
-        i %= players.size();
         if (i >= 0 && i < players.size())
         {
             return players.get(i);
