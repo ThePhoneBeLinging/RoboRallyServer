@@ -5,15 +5,16 @@ import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.CompleteGame;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Lobby;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Player.Card;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Player.Player;
-import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Repository.BoardRepository;
-import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Repository.LobbyRepository;
-import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Repository.PlayerRepository;
+import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Repository.*;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Space;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static dk.dtu.compute.se.pisd.RoboSpring.Util.fromGameBoardToServerBoard;
+import static dk.dtu.compute.se.pisd.RoboSpring.Util.fromServerBoardToGameBoard;
 
 @RestController
 public class LobbyController
@@ -23,16 +24,20 @@ public class LobbyController
     private final PlayerRepository playerRepository;
     private final BoardController boardController;
     private final CardsController cardsController;
+    private final EnergyRepository energyRepository;
+    private final CardsRepository cardsRepository;
 
     LobbyController(LobbyRepository lobbyRepository, BoardRepository boardRepository,
                     PlayerRepository playerRepository, BoardController boardController
-                    , CardsController cardsController)
+                    , CardsController cardsController, EnergyRepository energyRepository, EnergyRepository energyRepository1, CardsRepository cardsRepository)
     {
         this.lobbyRepository = lobbyRepository;
         this.boardRepository = boardRepository;
         this.playerRepository = playerRepository;
         this.boardController = boardController;
         this.cardsController = cardsController;
+        this.energyRepository = energyRepository1;
+        this.cardsRepository = cardsRepository;
     }
 
     @RequestMapping(value = "lobby/create")
@@ -80,6 +85,7 @@ public class LobbyController
     public boolean startGame(Long gameID)
     {
         CompleteGame newGame = new CompleteGame();
+        newGame.setTurnID(0);
         Board board = boardRepository.findBoardByGameIDAndTurnID(gameID, 0);
         boardRepository.delete(board);
         board.setPhase("PROGRAMMING");
@@ -127,7 +133,9 @@ public class LobbyController
             gameBoard.getPlayer(i).setSpace(space);
         }
         playerRepository.saveAll(players);
-        //newGame = fromGameBoardToServerBoard(gameBoard);
+        newGame = fromGameBoardToServerBoard(gameBoard);
+        BoardSaveLoad boardSaveLoad = new BoardSaveLoad(boardRepository,energyRepository,playerRepository,cardsRepository);
+        boardSaveLoad.saveBoard(newGame);
         return true;
     }
 

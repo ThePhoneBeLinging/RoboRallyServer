@@ -10,6 +10,8 @@ import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Command;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Heading;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Phase;
 
+import java.util.ArrayList;
+
 public class Util
 {
 
@@ -84,6 +86,7 @@ public class Util
         serverBoard.setPhase(gameBoard.getPhase().toString());
         serverBoard.setBoardname(gameBoard.boardName);
         completeServerBoard.setBoard(serverBoard);
+        completeServerBoard.setPlayerList(new ArrayList<>());
 
         int i = 0;
         while (gameBoard.getPlayer(i) != null)
