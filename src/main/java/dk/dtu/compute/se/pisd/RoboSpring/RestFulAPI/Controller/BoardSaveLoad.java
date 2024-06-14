@@ -58,7 +58,7 @@ public class BoardSaveLoad
             card.setGameID(completeGame.getGameID());
             cardsRepository.save(card);
         }
-        fromServerBoardToGameBoard(completeGame);
+        //fromServerBoardToGameBoard(completeGame);
         return completeGame;
     }
 
