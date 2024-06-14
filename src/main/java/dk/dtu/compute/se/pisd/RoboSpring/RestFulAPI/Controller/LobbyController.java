@@ -3,6 +3,7 @@ package dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Controller;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Board;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.CompleteGame;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Lobby;
+import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Player.Card;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Player.Player;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Repository.BoardRepository;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Repository.LobbyRepository;
@@ -21,14 +22,17 @@ public class LobbyController
     private final BoardRepository boardRepository;
     private final PlayerRepository playerRepository;
     private final BoardController boardController;
+    private final CardsController cardsController;
 
     LobbyController(LobbyRepository lobbyRepository, BoardRepository boardRepository,
-                    PlayerRepository playerRepository, BoardController boardController)
+                    PlayerRepository playerRepository, BoardController boardController
+                    , CardsController cardsController)
     {
         this.lobbyRepository = lobbyRepository;
         this.boardRepository = boardRepository;
         this.playerRepository = playerRepository;
         this.boardController = boardController;
+        this.cardsController = cardsController;
     }
 
     @RequestMapping(value = "lobby/create")
@@ -101,12 +105,15 @@ public class LobbyController
         newGame.setBoard(board);
         newGame.setGameID(gameID);
         newGame.setPlayerList(playerRepository.findPlayersByGameIDAndTurnID(gameID, 0));
+        ArrayList<Card> cards = new ArrayList<>();
         for (Player player : newGame.getPlayerList())
         {
             player.setName("Player" + player.getPlayerID());
             player.setHeading("SOUTH");
+            ArrayList<Card> playerCards = cardsController.initializeDeck(player);
+            cards.addAll(playerCards);
         }
-        newGame.setCards(new ArrayList<>());
+        newGame.setCards(cards);
         newGame.setEnergyCubes(new ArrayList<>());
         dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Board gameBoard =
                 dk.dtu.compute.se.pisd.RoboSpring.Util.fromServerBoardToGameBoard(newGame);
