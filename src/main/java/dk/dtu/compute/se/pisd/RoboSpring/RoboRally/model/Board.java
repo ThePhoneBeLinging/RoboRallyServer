@@ -57,12 +57,13 @@ public class Board extends Subject
     private final Space[][] spaces;
     private final List<Player> players = new ArrayList<>();
     private RebootToken[] rebootToken;
-    private Integer gameId;
     private Player current;
     private Phase phase = INITIALISATION;
     private int step = 0;
     private boolean stepMode;
     private ArrayList<UpgradeCard> upgradeCards = new ArrayList<>();
+
+    private Long gameID;
 
     public int getTurnID()
     {
@@ -234,29 +235,6 @@ public class Board extends Subject
      * @return the name of the board
      * @author Elias
      */
-    public Integer getGameId()
-    {
-        return gameId;
-    }
-
-    /**
-     * @param gameId the id of the game to which this board belongs
-     * @author Elias
-     */
-    public void setGameId(int gameId)
-    {
-        if (this.gameId == null)
-        {
-            this.gameId = gameId;
-        }
-        else
-        {
-            if (!this.gameId.equals(gameId))
-            {
-                throw new IllegalStateException("A game with a set id may not be assigned a new id!");
-            }
-        }
-    }
 
     /**
      * @param playersArr, can contain null elements, these are ignored.
@@ -594,5 +572,13 @@ public class Board extends Subject
             }
         }
         return lowestYSpace;
+    }
+
+    public Long getGameID() {
+        return gameID;
+    }
+
+    public void setGameID(Long gameID) {
+        this.gameID = gameID;
     }
 }

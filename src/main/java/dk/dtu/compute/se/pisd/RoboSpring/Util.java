@@ -21,6 +21,7 @@ public class Util
         GameController gameController = new GameController(gameBoard);
         gameBoard.setStep(serverBoard.getBoard().getStep());
         gameBoard.setPhase(Phase.valueOf(serverBoard.getBoard().getPhase()));
+        gameBoard.setGameID(serverBoard.getGameID());
 
         for (Player player : serverBoard.getPlayerList())
         {
@@ -87,6 +88,9 @@ public class Util
         serverBoard.setBoardname(gameBoard.boardName);
         completeServerBoard.setBoard(serverBoard);
         completeServerBoard.setPlayerList(new ArrayList<>());
+        completeServerBoard.setGameID(gameBoard.getGameID());
+        completeServerBoard.setEnergyCubes(new ArrayList<>());
+        completeServerBoard.setCards(new ArrayList<>());
 
         int i = 0;
         while (gameBoard.getPlayer(i) != null)
@@ -103,6 +107,30 @@ public class Util
             serverPlayer.setEnergyCubes(gameBoardPlayer.getEnergyCubes());
             serverPlayer.setPlayersTurn(gameBoardPlayer.isThisPlayerTurn());
             completeServerBoard.getPlayerList().add(serverPlayer);
+
+            for (int j = 0; j < dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Player.NO_REGISTERS; j++)
+            {
+                dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Card card = gameBoardPlayer.getProgramField(j).getProgrammingCard();
+                if (card != null)
+                {
+                    Card serverCard = new Card();
+                    serverCard.setCommand(card.getCommand().toString());
+                    serverCard.setPlayerID(gameBoardPlayer.getPlayerID());
+                    serverCard.setLocation("REGISTER");
+                    completeServerBoard.getCards().add(serverCard);
+                }
+            }
+            for (int k = 0; k < dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Player.NO_CARDS; k++) {
+                dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Card card = gameBoardPlayer.getCardField(k).getProgrammingCard();
+                if (card != null)
+                {
+                    Card serverCard = new Card();
+                    serverCard.setCommand(card.getCommand().toString());
+                    serverCard.setPlayerID(gameBoardPlayer.getPlayerID());
+                    serverCard.setLocation("HAND");
+                    completeServerBoard.getCards().add(serverCard);
+                }
+            }
             i++;
         }
         return completeServerBoard;

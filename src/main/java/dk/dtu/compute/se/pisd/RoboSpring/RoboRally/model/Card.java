@@ -64,4 +64,11 @@ public class Card extends Subject
      * @author Elias
      */
 
+    public Command getCommand() {
+        return command;
+    }
+
+    public void setCommand(Command command) {
+        this.command = command;
+    }
 }

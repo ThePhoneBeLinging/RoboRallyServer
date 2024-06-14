@@ -23,19 +23,17 @@ public class LobbyController
     private final BoardRepository boardRepository;
     private final PlayerRepository playerRepository;
     private final BoardController boardController;
-    private final CardsController cardsController;
     private final EnergyRepository energyRepository;
     private final CardsRepository cardsRepository;
 
     LobbyController(LobbyRepository lobbyRepository, BoardRepository boardRepository,
                     PlayerRepository playerRepository, BoardController boardController
-                    , CardsController cardsController, EnergyRepository energyRepository, EnergyRepository energyRepository1, CardsRepository cardsRepository)
+                   , EnergyRepository energyRepository, EnergyRepository energyRepository1, CardsRepository cardsRepository)
     {
         this.lobbyRepository = lobbyRepository;
         this.boardRepository = boardRepository;
         this.playerRepository = playerRepository;
         this.boardController = boardController;
-        this.cardsController = cardsController;
         this.energyRepository = energyRepository1;
         this.cardsRepository = cardsRepository;
     }
@@ -110,16 +108,14 @@ public class LobbyController
         }
         newGame.setBoard(board);
         newGame.setGameID(gameID);
+        System.out.println(gameID);
         newGame.setPlayerList(playerRepository.findPlayersByGameIDAndTurnID(gameID, 0));
-        ArrayList<Card> cards = new ArrayList<>();
         for (Player player : newGame.getPlayerList())
         {
             player.setName("Player" + player.getPlayerID());
             player.setHeading("SOUTH");
-            ArrayList<Card> playerCards = cardsController.initializeDeck(player);
-            cards.addAll(playerCards);
         }
-        newGame.setCards(cards);
+        newGame.setCards(new ArrayList<Card>());
         newGame.setEnergyCubes(new ArrayList<>());
         dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Board gameBoard =
                 dk.dtu.compute.se.pisd.RoboSpring.Util.fromServerBoardToGameBoard(newGame);
@@ -135,6 +131,7 @@ public class LobbyController
         playerRepository.saveAll(players);
         newGame = fromGameBoardToServerBoard(gameBoard);
         BoardSaveLoad boardSaveLoad = new BoardSaveLoad(boardRepository,energyRepository,playerRepository,cardsRepository);
+        newGame.setTurnID(0);
         boardSaveLoad.saveBoard(newGame);
         return true;
     }
