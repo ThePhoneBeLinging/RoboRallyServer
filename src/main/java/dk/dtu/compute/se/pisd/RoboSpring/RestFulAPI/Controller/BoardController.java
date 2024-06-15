@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -62,14 +63,16 @@ public class BoardController
         BoardSaveLoad boardSaveLoad = new BoardSaveLoad(boardRepository, energyRepository, playerRepository,
                 cardsRepository);
         CompleteGame completeGame = boardSaveLoad.loadBoard(gameID, TurnID);
-        assert completeGame != null;
+        if (completeGame == null) return null;
+        List<Card> playerCards = new ArrayList<Card>();
         for (Card card : completeGame.getCards())
         {
-            if (card.getPlayerID() != playerID)
+            if (card.getPlayerID() == playerID)
             {
-                completeGame.getCards().remove(card);
+                playerCards.add(card);
             }
         }
+        completeGame.setCards(playerCards);
         return completeGame;
     }
 }
