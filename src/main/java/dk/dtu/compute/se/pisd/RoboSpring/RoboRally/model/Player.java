@@ -86,6 +86,7 @@ public class Player extends Subject
         for (int i = 0; i < cards.length; i++)
         {
             cards[i] = new CardField(this);
+            cards[i].setCard(activeCardsPile.drawTopCard());
         }
     }
 

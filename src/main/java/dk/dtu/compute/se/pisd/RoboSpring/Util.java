@@ -98,7 +98,8 @@ public class Util
             dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Player gameBoardPlayer = gameBoard.getPlayer(i);
             Player serverPlayer = new Player();
             serverPlayer.setName(gameBoardPlayer.getName());
-            serverPlayer.setGameID(gameBoardPlayer.getPlayerID());
+            serverPlayer.setGameID(gameBoardPlayer.board.getGameID());
+            serverPlayer.setPlayerID(gameBoardPlayer.getPlayerID());
             serverPlayer.setX(gameBoardPlayer.getSpace().x);
             serverPlayer.setY(gameBoardPlayer.getSpace().y);
             serverPlayer.setLastVisitedCheckpoint(gameBoardPlayer.getLastVisitedCheckPoint());
