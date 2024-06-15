@@ -19,14 +19,16 @@ import java.util.List;
 
 @RestController
 //Base endpoint
-public class BoardController {
+public class BoardController
+{
     private final BoardRepository boardRepository;
     private final EnergyRepository energyRepository;
     private final PlayerRepository playerRepository;
     private final CardsRepository cardsRepository;
 
     public BoardController(BoardRepository boardRepository, EnergyRepository energyRepository,
-                           PlayerRepository playerRepository, CardsRepository cardsRepository) {
+                           PlayerRepository playerRepository, CardsRepository cardsRepository)
+    {
         this.boardRepository = boardRepository;
         this.energyRepository = energyRepository;
         this.playerRepository = playerRepository;
@@ -36,13 +38,15 @@ public class BoardController {
     @GetMapping
     //Specific endpoint for the method
     @RequestMapping(value = "")
-    public ResponseEntity<List<Board>> getBoards() {
+    public ResponseEntity<List<Board>> getBoards()
+    {
         List<Board> boardList = boardRepository.findAll();
         return ResponseEntity.ok(boardList);
     }
 
     @RequestMapping(value = "set/boards/single/delete")
-    public boolean deleteBoard(Long gameID, int TurnID) {
+    public boolean deleteBoard(Long gameID, int TurnID)
+    {
         List<Player> playerList = playerRepository.findPlayersByGameIDAndTurnID(gameID, TurnID);
         List<Card> cardList = cardsRepository.findAllByGameID(gameID);
         cardsRepository.deleteAll(cardList);
@@ -54,20 +58,21 @@ public class BoardController {
     }
 
     @RequestMapping(value = "get/boards/single")
-    public CompleteGame getBoard(Long gameID, int TurnID, Long playerID) {
+    public CompleteGame getBoard(Long gameID, int TurnID, Long playerID)
+    {
         BoardSaveLoad boardSaveLoad = new BoardSaveLoad(boardRepository, energyRepository, playerRepository,
                 cardsRepository);
         CompleteGame completeGame = boardSaveLoad.loadBoard(gameID, TurnID);
-        if (completeGame == null) {
-            return null;
-        }
-        ArrayList<Card> cardsForPlayer = new ArrayList<>();
-        for (Card card : completeGame.getCards()) {
-            if (card.getPlayerID() == playerID) {
-                cardsForPlayer.add(card);
+        if (completeGame == null) return null;
+        List<Card> playerCards = new ArrayList<Card>();
+        for (Card card : completeGame.getCards())
+        {
+            if (card.getPlayerID() == playerID)
+            {
+                playerCards.add(card);
             }
         }
-        completeGame.setCards(cardsForPlayer);
+        completeGame.setCards(playerCards);
         return completeGame;
     }
 }
