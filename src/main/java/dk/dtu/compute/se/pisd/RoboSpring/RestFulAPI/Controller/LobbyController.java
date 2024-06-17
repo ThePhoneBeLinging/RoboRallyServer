@@ -25,10 +25,12 @@ public class LobbyController
     private final BoardController boardController;
     private final EnergyRepository energyRepository;
     private final CardsRepository cardsRepository;
+    private final UpgradeCardRepository upgradeCardRepository;
 
     LobbyController(LobbyRepository lobbyRepository, BoardRepository boardRepository,
                     PlayerRepository playerRepository, BoardController boardController
-                   , EnergyRepository energyRepository, EnergyRepository energyRepository1, CardsRepository cardsRepository)
+                   , EnergyRepository energyRepository, EnergyRepository energyRepository1, CardsRepository cardsRepository,
+                    UpgradeCardRepository upgradeCardRepository)
     {
         this.lobbyRepository = lobbyRepository;
         this.boardRepository = boardRepository;
@@ -36,6 +38,7 @@ public class LobbyController
         this.boardController = boardController;
         this.energyRepository = energyRepository1;
         this.cardsRepository = cardsRepository;
+        this.upgradeCardRepository = upgradeCardRepository;
     }
 
     @RequestMapping(value = "lobby/create")
@@ -83,6 +86,7 @@ public class LobbyController
     public boolean startGame(Long gameID)
     {
         CompleteGame newGame = new CompleteGame();
+        newGame.setUpgradeCards(new ArrayList<>());
         newGame.setTurnID(0);
         Board board = boardRepository.findBoardByGameIDAndTurnID(gameID, 0);
         boardRepository.delete(board);
@@ -130,7 +134,7 @@ public class LobbyController
         }
         playerRepository.saveAll(players);
         newGame = fromGameBoardToServerBoard(gameBoard);
-        BoardSaveLoad boardSaveLoad = new BoardSaveLoad(boardRepository,energyRepository,playerRepository,cardsRepository);
+        BoardSaveLoad boardSaveLoad = new BoardSaveLoad(boardRepository,energyRepository,playerRepository,cardsRepository, upgradeCardRepository);
         newGame.setTurnID(0);
         boardSaveLoad.saveBoard(newGame);
         return true;
