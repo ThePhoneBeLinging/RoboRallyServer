@@ -56,6 +56,7 @@ public class LobbyController
         Board board = new Board();
         board.setGameID(gameID);
         boardRepository.save(board);
+        board.setPhase("LOBBY");
         return joinLobby(gameID);
     }
 
@@ -63,8 +64,19 @@ public class LobbyController
     public Lobby joinLobby(Long gameID)
     {
         Lobby lobby = new Lobby();
-        lobby.setPlayerID(1L + lobbyRepository.countLobbyObjectsByGameID(gameID));
+
+        Player player = new Player();
+        player.setGameID(gameID);
+        player.setPlayerID(1L + lobbyRepository.countLobbyObjectsByGameID(gameID));
+
+        player.setTurnID(0);
+        player.setY(0);
+        player.setX(0);
+        player.setHeading("SOUTH");
+        playerRepository.save(player);
+
         lobby.setGameID(gameID);
+        lobby.setPlayerID(player.getPlayerID());
         lobby = lobbyRepository.save(lobby);
         return lobby;
     }
@@ -93,19 +105,7 @@ public class LobbyController
             board.setBoardname("dizzyHighway");
         }
         boardRepository.save(board);
-        List<Lobby> lobbies = lobbyRepository.findLobbiesByGameID(gameID);
-        for (Lobby lobby : lobbies)
-        {
-            Player player = new Player();
-            player.setGameID(gameID);
-            player.setPlayerID(lobby.getPlayerID());
-            player.setTurnID(0);
-            player.setY(0);
-            player.setX(0);
-            player.setHeading("SOUTH");
-            playerRepository.save(player);
-            lobbyRepository.deleteAll(lobbyRepository.findLobbiesByGameID(gameID));
-        }
+
         newGame.setBoard(board);
         newGame.setGameID(gameID);
         System.out.println(gameID);
