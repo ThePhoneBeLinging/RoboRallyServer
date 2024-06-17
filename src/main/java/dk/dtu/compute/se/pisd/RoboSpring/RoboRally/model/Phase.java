@@ -28,5 +28,5 @@ package dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model;
  *
  */
 public enum Phase {
-    INITIALISATION, PROGRAMMING, ACTIVATION, PLAYER_INTERACTION
+    INITIALISATION, LOBBY, PROGRAMMING, ACTIVATION, PLAYER_INTERACTION
 }

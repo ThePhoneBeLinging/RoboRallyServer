@@ -28,8 +28,8 @@ public class LobbyController
 
     LobbyController(LobbyRepository lobbyRepository, BoardRepository boardRepository,
                     PlayerRepository playerRepository, BoardController boardController,
-                    EnergyRepository energyRepository, EnergyRepository energyRepository1,
-                    CardsRepository cardsRepository, UpgradeCardRepository upgradeCardRepository)
+                    EnergyRepository energyRepository1, CardsRepository cardsRepository,
+                    UpgradeCardRepository upgradeCardRepository)
     {
         this.lobbyRepository = lobbyRepository;
         this.boardRepository = boardRepository;
@@ -80,6 +80,7 @@ public class LobbyController
         lobby.setGameID(gameID);
         lobby.setPlayerID(player.getPlayerID());
         lobby = lobbyRepository.save(lobby);
+        boardRepository.findBoardByGameIDAndTurnID(gameID, 0).setPhase("LOBBY");
         return lobby;
     }
 
@@ -178,5 +179,11 @@ public class LobbyController
             players.add(lobby.getPlayerID());
         }
         return players;
+    }
+
+    @RequestMapping(value = "lobby/getPhase")
+    public String getPhase(Long gameID)
+    {
+        return boardRepository.findBoardByGameIDAndTurnID(gameID, 0).getPhase();
     }
 }
