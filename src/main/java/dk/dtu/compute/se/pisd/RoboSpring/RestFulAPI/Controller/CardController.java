@@ -4,20 +4,20 @@ import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Board;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.CompleteGame;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Player.Card;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Player.Player;
-import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Repository.*;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Player.PlayerRegisters;
+import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Repository.*;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.controller.GameController;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static dk.dtu.compute.se.pisd.RoboSpring.Util.fromServerBoardToGameBoard;
 
 @RestController
-public class CardController {
+public class CardController
+{
 
     private final CardsRepository cardsRepository;
     private final PlayerRepository playerRepository;
@@ -25,7 +25,10 @@ public class CardController {
     private final UpgradeCardRepository upgradeCardRepository;
     private final EnergyRepository energyRepository;
 
-    public CardController(CardsRepository cardsRepository, PlayerRepository playerRepository, BoardRepository boardRepository, UpgradeCardRepository upgradeCardRepository, EnergyRepository energyRepository) {
+    public CardController(CardsRepository cardsRepository, PlayerRepository playerRepository,
+                          BoardRepository boardRepository, UpgradeCardRepository upgradeCardRepository,
+                          EnergyRepository energyRepository)
+    {
         this.cardsRepository = cardsRepository;
         this.playerRepository = playerRepository;
         this.boardRepository = boardRepository;
@@ -36,7 +39,8 @@ public class CardController {
     @PostMapping(value = "set/player/cards")
     public void setPlayerCards(@RequestBody PlayerRegisters cards)
     {
-        List<Card> cardsOnHand = cardsRepository.findAllByPlayerIDAndGameIDAndLocation(cards.getPlayerID(), cards.getGameID(), "HAND");
+        List<Card> cardsOnHand = cardsRepository.findAllByPlayerIDAndGameIDAndLocation(cards.getPlayerID(),
+                cards.getGameID(), "HAND");
         cardsRepository.deleteAll(cardsOnHand);
 
         for (int index : cards.getRegisterCards())
@@ -48,7 +52,8 @@ public class CardController {
         List<Player> players = playerRepository.findAllByGameID(cards.getGameID());
         for (Player player : players)
         {
-            List<Card> registerCards = cardsRepository.findAllByPlayerIDAndGameIDAndLocation(player.getId(), cards.getGameID(), "REGISTER");
+            List<Card> registerCards = cardsRepository.findAllByPlayerIDAndGameIDAndLocation(player.getPlayerID(),
+                    cards.getGameID(), "REGISTER");
             if (registerCards.isEmpty())
             {
                 return;
@@ -56,7 +61,10 @@ public class CardController {
         }
         List<Board> boards = boardRepository.findAllByGameID(cards.getGameID());
         boardRepository.deleteAllByGameID(cards.getGameID());
-        boards.forEach(board -> { board.setPhase("ACTIVATION"); boardRepository.save(board); });
+        boards.forEach(board -> {
+            board.setPhase("ACTIVATION");
+            boardRepository.save(board);
+        });
         boardRepository.saveAll(boards);
 
         CompleteGame completeGame = new CompleteGame();
@@ -70,7 +78,8 @@ public class CardController {
 
         dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Board gameBoard = fromServerBoardToGameBoard(completeGame);
 
-        GameController gameController = new GameController(gameBoard, boardRepository, energyRepository, playerRepository, cardsRepository, upgradeCardRepository);
+        GameController gameController = new GameController(gameBoard, boardRepository, energyRepository,
+                playerRepository, cardsRepository, upgradeCardRepository);
         gameBoard.setTurnID(1);
         gameController.executePrograms();
 
