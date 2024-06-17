@@ -10,4 +10,6 @@ public interface CardsRepository extends JpaRepository<Card, Long>
     List<Card> findAllByPlayerIDAndGameID(Long playerID, Long gameID);
 
     List<Card> findAllByGameID(Long gameID);
+
+    List<Card> findAllByPlayerIDAndGameIDAndLocation(Long playerID, Long gameID, String location);
 }

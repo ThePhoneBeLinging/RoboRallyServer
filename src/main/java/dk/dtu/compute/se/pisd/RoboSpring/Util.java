@@ -3,6 +3,7 @@ package dk.dtu.compute.se.pisd.RoboSpring;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.CompleteGame;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Player.Card;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Player.Player;
+import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.UpgradeCard;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.controller.GameController;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.fileaccess.LoadBoard;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Board;
@@ -11,6 +12,7 @@ import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Heading;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Phase;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Util
 {
@@ -36,6 +38,13 @@ public class Util
             gameBoardPlayer.setMovedByConveyorThisTurn(player.isMovedByConveyorThisTurn());
             gameBoardPlayer.setEnergyCubes(player.getEnergyCubes());
             gameBoardPlayer.setThisPlayerTurn(player.isPlayersTurn());
+            for(UpgradeCard upgradeCard : serverBoard.getUpgradeCards())
+            {
+                if(Objects.equals(gameBoardPlayer.getPlayerID(), upgradeCard.getPlayerID()))
+                {
+                    gameBoardPlayer.addUpgradeCard(new dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.UpgradeCard(upgradeCard.getCardName(), upgradeCard.getPrice()));
+                }
+            }
         }
 
         for (Card card : serverBoard.getCards())
@@ -91,6 +100,21 @@ public class Util
         completeServerBoard.setGameID(gameBoard.getGameID());
         completeServerBoard.setEnergyCubes(new ArrayList<>());
         completeServerBoard.setCards(new ArrayList<>());
+        completeServerBoard.setUpgradeCards(new ArrayList<>());
+
+        for(int i=0;i< gameBoard.getPlayersNumber();i++)
+        {
+            dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Player player=gameBoard.getPlayer(i);
+            for(dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.UpgradeCard upgradeCard: player.getUpgradeCards())
+            {
+                UpgradeCard serverUpgradeCard = new UpgradeCard();
+                serverUpgradeCard.setCardName(upgradeCard.getName());
+                serverUpgradeCard.setPrice(upgradeCard.getPrice());
+                serverUpgradeCard.setPlayerID(player.getPlayerID());
+                serverUpgradeCard.setGameID(gameBoard.getGameID());
+                completeServerBoard.getUpgradeCards().add(serverUpgradeCard);
+            }
+        }
 
         int i = 0;
         while (gameBoard.getPlayer(i) != null)

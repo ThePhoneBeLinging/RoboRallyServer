@@ -21,4 +21,5 @@ public class CompleteGame
     private List<EnergyCube> energyCubes;
     private List<Player> playerList;
     private List<Card> cards;
+    private List<UpgradeCard> upgradeCards;
 }

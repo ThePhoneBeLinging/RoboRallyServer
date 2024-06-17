@@ -5,11 +5,10 @@ import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.CompleteGame;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.EnergyCube;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Player.Card;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Player.Player;
-import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Repository.BoardRepository;
-import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Repository.CardsRepository;
-import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Repository.EnergyRepository;
-import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Repository.PlayerRepository;
+import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Repository.*;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.UpgradeCard;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static dk.dtu.compute.se.pisd.RoboSpring.Util.fromServerBoardToGameBoard;
@@ -20,21 +19,23 @@ public class BoardSaveLoad
     private final EnergyRepository energyRepository;
     private final PlayerRepository playerRepository;
     private final CardsRepository cardsRepository;
+    private final UpgradeCardRepository upgradeCardRepository;
 
     public BoardSaveLoad(BoardRepository boardRepository, EnergyRepository energyRepository,
-                         PlayerRepository playerRepository, CardsRepository cardsRepository)
+                         PlayerRepository playerRepository, CardsRepository cardsRepository, UpgradeCardRepository upgradeCardRepository)
     {
         this.boardRepository = boardRepository;
         this.energyRepository = energyRepository;
         this.playerRepository = playerRepository;
         this.cardsRepository = cardsRepository;
+        this.upgradeCardRepository = upgradeCardRepository;
     }
 
     public CompleteGame saveBoard(CompleteGame completeGame)
     {
         // Deletes previous board with same gameID and turnID
         BoardController boardController = new BoardController(boardRepository, energyRepository, playerRepository,
-                cardsRepository);
+                cardsRepository, upgradeCardRepository);
         boardController.deleteBoard(completeGame.getGameID(), completeGame.getTurnID());
 
         completeGame.getBoard().setGameID(completeGame.getGameID());
@@ -57,6 +58,15 @@ public class BoardSaveLoad
         {
             card.setGameID(completeGame.getGameID());
             cardsRepository.save(card);
+        }
+
+        if(completeGame.getUpgradeCards() != null)
+        {
+            upgradeCardRepository.saveAll(completeGame.getUpgradeCards());
+        }
+        else
+        {
+            completeGame.setUpgradeCards(new ArrayList<>());
         }
         //fromServerBoardToGameBoard(completeGame);
         return completeGame;
