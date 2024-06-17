@@ -59,13 +59,11 @@ public class CardController
                 return;
             }
         }
-        List<Board> boards = boardRepository.findAllByGameID(cards.getGameID());
-        boardRepository.deleteAllByGameID(cards.getGameID());
-        boards.forEach(board -> {
-            board.setPhase("ACTIVATION");
-            boardRepository.save(board);
-        });
-        boardRepository.saveAll(boards);
+        Board board = boardRepository.findBoardByGameIDAndTurnID(cards.getGameID(), 1);
+        boardRepository.delete(board);
+        board.setPhase("ACTIVATION");
+
+        boardRepository.save(board);
 
         CompleteGame completeGame = new CompleteGame();
         completeGame.setBoard(boardRepository.findBoardByGameIDAndTurnID(cards.getGameID(), 0));
