@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static dk.dtu.compute.se.pisd.RoboSpring.Util.fromGameBoardToServerBoard;
-import static dk.dtu.compute.se.pisd.RoboSpring.Util.fromServerBoardToGameBoard;
 
 @RestController
 public class LobbyController
@@ -28,9 +27,9 @@ public class LobbyController
     private final UpgradeCardRepository upgradeCardRepository;
 
     LobbyController(LobbyRepository lobbyRepository, BoardRepository boardRepository,
-                    PlayerRepository playerRepository, BoardController boardController
-                   , EnergyRepository energyRepository, EnergyRepository energyRepository1, CardsRepository cardsRepository,
-                    UpgradeCardRepository upgradeCardRepository)
+                    PlayerRepository playerRepository, BoardController boardController,
+                    EnergyRepository energyRepository, EnergyRepository energyRepository1,
+                    CardsRepository cardsRepository, UpgradeCardRepository upgradeCardRepository)
     {
         this.lobbyRepository = lobbyRepository;
         this.boardRepository = boardRepository;
@@ -134,9 +133,12 @@ public class LobbyController
         }
         playerRepository.saveAll(players);
         newGame = fromGameBoardToServerBoard(gameBoard);
-        BoardSaveLoad boardSaveLoad = new BoardSaveLoad(boardRepository,energyRepository,playerRepository,cardsRepository, upgradeCardRepository);
+        BoardSaveLoad boardSaveLoad = new BoardSaveLoad(boardRepository, energyRepository, playerRepository,
+                cardsRepository, upgradeCardRepository);
         newGame.setTurnID(0);
         boardSaveLoad.saveBoard(newGame);
+        List<Lobby> lobbies = lobbyRepository.findLobbiesByGameID(gameID);
+        lobbyRepository.deleteAll(lobbies);
         return true;
     }
 
