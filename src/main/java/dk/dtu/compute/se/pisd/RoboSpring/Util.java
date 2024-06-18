@@ -61,7 +61,7 @@ public class Util
                     {
                         case "REGISTER":
                             int k = 0;
-                            while (gamePlayer.getProgramField(k) != null)
+                            while (gamePlayer.getProgramField(k).getProgrammingCard() != null)
                             {
                                 k++;
                                 if (k == dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Player.NO_REGISTERS - 1)
@@ -73,7 +73,7 @@ public class Util
                             break;
                         case "HAND":
                             int j = 0;
-                            while (gamePlayer.getCardField(j) != null)
+                            while (gamePlayer.getCardField(j).getProgrammingCard() != null)
                             {
                                 j++;
                                 if (j == dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Player.NO_CARDS - 1)
@@ -111,6 +111,7 @@ public class Util
         completeServerBoard.setEnergyCubes(new ArrayList<>());
         completeServerBoard.setCards(new ArrayList<>());
         completeServerBoard.setUpgradeCards(new ArrayList<>());
+        completeServerBoard.setTurnID(gameBoard.getTurnID());
 
         for (int i = 0; i < gameBoard.getPlayersNumber(); i++)
         {
@@ -134,6 +135,7 @@ public class Util
             serverPlayer.setName(gameBoardPlayer.getName());
             serverPlayer.setGameID(gameBoardPlayer.board.getGameID());
             serverPlayer.setPlayerID(gameBoardPlayer.getPlayerID());
+            serverPlayer.setTurnID(gameBoard.getTurnID());
             serverPlayer.setX(gameBoardPlayer.getSpace().x);
             serverPlayer.setY(gameBoardPlayer.getSpace().y);
             serverPlayer.setLastVisitedCheckpoint(gameBoardPlayer.getLastVisitedCheckPoint());
@@ -171,6 +173,26 @@ public class Util
                     serverCard.setGameID(gameBoard.getGameID());
                     completeServerBoard.getCards().add(serverCard);
                 }
+            }
+            for (dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Card card :
+                    gameBoard.getPlayer(i).activeCardsPile.playerCards)
+            {
+                Card serverCard = new Card();
+                serverCard.setCommand(card.getCommand().toString());
+                serverCard.setPlayerID(gameBoardPlayer.getPlayerID());
+                serverCard.setLocation("ACTIVE");
+                serverCard.setGameID(gameBoard.getGameID());
+                completeServerBoard.getCards().add(serverCard);
+            }
+            for (dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Card card :
+                    gameBoard.getPlayer(i).activeCardsPile.playerCards)
+            {
+                Card serverCard = new Card();
+                serverCard.setCommand(card.getCommand().toString());
+                serverCard.setPlayerID(gameBoardPlayer.getPlayerID());
+                serverCard.setLocation("DISCARD");
+                serverCard.setGameID(gameBoard.getGameID());
+                completeServerBoard.getCards().add(serverCard);
             }
             i++;
         }

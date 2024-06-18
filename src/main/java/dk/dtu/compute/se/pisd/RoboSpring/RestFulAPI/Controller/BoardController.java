@@ -25,7 +25,8 @@ public class BoardController
     private final UpgradeCardRepository upgradeCardRepository;
 
     public BoardController(BoardRepository boardRepository, EnergyRepository energyRepository,
-                           PlayerRepository playerRepository, CardsRepository cardsRepository, UpgradeCardRepository upgradeCardRepository)
+                           PlayerRepository playerRepository, CardsRepository cardsRepository,
+                           UpgradeCardRepository upgradeCardRepository)
     {
         this.boardRepository = boardRepository;
         this.energyRepository = energyRepository;
@@ -52,7 +53,11 @@ public class BoardController
         List<EnergyCube> energyCubeList = energyRepository.findEnergyCubesByGameIDAndTurnID(gameID, TurnID);
         playerRepository.deleteAll(playerList);
         energyRepository.deleteAll(energyCubeList);
-        boardRepository.delete(boardRepository.findBoardByGameIDAndTurnID(gameID, TurnID));
+        Board boardToDelete = boardRepository.findBoardByGameIDAndTurnID(gameID, TurnID);
+        if (boardToDelete != null)
+        {
+            boardRepository.delete(boardToDelete);
+        }
         return true;
     }
 
@@ -62,7 +67,10 @@ public class BoardController
         BoardSaveLoad boardSaveLoad = new BoardSaveLoad(boardRepository, energyRepository, playerRepository,
                 cardsRepository, upgradeCardRepository);
         CompleteGame completeGame = boardSaveLoad.loadBoard(gameID, TurnID);
-        if (completeGame == null) return null;
+        if (completeGame == null)
+        {
+            return null;
+        }
         List<Card> playerCards = new ArrayList<Card>();
         for (Card card : completeGame.getCards())
         {
