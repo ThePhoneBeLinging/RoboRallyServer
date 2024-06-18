@@ -24,6 +24,7 @@ public class Util
         gameBoard.setStep(serverBoard.getBoard().getStep());
         gameBoard.setPhase(Phase.valueOf(serverBoard.getBoard().getPhase()));
         gameBoard.setGameID(serverBoard.getGameID());
+        gameBoard.setTurnID(serverBoard.getTurnID());
 
         for (Player player : serverBoard.getPlayerList())
         {
@@ -95,6 +96,7 @@ public class Util
         serverBoard.setStep(gameBoard.getStep());
         serverBoard.setPhase(gameBoard.getPhase().toString());
         serverBoard.setBoardname(gameBoard.boardName);
+        serverBoard.setTurnID(gameBoard.getTurnID());
         completeServerBoard.setBoard(serverBoard);
         completeServerBoard.setPlayerList(new ArrayList<>());
         completeServerBoard.setGameID(gameBoard.getGameID());
