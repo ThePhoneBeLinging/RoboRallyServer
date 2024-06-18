@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static dk.dtu.compute.se.pisd.RoboSpring.Util.fromServerBoardToGameBoard;
@@ -42,12 +43,15 @@ public class CardController
         List<Card> cardsOnHand = cardsRepository.findAllByPlayerIDAndGameIDAndLocation(cards.getPlayerID(),
                 cards.getGameID(), "HAND");
         cardsRepository.deleteAll(cardsOnHand);
-
+        List<Card> register = new ArrayList<>();
         for (int index : cards.getRegisterCards())
         {
             cardsOnHand.get(index).setLocation("REGISTER");
+            register.add(cardsOnHand.get(index));
         }
+        cardsOnHand.removeAll(register);
         cardsRepository.saveAll(cardsOnHand);
+        cardsRepository.saveAll(register);
 
         List<Player> players = playerRepository.findAllByGameID(cards.getGameID());
         for (Player player : players)
