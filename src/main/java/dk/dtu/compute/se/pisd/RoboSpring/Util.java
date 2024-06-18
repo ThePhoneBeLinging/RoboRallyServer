@@ -144,6 +144,8 @@ public class Util
                     serverCard.setCommand(card.getCommand().toString());
                     serverCard.setPlayerID(gameBoardPlayer.getPlayerID());
                     serverCard.setLocation("REGISTER");
+                    serverCard.setGameID(gameBoard.getGameID());
+
                     completeServerBoard.getCards().add(serverCard);
                 }
             }
@@ -155,6 +157,7 @@ public class Util
                     serverCard.setCommand(card.getCommand().toString());
                     serverCard.setPlayerID(gameBoardPlayer.getPlayerID());
                     serverCard.setLocation("HAND");
+                    serverCard.setGameID(gameBoard.getGameID());
                     completeServerBoard.getCards().add(serverCard);
                 }
             }
