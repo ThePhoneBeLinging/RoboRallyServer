@@ -169,21 +169,4 @@ public class LobbyController
         return lobbyToReturn;
     }
 
-    @RequestMapping(value = "lobby/getPlayers")
-    public List<Long> getPlayers(Long gameID)
-    {
-        List<Long> players = new ArrayList<>();
-        List<Lobby> lobbyToTakeFrom = lobbyRepository.findLobbiesByGameID(gameID);
-        for (Lobby lobby : lobbyToTakeFrom)
-        {
-            players.add(lobby.getPlayerID());
-        }
-        return players;
-    }
-
-    @RequestMapping(value = "lobby/getPhase")
-    public String getPhase(Long gameID)
-    {
-        return boardRepository.findBoardByGameIDAndTurnID(gameID, 0).getPhase();
-    }
 }
