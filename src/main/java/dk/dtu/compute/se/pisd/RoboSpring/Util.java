@@ -39,9 +39,9 @@ public class Util
             gameBoardPlayer.setMovedByConveyorThisTurn(player.isMovedByConveyorThisTurn());
             gameBoardPlayer.setEnergyCubes(player.getEnergyCubes());
             gameBoardPlayer.setThisPlayerTurn(player.isPlayersTurn());
-            for(UpgradeCard upgradeCard : serverBoard.getUpgradeCards())
+            for (UpgradeCard upgradeCard : serverBoard.getUpgradeCards())
             {
-                if(Objects.equals(gameBoardPlayer.getPlayerID(), upgradeCard.getPlayerID()))
+                if (Objects.equals(gameBoardPlayer.getPlayerID(), upgradeCard.getPlayerID()))
                 {
                     gameBoardPlayer.addUpgradeCard(new dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.UpgradeCard(upgradeCard.getCardName(), upgradeCard.getPrice()));
                 }
@@ -61,17 +61,25 @@ public class Util
                     {
                         case "REGISTER":
                             int k = 0;
-                            while (gamePlayer.getProgramField(k) == null)
+                            while (gamePlayer.getProgramField(k) != null)
                             {
                                 k++;
+                                if (k == dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Player.NO_REGISTERS - 1)
+                                {
+                                    break;
+                                }
                             }
                             gamePlayer.getProgramField(k).setCard(cardToAdd);
                             break;
                         case "HAND":
                             int j = 0;
-                            while (gamePlayer.getCardField(j) == null)
+                            while (gamePlayer.getCardField(j) != null)
                             {
                                 j++;
+                                if (j == dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Player.NO_CARDS - 1)
+                                {
+                                    break;
+                                }
                             }
                             gamePlayer.getCardField(j).setCard(cardToAdd);
                             break;
@@ -104,10 +112,10 @@ public class Util
         completeServerBoard.setCards(new ArrayList<>());
         completeServerBoard.setUpgradeCards(new ArrayList<>());
 
-        for(int i=0;i< gameBoard.getPlayersNumber();i++)
+        for (int i = 0; i < gameBoard.getPlayersNumber(); i++)
         {
-            dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Player player=gameBoard.getPlayer(i);
-            for(dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.UpgradeCard upgradeCard: player.getUpgradeCards())
+            dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Player player = gameBoard.getPlayer(i);
+            for (dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.UpgradeCard upgradeCard : player.getUpgradeCards())
             {
                 UpgradeCard serverUpgradeCard = new UpgradeCard();
                 serverUpgradeCard.setCardName(upgradeCard.getName());
@@ -137,7 +145,8 @@ public class Util
 
             for (int j = 0; j < dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Player.NO_REGISTERS; j++)
             {
-                dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Card card = gameBoardPlayer.getProgramField(j).getProgrammingCard();
+                dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Card card =
+                        gameBoardPlayer.getProgramField(j).getProgrammingCard();
                 if (card != null)
                 {
                     Card serverCard = new Card();
@@ -149,8 +158,10 @@ public class Util
                     completeServerBoard.getCards().add(serverCard);
                 }
             }
-            for (int k = 0; k < dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Player.NO_CARDS; k++) {
-                dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Card card = gameBoardPlayer.getCardField(k).getProgrammingCard();
+            for (int k = 0; k < dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Player.NO_CARDS; k++)
+            {
+                dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Card card =
+                        gameBoardPlayer.getCardField(k).getProgrammingCard();
                 if (card != null)
                 {
                     Card serverCard = new Card();
