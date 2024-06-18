@@ -59,7 +59,7 @@ public class CardController
                 return;
             }
         }
-        Board board = boardRepository.findBoardByGameIDAndTurnID(cards.getGameID(), 1);
+        Board board = boardRepository.findBoardByGameIDAndTurnID(cards.getGameID(), 0);
         boardRepository.delete(board);
         board.setPhase("ACTIVATION");
 
@@ -74,11 +74,13 @@ public class CardController
         completeGame.setTurnID(0);
         completeGame.setGameID(cards.getGameID());
 
+
         dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Board gameBoard = fromServerBoardToGameBoard(completeGame);
 
         GameController gameController = new GameController(gameBoard, boardRepository, energyRepository,
                 playerRepository, cardsRepository, upgradeCardRepository);
         gameBoard.setTurnID(1);
+        gameBoard.setCurrentPlayer(gameBoard.getPlayer(0));
         gameController.executePrograms();
 
         //TODO check if this works and add functionality so that the server goes through the activation phase
