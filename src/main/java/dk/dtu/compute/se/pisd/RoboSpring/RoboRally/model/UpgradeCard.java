@@ -13,7 +13,7 @@ public class UpgradeCard extends Subject
      * @param price
      * @author Mads
      */
-    UpgradeCard(String name, int price)
+    public UpgradeCard(String name, int price)
     {
         this.name = name;
         this.price = price;

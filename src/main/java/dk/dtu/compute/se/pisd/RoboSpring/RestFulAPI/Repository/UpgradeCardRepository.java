@@ -5,10 +5,15 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface UpgradeCardRepository extends JpaRepository<UpgradeCard, Long> {
+public interface UpgradeCardRepository extends JpaRepository<UpgradeCard, Long>
+{
 
     List<UpgradeCard> findByPlayerIDIsNullAndGameID(Long gameID);
 
     List<UpgradeCard> findActiveUpgradeCardsByPlayerIDAndGameID(Long playerID, Long gameID);
+
+    List<UpgradeCard> findActiveUpgradeCardsByGameID(Long gameID);
+
+    List<UpgradeCard> findUpgradeCardsByGameID(Long gameID);
 
 }

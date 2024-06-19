@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static dk.dtu.compute.se.pisd.RoboSpring.Util.fromGameBoardToServerBoard;
-import static dk.dtu.compute.se.pisd.RoboSpring.Util.fromServerBoardToGameBoard;
 
 @RestController
 public class LobbyController
@@ -25,10 +24,12 @@ public class LobbyController
     private final BoardController boardController;
     private final EnergyRepository energyRepository;
     private final CardsRepository cardsRepository;
+    private final UpgradeCardRepository upgradeCardRepository;
 
     LobbyController(LobbyRepository lobbyRepository, BoardRepository boardRepository,
-                    PlayerRepository playerRepository, BoardController boardController
-                   , EnergyRepository energyRepository, EnergyRepository energyRepository1, CardsRepository cardsRepository)
+                    PlayerRepository playerRepository, BoardController boardController,
+                    EnergyRepository energyRepository1, CardsRepository cardsRepository,
+                    UpgradeCardRepository upgradeCardRepository)
     {
         this.lobbyRepository = lobbyRepository;
         this.boardRepository = boardRepository;
@@ -36,6 +37,7 @@ public class LobbyController
         this.boardController = boardController;
         this.energyRepository = energyRepository1;
         this.cardsRepository = cardsRepository;
+        this.upgradeCardRepository = upgradeCardRepository;
     }
 
     @RequestMapping(value = "lobby/create")
@@ -56,6 +58,7 @@ public class LobbyController
         Board board = new Board();
         board.setGameID(gameID);
         boardRepository.save(board);
+        board.setPhase("LOBBY");
         return joinLobby(gameID);
     }
 
@@ -63,9 +66,21 @@ public class LobbyController
     public Lobby joinLobby(Long gameID)
     {
         Lobby lobby = new Lobby();
-        lobby.setPlayerID(1L + lobbyRepository.countLobbyObjectsByGameID(gameID));
+
+        Player player = new Player();
+        player.setGameID(gameID);
+        player.setPlayerID(1L + lobbyRepository.countLobbyObjectsByGameID(gameID));
+
+        player.setTurnID(0);
+        player.setY(0);
+        player.setX(0);
+        player.setHeading("SOUTH");
+        playerRepository.save(player);
+
         lobby.setGameID(gameID);
+        lobby.setPlayerID(player.getPlayerID());
         lobby = lobbyRepository.save(lobby);
+        boardRepository.findBoardByGameIDAndTurnID(gameID, 0).setPhase("LOBBY");
         return lobby;
     }
 
@@ -83,6 +98,7 @@ public class LobbyController
     public boolean startGame(Long gameID)
     {
         CompleteGame newGame = new CompleteGame();
+        newGame.setUpgradeCards(new ArrayList<>());
         newGame.setTurnID(0);
         Board board = boardRepository.findBoardByGameIDAndTurnID(gameID, 0);
         boardRepository.delete(board);
@@ -93,19 +109,7 @@ public class LobbyController
             board.setBoardname("dizzyHighway");
         }
         boardRepository.save(board);
-        List<Lobby> lobbies = lobbyRepository.findLobbiesByGameID(gameID);
-        for (Lobby lobby : lobbies)
-        {
-            Player player = new Player();
-            player.setGameID(gameID);
-            player.setPlayerID(lobby.getPlayerID());
-            player.setTurnID(0);
-            player.setY(0);
-            player.setX(0);
-            player.setHeading("SOUTH");
-            playerRepository.save(player);
-            lobbyRepository.deleteAll(lobbyRepository.findLobbiesByGameID(gameID));
-        }
+
         newGame.setBoard(board);
         newGame.setGameID(gameID);
         System.out.println(gameID);
@@ -130,9 +134,12 @@ public class LobbyController
         }
         playerRepository.saveAll(players);
         newGame = fromGameBoardToServerBoard(gameBoard);
-        BoardSaveLoad boardSaveLoad = new BoardSaveLoad(boardRepository,energyRepository,playerRepository,cardsRepository);
+        BoardSaveLoad boardSaveLoad = new BoardSaveLoad(boardRepository, energyRepository, playerRepository,
+                cardsRepository, upgradeCardRepository);
         newGame.setTurnID(0);
         boardSaveLoad.saveBoard(newGame);
+        List<Lobby> lobbies = lobbyRepository.findLobbiesByGameID(gameID);
+        lobbyRepository.deleteAll(lobbies);
         return true;
     }
 
@@ -162,15 +169,4 @@ public class LobbyController
         return lobbyToReturn;
     }
 
-    @RequestMapping(value = "lobby/getPlayers")
-    public List<Long> getPlayers(Long gameID)
-    {
-        List<Long> players = new ArrayList<>();
-        List<Lobby> lobbyToTakeFrom = lobbyRepository.findLobbiesByGameID(gameID);
-        for (Lobby lobby : lobbyToTakeFrom)
-        {
-            players.add(lobby.getPlayerID());
-        }
-        return players;
-    }
 }

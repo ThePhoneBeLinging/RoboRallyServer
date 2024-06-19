@@ -21,8 +21,12 @@
  */
 package dk.dtu.compute.se.pisd.RoboSpring.RoboRally.controller;
 
+import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Controller.BoardSaveLoad;
+import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Repository.*;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.*;
 import org.jetbrains.annotations.NotNull;
+
+import static dk.dtu.compute.se.pisd.RoboSpring.Util.fromGameBoardToServerBoard;
 
 /**
  * @author Ekkart Kindler, ekki@dtu.dk
@@ -31,6 +35,11 @@ public class GameController
 {
     final public Board board;
     final public MoveController moveController;
+    final public BoardRepository boardRepository;
+    final public EnergyRepository energyRepository;
+    final public PlayerRepository playerRepository;
+    final public CardsRepository cardsRepository;
+    final public UpgradeCardRepository upgradeCardRepository;
 
     /**
      * @author Elias
@@ -39,6 +48,24 @@ public class GameController
     {
         this.board = board;
         this.moveController = new MoveController(this);
+        this.boardRepository = null;
+        this.energyRepository = null;
+        this.playerRepository = null;
+        this.cardsRepository = null;
+        this.upgradeCardRepository = null;
+    }
+
+    public GameController(@NotNull Board board, BoardRepository boardRepository, EnergyRepository energyRepository,
+                          PlayerRepository playerRepository, CardsRepository cardsRepository,
+                          UpgradeCardRepository upgradeCardRepository)
+    {
+        this.board = board;
+        this.moveController = new MoveController(this);
+        this.boardRepository = boardRepository;
+        this.energyRepository = energyRepository;
+        this.playerRepository = playerRepository;
+        this.cardsRepository = cardsRepository;
+        this.upgradeCardRepository = upgradeCardRepository;
     }
 
     /**
@@ -176,6 +203,10 @@ public class GameController
                         startProgrammingPhase();
                     }
                 }
+                BoardSaveLoad boardSaveLoad = new BoardSaveLoad(boardRepository, energyRepository, playerRepository,
+                        cardsRepository, upgradeCardRepository);
+                boardSaveLoad.saveBoard(fromGameBoardToServerBoard(board));
+                board.setTurnID(board.getTurnID() + 1);
             }
             else
             {
@@ -227,6 +258,7 @@ public class GameController
                 }
             }
         }
+        board.setTurnID(0);
     }
 
     /**

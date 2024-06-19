@@ -5,15 +5,13 @@ import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.CompleteGame;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.EnergyCube;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Player.Card;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Player.Player;
-import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Repository.BoardRepository;
-import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Repository.CardsRepository;
-import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Repository.EnergyRepository;
-import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Repository.PlayerRepository;
+import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Repository.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -25,14 +23,17 @@ public class BoardController
     private final EnergyRepository energyRepository;
     private final PlayerRepository playerRepository;
     private final CardsRepository cardsRepository;
+    private final UpgradeCardRepository upgradeCardRepository;
 
     public BoardController(BoardRepository boardRepository, EnergyRepository energyRepository,
-                           PlayerRepository playerRepository, CardsRepository cardsRepository)
+                           PlayerRepository playerRepository, CardsRepository cardsRepository,
+                           UpgradeCardRepository upgradeCardRepository)
     {
         this.boardRepository = boardRepository;
         this.energyRepository = energyRepository;
         this.playerRepository = playerRepository;
         this.cardsRepository = cardsRepository;
+        this.upgradeCardRepository = upgradeCardRepository;
     }
 
     @GetMapping
@@ -53,7 +54,11 @@ public class BoardController
         List<EnergyCube> energyCubeList = energyRepository.findEnergyCubesByGameIDAndTurnID(gameID, TurnID);
         playerRepository.deleteAll(playerList);
         energyRepository.deleteAll(energyCubeList);
-        boardRepository.delete(boardRepository.findBoardByGameIDAndTurnID(gameID, TurnID));
+        Board boardToDelete = boardRepository.findBoardByGameIDAndTurnID(gameID, TurnID);
+        if (boardToDelete != null)
+        {
+            boardRepository.delete(boardToDelete);
+        }
         return true;
     }
 
@@ -61,16 +66,21 @@ public class BoardController
     public CompleteGame getBoard(Long gameID, int TurnID, Long playerID)
     {
         BoardSaveLoad boardSaveLoad = new BoardSaveLoad(boardRepository, energyRepository, playerRepository,
-                cardsRepository);
+                cardsRepository, upgradeCardRepository);
         CompleteGame completeGame = boardSaveLoad.loadBoard(gameID, TurnID);
-        assert completeGame != null;
+        if (completeGame == null)
+        {
+            return null;
+        }
+        List<Card> playerCards = new ArrayList<Card>();
         for (Card card : completeGame.getCards())
         {
-            if (card.getPlayerID() != playerID)
+            if (card.getPlayerID() == playerID)
             {
-                completeGame.getCards().remove(card);
+                playerCards.add(card);
             }
         }
+        completeGame.setCards(playerCards);
         return completeGame;
     }
 }
