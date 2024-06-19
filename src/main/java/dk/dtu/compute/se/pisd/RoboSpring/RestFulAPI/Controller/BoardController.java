@@ -5,6 +5,7 @@ import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.CompleteGame;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.EnergyCube;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Player.Card;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Player.Player;
+import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.UpgradeCard;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Repository.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -55,6 +56,8 @@ public class BoardController
         playerRepository.deleteAll(playerList);
         energyRepository.deleteAll(energyCubeList);
         Board boardToDelete = boardRepository.findBoardByGameIDAndTurnID(gameID, TurnID);
+        List<UpgradeCard> upgradeCards = upgradeCardRepository.findUpgradeCardsByGameID(gameID);
+        upgradeCardRepository.deleteAll(upgradeCards);
         if (boardToDelete != null)
         {
             boardRepository.delete(boardToDelete);
