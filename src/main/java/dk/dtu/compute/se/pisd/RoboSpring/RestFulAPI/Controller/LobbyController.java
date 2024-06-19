@@ -131,6 +131,9 @@ public class LobbyController
             players.get(i).setX(space.x);
             players.get(i).setY(space.y);
             gameBoard.getPlayer(i).setSpace(space);
+            gameBoard.getPlayer(i).activeCardsPile.initializeAPlayerDeck();
+            gameBoard.getPlayer(i).activeCardsPile.shuffleDeck();
+            gameBoard.getPlayer(i).drawCards();
         }
         playerRepository.saveAll(players);
         newGame = fromGameBoardToServerBoard(gameBoard);

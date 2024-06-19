@@ -72,8 +72,6 @@ public class Player extends Subject
         this.space = null;
         this.moveController = moveController;
         activeCardsPile = new Deck();
-        activeCardsPile.initializeAPlayerDeck();
-        activeCardsPile.shuffleDeck();
         discardedCardsPile = new Deck();
         energyCubes = 0;
         program = new CardField[NO_REGISTERS];
@@ -86,6 +84,14 @@ public class Player extends Subject
         for (int i = 0; i < cards.length; i++)
         {
             cards[i] = new CardField(this);
+            cards[i].setCard(activeCardsPile.drawTopCard());
+        }
+    }
+
+    public void drawCards()
+    {
+        for (int i = 0; i < NO_CARDS; i++)
+        {
             cards[i].setCard(activeCardsPile.drawTopCard());
         }
     }

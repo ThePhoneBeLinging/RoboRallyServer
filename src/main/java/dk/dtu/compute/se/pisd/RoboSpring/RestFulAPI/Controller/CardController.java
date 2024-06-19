@@ -7,6 +7,7 @@ import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Player.Player;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Player.PlayerRegisters;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Repository.*;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.controller.GameController;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Command;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -80,7 +81,19 @@ public class CardController
 
 
         dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Board gameBoard = fromServerBoardToGameBoard(completeGame);
-
+        for (int i = 0; i < gameBoard.getPlayersNumber(); i++)
+        {
+            gameBoard.getPlayer(i).activeCardsPile.playerCards.clear();
+            List<Card> serverCards =
+                    cardsRepository.findAllByPlayerIDAndGameIDAndLocation(gameBoard.getPlayer(i).getPlayerID(),
+                            gameBoard.getGameID(), "ACTIVE");
+            for (Card serverCard : serverCards)
+            {
+                dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Card card =
+                        new dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Card(Command.valueOf(serverCard.getCommand()));
+                gameBoard.getPlayer(i).activeCardsPile.playerCards.add(card);
+            }
+        }
         GameController gameController = new GameController(gameBoard, boardRepository, energyRepository,
                 playerRepository, cardsRepository, upgradeCardRepository);
         gameBoard.setTurnID(1);
