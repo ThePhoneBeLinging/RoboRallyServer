@@ -110,9 +110,7 @@ public class Deck
         {
             return null;
         }
-        Card tempCard = playerCards.get(0);
-        playerCards.remove(0);
-        return tempCard;
+        return playerCards.remove(0);
     }
 
 }
