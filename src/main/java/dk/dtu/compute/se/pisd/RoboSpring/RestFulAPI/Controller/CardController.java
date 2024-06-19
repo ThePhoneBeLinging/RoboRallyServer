@@ -84,6 +84,7 @@ public class CardController
         GameController gameController = new GameController(gameBoard, boardRepository, energyRepository,
                 playerRepository, cardsRepository, upgradeCardRepository);
         gameBoard.setTurnID(1);
+        gameBoard.activateBoardElements();
         gameBoard.setCurrentPlayer(gameBoard.getPlayer(0));
         gameController.executePrograms();
 
