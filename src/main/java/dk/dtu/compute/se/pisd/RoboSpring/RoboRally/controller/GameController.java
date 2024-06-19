@@ -56,7 +56,9 @@ public class GameController
     }
 
     public GameController(@NotNull Board board, BoardRepository boardRepository, EnergyRepository energyRepository,
-                          PlayerRepository playerRepository, CardsRepository cardsRepository, UpgradeCardRepository upgradeCardRepository) {
+                          PlayerRepository playerRepository, CardsRepository cardsRepository,
+                          UpgradeCardRepository upgradeCardRepository)
+    {
         this.board = board;
         this.moveController = new MoveController(this);
         this.boardRepository = boardRepository;
@@ -201,7 +203,8 @@ public class GameController
                         startProgrammingPhase();
                     }
                 }
-                BoardSaveLoad boardSaveLoad = new BoardSaveLoad(boardRepository, energyRepository, playerRepository, cardsRepository, upgradeCardRepository);
+                BoardSaveLoad boardSaveLoad = new BoardSaveLoad(boardRepository, energyRepository, playerRepository,
+                        cardsRepository, upgradeCardRepository);
                 boardSaveLoad.saveBoard(fromGameBoardToServerBoard(board));
                 board.setTurnID(board.getTurnID() + 1);
             }
@@ -255,6 +258,7 @@ public class GameController
                 }
             }
         }
+        board.setTurnID(0);
     }
 
     /**
