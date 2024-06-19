@@ -136,6 +136,15 @@ public class Util
                 completeServerBoard.getUpgradeCards().add(serverUpgradeCard);
             }
         }
+        for (dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.UpgradeCard upgradeCard : gameBoard.getUpgradeCards())
+        {
+            UpgradeCard serverUpgradeCard = new UpgradeCard();
+            serverUpgradeCard.setCardName(upgradeCard.getName());
+            serverUpgradeCard.setGameID(gameBoard.getGameID());
+            serverUpgradeCard.setPrice(upgradeCard.getPrice());
+            serverUpgradeCard.setPlayerID(null);
+            completeServerBoard.getUpgradeCards().add(serverUpgradeCard);
+        }
 
         int i = 0;
         while (gameBoard.getPlayer(i) != null)
