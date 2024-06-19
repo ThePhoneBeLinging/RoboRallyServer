@@ -39,12 +39,22 @@ public class Util
             gameBoardPlayer.setMovedByConveyorThisTurn(player.isMovedByConveyorThisTurn());
             gameBoardPlayer.setEnergyCubes(player.getEnergyCubes());
             gameBoardPlayer.setThisPlayerTurn(player.isPlayersTurn());
-            for (UpgradeCard upgradeCard : serverBoard.getUpgradeCards())
+        }
+        for (UpgradeCard upgradeCard : serverBoard.getUpgradeCards())
+        {
+            dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.UpgradeCard upgradeCardToAdd =
+                    new dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.UpgradeCard(upgradeCard.getCardName(),
+                            upgradeCard.getPrice());
+            for (int i = 0; i < gameBoard.getPlayersNumber(); i++)
             {
-                if (Objects.equals(gameBoardPlayer.getPlayerID(), upgradeCard.getPlayerID()))
+                if (Objects.equals(gameBoard.getPlayer(i), upgradeCard.getPlayerID()))
                 {
-                    gameBoardPlayer.addUpgradeCard(new dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.UpgradeCard(upgradeCard.getCardName(), upgradeCard.getPrice()));
+                    gameBoard.getPlayer(i).addUpgradeCard(upgradeCardToAdd);
                 }
+            }
+            if (upgradeCard.getPlayerID() == null)
+            {
+                gameBoard.getUpgradeCards().add(upgradeCardToAdd);
             }
         }
 
