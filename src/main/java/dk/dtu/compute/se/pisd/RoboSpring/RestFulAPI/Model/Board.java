@@ -20,6 +20,7 @@ public class Board
     private Long id;
     private Long gameID;
     private int turnID;
+    private Long playerID;
     private String boardname;
     private int step;
     private String phase;

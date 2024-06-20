@@ -26,6 +26,9 @@ import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Repository.*;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.*;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static dk.dtu.compute.se.pisd.RoboSpring.Util.fromGameBoardToServerBoard;
 
 /**
@@ -177,7 +180,7 @@ public class GameController
                 {
                     if (card.command.isInteractive())
                     {
-                        board.setPhase(Phase.PLAYER_INTERACTION);
+                        startInteractivePhase(currentPlayer);
                         return;
                     }
                     Command command = card.command;
@@ -230,7 +233,6 @@ public class GameController
     public void startProgrammingPhase()
     {
         board.setPhase(Phase.PROGRAMMING);
-        board.getPhase();
         board.setCurrentPlayer(board.getPlayer(0));
         board.setStep(0);
 
@@ -261,6 +263,16 @@ public class GameController
         board.setTurnID(0);
     }
 
+    public void startInteractivePhase(Player currentPlayer)
+    {
+        board.setPhase(Phase.PLAYER_INTERACTION);
+        board.setCurrentPlayer(currentPlayer);
+        board.setOptions(new ArrayList<>());
+        for (Command option : currentPlayer.getProgramField(board.getStep()).getProgrammingCard().command.getOptions())
+        {
+            board.getOptions().add(option.toString());
+        }
+    }
     /**
      * Executes the command option and continues the program. This method should be called when the player has chosen
      * an option for an interactive command.

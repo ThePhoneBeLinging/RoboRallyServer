@@ -218,6 +218,11 @@ public class Util
             }
             i++;
         }
+        if (!gameBoard.getOptions().isEmpty())
+        {
+            serverBoard.setPlayerID(gameBoard.getCurrentPlayer().getPlayerID());
+            completeServerBoard.setCommandsToChooseBetween(gameBoard.getOptions());
+        }
         return completeServerBoard;
     }
 }

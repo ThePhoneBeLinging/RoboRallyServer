@@ -64,6 +64,7 @@ public class Board extends Subject
     private ArrayList<UpgradeCard> upgradeCards = new ArrayList<>();
 
     private Long gameID;
+    private List<String> options;
 
     public int getTurnID()
     {
@@ -580,5 +581,13 @@ public class Board extends Subject
 
     public void setGameID(Long gameID) {
         this.gameID = gameID;
+    }
+
+    public List<String> getOptions() {
+        return options;
+    }
+
+    public void setOptions(List<String> options) {
+        this.options = options;
     }
 }
