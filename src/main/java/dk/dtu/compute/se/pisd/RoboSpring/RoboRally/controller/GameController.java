@@ -24,6 +24,7 @@ package dk.dtu.compute.se.pisd.RoboSpring.RoboRally.controller;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Controller.BoardSaveLoad;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Repository.*;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.*;
+import dk.dtu.compute.se.pisd.RoboSpring.Util;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -43,19 +44,15 @@ public class GameController
     final public PlayerRepository playerRepository;
     final public CardsRepository cardsRepository;
     final public UpgradeCardRepository upgradeCardRepository;
+    final private BoardSaveLoad boardSaveLoad;
+
 
     /**
      * @author Elias
      */
     public GameController(@NotNull Board board)
     {
-        this.board = board;
-        this.moveController = new MoveController(this);
-        this.boardRepository = null;
-        this.energyRepository = null;
-        this.playerRepository = null;
-        this.cardsRepository = null;
-        this.upgradeCardRepository = null;
+        this(board,null,null,null,null,null);
     }
 
     public GameController(@NotNull Board board, BoardRepository boardRepository, EnergyRepository energyRepository,
@@ -69,6 +66,8 @@ public class GameController
         this.playerRepository = playerRepository;
         this.cardsRepository = cardsRepository;
         this.upgradeCardRepository = upgradeCardRepository;
+        this.boardSaveLoad = new BoardSaveLoad(boardRepository, energyRepository, playerRepository,
+                cardsRepository, upgradeCardRepository);
     }
 
     /**
@@ -181,6 +180,7 @@ public class GameController
                     if (card.command.isInteractive())
                     {
                         startInteractivePhase(currentPlayer);
+                        boardSaveLoad.saveBoard(Util.fromGameBoardToServerBoard(board));
                         return;
                     }
                     Command command = card.command;
@@ -206,9 +206,8 @@ public class GameController
                         startProgrammingPhase();
                     }
                 }
-                BoardSaveLoad boardSaveLoad = new BoardSaveLoad(boardRepository, energyRepository, playerRepository,
-                        cardsRepository, upgradeCardRepository);
-                boardSaveLoad.saveBoard(fromGameBoardToServerBoard(board));
+
+                this.boardSaveLoad.saveBoard(fromGameBoardToServerBoard(board));
                 board.setTurnID(board.getTurnID() + 1);
             }
             else
@@ -273,6 +272,7 @@ public class GameController
             board.getOptions().add(option.toString());
         }
     }
+
     /**
      * Executes the command option and continues the program. This method should be called when the player has chosen
      * an option for an interactive command.
