@@ -207,7 +207,7 @@ public class Util
                 completeServerBoard.getCards().add(serverCard);
             }
             for (dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Card card :
-                    gameBoard.getPlayer(i).activeCardsPile.playerCards)
+                    gameBoard.getPlayer(i).discardedCardsPile.playerCards)
             {
                 Card serverCard = new Card();
                 serverCard.setCommand(card.getCommand().toString());
