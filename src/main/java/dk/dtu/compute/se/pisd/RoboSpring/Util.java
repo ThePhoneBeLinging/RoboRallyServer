@@ -43,6 +43,11 @@ public class Util
             gameBoardPlayer.setMovedByConveyorThisTurn(player.isMovedByConveyorThisTurn());
             gameBoardPlayer.setEnergyCubes(player.getEnergyCubes());
             gameBoardPlayer.setThisPlayerTurn(player.isPlayersTurn());
+
+            if(gameBoardPlayer.isThisPlayerTurn())
+            {
+                gameBoard.setCurrentPlayer(gameBoardPlayer);
+            }
         }
         for (UpgradeCard upgradeCard : serverBoard.getUpgradeCards())
         {
@@ -179,6 +184,19 @@ public class Util
                     serverCard.setLocation("REGISTER");
                     serverCard.setGameID(gameBoard.getGameID());
 
+                    completeServerBoard.getCards().add(serverCard);
+                }
+
+            }
+            if (gameBoard.getPhase() == Phase.PLAYER_INTERACTION && gameBoard.getOptions() != null)
+            {
+                for (String command : gameBoard.getOptions())
+                {
+                    Card serverCard = new Card();
+                    serverCard.setCommand(command);
+                    serverCard.setPlayerID(gameBoardPlayer.getPlayerID());
+                    serverCard.setLocation("OPTION");
+                    serverCard.setGameID(gameBoard.getGameID());
                     completeServerBoard.getCards().add(serverCard);
                 }
             }

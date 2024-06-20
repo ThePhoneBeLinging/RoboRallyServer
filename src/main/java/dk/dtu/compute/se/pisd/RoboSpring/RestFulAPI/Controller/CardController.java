@@ -8,6 +8,7 @@ import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Player.PlayerRegisters
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Repository.*;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.controller.GameController;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Command;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,6 +37,19 @@ public class CardController
         this.boardRepository = boardRepository;
         this.upgradeCardRepository = upgradeCardRepository;
         this.energyRepository = energyRepository;
+    }
+
+    @GetMapping(value = "set/interactive/choice")
+    public void setInteractiveChoice(Long gameID, int turnID, Long playerID, int choice) {
+        List<Card> chosenOption = cardsRepository.findAllByPlayerIDAndGameIDAndLocation(playerID, gameID, "OPTION");
+        cardsRepository.deleteAll(chosenOption);
+        Card card = chosenOption.get(choice);
+
+        BoardSaveLoad boardSaveLoad = new BoardSaveLoad(boardRepository, energyRepository, playerRepository, cardsRepository, upgradeCardRepository);
+
+        dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Board gameBoard = fromServerBoardToGameBoard(boardSaveLoad.loadBoard(gameID, turnID));
+        GameController gameController =  new GameController(gameBoard, boardRepository, energyRepository, playerRepository, cardsRepository, upgradeCardRepository);
+        gameController.executeCommandOptionAndContinue(Command.valueOf(card.getCommand()));
     }
 
     @PostMapping(value = "set/player/cards")
