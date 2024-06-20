@@ -218,7 +218,7 @@ public class Util
             }
             i++;
         }
-        if (!gameBoard.getOptions().isEmpty())
+        if (gameBoard.getOptions() != null && !gameBoard.getOptions().isEmpty())
         {
             serverBoard.setPlayerID(gameBoard.getCurrentPlayer().getPlayerID());
             completeServerBoard.setCommandsToChooseBetween(gameBoard.getOptions());
