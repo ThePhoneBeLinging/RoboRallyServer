@@ -74,8 +74,16 @@ public class LobbyController
 
         Player player = new Player();
         player.setGameID(gameID);
-        player.setPlayerID(1L + lobbyRepository.countLobbyObjectsByGameID(gameID));
+// Retrieve all players in the lobby
+        List<Player> playersInLobby = playerRepository.findPlayersByGameIDAndTurnID(gameID, 0);
 
+
+        Long maxPlayerID = playersInLobby.stream()
+                .map(Player::getPlayerID)
+                .max(Long::compare)
+                .orElse(0L);
+
+        player.setPlayerID(maxPlayerID + 1);
         player.setTurnID(0);
         player.setY(0);
         player.setX(0);
