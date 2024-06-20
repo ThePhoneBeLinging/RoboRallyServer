@@ -80,6 +80,7 @@ public class BoardSaveLoad
         completeGame.setEnergyCubes(energyRepository.findEnergyCubesByGameIDAndTurnID(gameID, turnID));
         completeGame.setCards(cardsRepository.findAllByGameID(gameID));
         completeGame.setUpgradeCards(upgradeCardRepository.findUpgradeCardsByGameID(gameID));
+        completeGame.setTurnID(turnID);
         if (completeGame.getBoard() == null || completeGame.getPlayerList() == null || completeGame.getEnergyCubes() == null || completeGame.getCards() == null || completeGame.getUpgradeCards() == null)
         {
             return null;

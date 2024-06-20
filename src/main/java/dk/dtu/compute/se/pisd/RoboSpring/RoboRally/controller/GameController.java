@@ -28,7 +28,6 @@ import dk.dtu.compute.se.pisd.RoboSpring.Util;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static dk.dtu.compute.se.pisd.RoboSpring.Util.fromGameBoardToServerBoard;
 
@@ -52,7 +51,7 @@ public class GameController
      */
     public GameController(@NotNull Board board)
     {
-        this(board,null,null,null,null,null);
+        this(board, null, null, null, null, null);
     }
 
     public GameController(@NotNull Board board, BoardRepository boardRepository, EnergyRepository energyRepository,
@@ -66,8 +65,8 @@ public class GameController
         this.playerRepository = playerRepository;
         this.cardsRepository = cardsRepository;
         this.upgradeCardRepository = upgradeCardRepository;
-        this.boardSaveLoad = new BoardSaveLoad(boardRepository, energyRepository, playerRepository,
-                cardsRepository, upgradeCardRepository);
+        this.boardSaveLoad = new BoardSaveLoad(boardRepository, energyRepository, playerRepository, cardsRepository,
+                upgradeCardRepository);
     }
 
     /**
@@ -286,6 +285,7 @@ public class GameController
         Player currentPlayer = board.getCurrentPlayer();
         moveController.executeCommand(currentPlayer, commandOption);
         board.setPhase(Phase.ACTIVATION);
+        this.boardSaveLoad.saveBoard(fromGameBoardToServerBoard(board));
         int step = board.getStep();
         int nextPlayerNumber = board.getPlayerNumber(currentPlayer) + 1;
         if (nextPlayerNumber < board.getPlayersNumber())
