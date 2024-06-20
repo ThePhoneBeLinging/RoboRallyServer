@@ -65,6 +65,11 @@ public class LobbyController
     @RequestMapping(value = "lobby/join")
     public Lobby joinLobby(Long gameID)
     {
+        Long lobbySize = lobbyRepository.countLobbyObjectsByGameID(gameID);
+        if (lobbySize >= 6)
+        {
+            return null;
+        }
         Lobby lobby = new Lobby();
 
         Player player = new Player();
