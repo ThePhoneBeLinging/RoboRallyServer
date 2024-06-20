@@ -172,4 +172,9 @@ public class LobbyController
         return lobbyToReturn;
     }
 
+    @RequestMapping(value = "lobby/size")
+    public Long getLobbySize(Long gameID) {
+        return lobbyRepository.countLobbyObjectsByGameID(gameID);
+    }
+
 }
