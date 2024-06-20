@@ -24,4 +24,16 @@ public class PlayerController
         return playerRepository.findAll();
     }
 
+    @RequestMapping("players/leave")
+    public boolean leaveGame(Long gameID, int playerID)
+    {
+        Player player = playerRepository.findPlayerByGameIDAndPlayerID(gameID, playerID);
+        if (player == null)
+        {
+            return false;
+        }
+        playerRepository.delete(player);
+        return true;
+    }
+
 }

@@ -182,4 +182,19 @@ public class LobbyController
         return lobbyRepository.countLobbyObjectsByGameID(gameID);
     }
 
+    @RequestMapping(value = "lobby/leave")
+    public boolean leaveLobby(Long gameID, Long playerID)
+    {
+        List<Lobby> lobbies = lobbyRepository.findLobbiesByGameID(gameID);
+        for (Lobby lobby : lobbies)
+        {
+            if (lobby.getPlayerID().equals(playerID))
+            {
+                lobbyRepository.delete(lobby);
+                break;
+            }
+        }
+        return true;
+    }
+
 }
