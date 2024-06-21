@@ -209,7 +209,7 @@ public class GameController
                     System.out.println("You win");
                 }
                 this.boardSaveLoad.saveBoard(fromGameBoardToServerBoard(board));
-                board.setTurnID(board.getTurnID() + 1);
+                board.setTurnID(board.getTurnID());
             }
             else
             {
