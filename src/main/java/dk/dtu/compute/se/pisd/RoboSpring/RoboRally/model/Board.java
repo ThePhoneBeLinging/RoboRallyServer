@@ -21,10 +21,7 @@
  */
 package dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model;
 
-import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.BoardElements.BoardElement;
-import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.BoardElements.Checkpoint;
-import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.BoardElements.RebootToken;
-import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.BoardElements.SpawnPoint;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.BoardElements.*;
 import dk.dtu.compute.se.pisd.RoboSpring.observer.Subject;
 import org.jetbrains.annotations.NotNull;
 
@@ -62,6 +59,7 @@ public class Board extends Subject
     private int step = 0;
     private boolean stepMode;
     private ArrayList<UpgradeCard> upgradeCards = new ArrayList<>();
+    ArrayList<EnergyCube> energyCubes = new ArrayList<>();
 
     private Long gameID;
     private List<String> options;
@@ -125,8 +123,6 @@ public class Board extends Subject
         this.activateBoardElements();
 
         this.upgradeCards = UpgradeCardsFactory.createUpgradeCards();
-        System.out.println("Dean Phar was here");
-
     }
 
     /**
@@ -599,5 +595,18 @@ public class Board extends Subject
 
     public void setOptions(List<String> options) {
         this.options = options;
+    }
+
+    public ArrayList<EnergyCube> getEnergyCubes()
+    {
+        for (BoardElement boardElement : boardElements[ENERGY_SPACE_INDEX])
+        {
+            energyCubes.add((EnergyCube) boardElement);
+        }
+        return energyCubes;
+    }
+
+    public void addEnergyCube(Space space) {
+        new EnergyCube(space);
     }
 }

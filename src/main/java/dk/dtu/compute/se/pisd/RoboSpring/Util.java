@@ -1,6 +1,7 @@
 package dk.dtu.compute.se.pisd.RoboSpring;
 
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.CompleteGame;
+import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.EnergyCube;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Player.Card;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Player.Player;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.UpgradeCard;
@@ -26,6 +27,7 @@ public class Util
         gameBoard.setGameID(serverBoard.getGameID());
         gameBoard.setTurnID(serverBoard.getTurnID());
         serverBoard.setUpgradeCards(new ArrayList<>());
+        serverBoard.setEnergyCubes(new ArrayList<>());
 
         for (Player player : serverBoard.getPlayerList())
         {
@@ -119,6 +121,10 @@ public class Util
                 }
             }
         }
+        for (dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.EnergyCube energyCube : serverBoard.getEnergyCubes())
+        {
+            gameBoard.addEnergyCube(gameBoard.getSpace(energyCube.getX(), energyCube.getY()));
+        }
         return gameBoard;
     }
 
@@ -138,6 +144,7 @@ public class Util
         completeServerBoard.setCards(new ArrayList<>());
         completeServerBoard.setUpgradeCards(new ArrayList<>());
         completeServerBoard.setTurnID(gameBoard.getTurnID());
+        completeServerBoard.setEnergyCubes(new ArrayList<>());
 
         for (int i = 0; i < gameBoard.getPlayersNumber(); i++)
         {
@@ -249,6 +256,16 @@ public class Util
         {
             serverBoard.setPlayerID(gameBoard.getCurrentPlayer().getPlayerID());
             completeServerBoard.setCommandsToChooseBetween(gameBoard.getOptions());
+        }
+        for (dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.BoardElements.EnergyCube energyCube : gameBoard.getEnergyCubes())
+        {
+            EnergyCube serverEnergyCube =
+                    new EnergyCube();
+            serverEnergyCube.setX(energyCube.getSpace().x);
+            serverEnergyCube.setY(energyCube.getSpace().y);
+            serverEnergyCube.setGameID(gameBoard.getGameID());
+            serverEnergyCube.setTurnID(gameBoard.getTurnID());
+            completeServerBoard.getEnergyCubes().add(serverEnergyCube);
         }
         return completeServerBoard;
     }
