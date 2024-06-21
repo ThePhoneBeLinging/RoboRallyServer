@@ -282,7 +282,7 @@ public class GameController
      * @author Emil
      */
 
-    public void executeCommandOptionAndContinue(Command commandOption) throws InterruptedException {
+    public void executeCommandOptionAndContinue(Command commandOption){
         Player currentPlayer = board.getCurrentPlayer();
         moveController.executeCommand(currentPlayer, commandOption);
         this.boardSaveLoad.saveBoard(fromGameBoardToServerBoard(board));
@@ -310,11 +310,6 @@ public class GameController
         }
 
         board.setPhase(Phase.ACTIVATION);
-        try {
-            Thread.sleep(2500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         board.setTurnID(board.getTurnID() + 1);
         continuePrograms();
     }
