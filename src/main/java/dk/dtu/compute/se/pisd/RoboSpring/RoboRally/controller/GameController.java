@@ -308,7 +308,11 @@ public class GameController
         }
 
         board.setPhase(Phase.ACTIVATION);
-        Thread.sleep(2500);
+        try {
+            Thread.sleep(2500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         board.setTurnID(board.getTurnID() + 1);
         continuePrograms();
     }
