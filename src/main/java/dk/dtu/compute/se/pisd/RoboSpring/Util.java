@@ -196,7 +196,8 @@ public class Util
                 }
 
             }
-            if (gameBoard.getPhase() == Phase.PLAYER_INTERACTION && gameBoard.getOptions() != null)
+            if (gameBoard.getPhase() == Phase.PLAYER_INTERACTION && gameBoard.getOptions() != null
+                    && gameBoard.getCurrentPlayer() == gameBoardPlayer)
             {
                 for (String command : gameBoard.getOptions())
                 {

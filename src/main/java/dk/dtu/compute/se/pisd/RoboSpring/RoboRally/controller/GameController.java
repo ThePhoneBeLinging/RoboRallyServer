@@ -285,8 +285,6 @@ public class GameController
     public void executeCommandOptionAndContinue(Command commandOption){
         Player currentPlayer = board.getCurrentPlayer();
         moveController.executeCommand(currentPlayer, commandOption);
-
-
         int step = board.getStep();
         int nextPlayerNumber = board.getPlayerNumber(currentPlayer) + 1;
         if (nextPlayerNumber < board.getPlayersNumber())
