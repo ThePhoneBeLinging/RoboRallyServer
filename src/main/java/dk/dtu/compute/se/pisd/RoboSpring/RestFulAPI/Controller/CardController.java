@@ -40,7 +40,7 @@ public class CardController
     }
 
     @GetMapping(value = "set/interactive/choice")
-    public void setInteractiveChoice(Long gameID, int turnID, Long playerID, int choice) {
+    public void setInteractiveChoice(Long gameID, int turnID, Long playerID, int choice) throws InterruptedException {
         List<Card> chosenOption = cardsRepository.findAllByPlayerIDAndGameIDAndLocation(playerID, gameID, "OPTION");
         cardsRepository.deleteAll(chosenOption);
         Card card = chosenOption.get(choice);
