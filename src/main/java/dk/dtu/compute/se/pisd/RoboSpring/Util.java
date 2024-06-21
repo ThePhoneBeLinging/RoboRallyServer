@@ -30,7 +30,14 @@ public class Util
         for (Player player : serverBoard.getPlayerList())
         {
             dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Player gameBoardPlayer =
-                    gameBoard.getPlayer(Math.toIntExact(player.getPlayerID() - 1));
+                    gameBoard.getPlayer(Math.toIntExact(player.getPlayerID()));
+            for (int i = 0; i < gameBoard.getPlayersNumber(); i++)
+            {
+                if (gameBoard.getPlayer(i) != null && gameBoard.getPlayer(i).getPlayerID() == player.getPlayerID())
+                {
+                    gameBoardPlayer = gameBoard.getPlayer(i);
+                }
+            }
             if (gameBoardPlayer == null)
             {
                 gameBoardPlayer = new dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Player(gameBoard,
