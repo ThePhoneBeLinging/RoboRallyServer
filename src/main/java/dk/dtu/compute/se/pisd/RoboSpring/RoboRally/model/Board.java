@@ -190,6 +190,19 @@ public class Board extends Subject
         return boardElements[CHECKPOINTS_INDEX].get(index);
     }
 
+    public int getLastCheckpoint() {
+        int checkpointIndex = 0;
+        for(int i = 0; i < CHECKPOINTS_INDEX; i++) {
+            BoardElement checkpoint = getCheckPointAtIndex(i);
+            if(checkpoint != null) {
+                checkpointIndex = i;
+            } else {
+                break;
+            }
+        }
+        return checkpointIndex;
+    }
+
     /**
      * @param indexOfElementsToBeActivated
      * @author Elias

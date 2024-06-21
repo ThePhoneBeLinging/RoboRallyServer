@@ -205,7 +205,9 @@ public class GameController
                         startProgrammingPhase();
                     }
                 }
-
+                if(currentPlayer.getLastVisitedCheckPoint() == board.getLastCheckpoint()) {
+                    System.out.println("You win");
+                }
                 this.boardSaveLoad.saveBoard(fromGameBoardToServerBoard(board));
                 board.setTurnID(board.getTurnID() + 1);
             }
