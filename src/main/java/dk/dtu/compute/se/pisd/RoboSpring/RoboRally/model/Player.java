@@ -28,6 +28,7 @@ import dk.dtu.compute.se.pisd.RoboSpring.observer.Subject;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Command.*;
 import static dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Heading.SOUTH;
@@ -59,6 +60,7 @@ public class Player extends Subject
     private int energyCubes;
     private boolean thisPlayerTurn = false;
     private Long playerID;
+    private List<Checkpoint> visitedCheckpoints = new ArrayList<>();
 
     /**
      * @param board the board to which this player belongs
@@ -260,9 +262,20 @@ public class Player extends Subject
     {
         int indexOfCheckPoint = board.getIndexOfCheckPoint(checkpoint);
 
+        if(visitedCheckpoints.contains(checkpoint)) {
+            System.out.println("Checkpoint already visited buddy");
+            return;
+        }
+
+        visitedCheckpoints.add(checkpoint);
+
         if (indexOfCheckPoint == lastVisitedCheckPoint)
         {
             lastVisitedCheckPoint++;
+        }
+
+        if(lastVisitedCheckPoint == board.getIndexOfCheckPoint(checkpoint)) {
+            System.out.println("You Win!");
         }
     }
 

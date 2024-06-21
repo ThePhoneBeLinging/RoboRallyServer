@@ -186,15 +186,6 @@ public class Board extends Subject
         return boardElements[CHECKPOINTS_INDEX].get(index);
     }
 
-    public int getLastCheckpoint() {
-        int lastCheckpointIndex = -1;
-        for (int i = 0; i < boardElements[CHECKPOINTS_INDEX].size(); i++) {
-            if (boardElements[CHECKPOINTS_INDEX].get(i) != null) {
-                lastCheckpointIndex = i;
-            }
-        }
-        return lastCheckpointIndex;
-    }
 
     /**
      * @param indexOfElementsToBeActivated
