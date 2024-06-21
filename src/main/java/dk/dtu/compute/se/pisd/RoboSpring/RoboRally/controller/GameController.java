@@ -285,7 +285,7 @@ public class GameController
     public void executeCommandOptionAndContinue(Command commandOption){
         Player currentPlayer = board.getCurrentPlayer();
         moveController.executeCommand(currentPlayer, commandOption);
-        this.boardSaveLoad.saveBoard(fromGameBoardToServerBoard(board));
+
 
         int step = board.getStep();
         int nextPlayerNumber = board.getPlayerNumber(currentPlayer) + 1;
@@ -310,6 +310,7 @@ public class GameController
         }
 
         board.setPhase(Phase.ACTIVATION);
+        this.boardSaveLoad.saveBoard(fromGameBoardToServerBoard(board));
         board.setTurnID(board.getTurnID() + 1);
         continuePrograms();
     }
