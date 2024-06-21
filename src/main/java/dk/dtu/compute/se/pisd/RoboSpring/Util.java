@@ -25,6 +25,7 @@ public class Util
         gameBoard.setPhase(Phase.valueOf(serverBoard.getBoard().getPhase()));
         gameBoard.setGameID(serverBoard.getGameID());
         gameBoard.setTurnID(serverBoard.getTurnID());
+        serverBoard.setUpgradeCards(new ArrayList<>());
 
         for (Player player : serverBoard.getPlayerList())
         {
