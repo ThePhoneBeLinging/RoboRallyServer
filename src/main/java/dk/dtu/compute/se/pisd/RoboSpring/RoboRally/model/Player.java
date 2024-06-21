@@ -60,7 +60,6 @@ public class Player extends Subject
     private int energyCubes;
     private boolean thisPlayerTurn = false;
     private Long playerID;
-    private List<Checkpoint> visitedCheckpoints = new ArrayList<>();
 
     /**
      * @param board the board to which this player belongs
@@ -262,19 +261,12 @@ public class Player extends Subject
     {
         int indexOfCheckPoint = board.getIndexOfCheckPoint(checkpoint);
 
-        if(visitedCheckpoints.contains(checkpoint)) {
-            System.out.println("Checkpoint already visited buddy");
-            return;
-        }
-
-        visitedCheckpoints.add(checkpoint);
-
         if (indexOfCheckPoint == lastVisitedCheckPoint)
         {
             lastVisitedCheckPoint++;
         }
 
-        if(lastVisitedCheckPoint == board.getIndexOfCheckPoint(checkpoint)) {
+        if(lastVisitedCheckPoint == board.getBoardElementsWithIndex(Board.CHECKPOINTS_INDEX).size()) {
             System.out.println("You Win!");
         }
     }
