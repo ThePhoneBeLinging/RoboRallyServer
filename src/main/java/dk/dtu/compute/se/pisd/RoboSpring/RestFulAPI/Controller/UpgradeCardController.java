@@ -1,6 +1,8 @@
 package dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Controller;
 
+import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Player.Player;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.UpgradeCard;
+import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Repository.PlayerRepository;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Repository.UpgradeCardRepository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,10 +14,12 @@ public class UpgradeCardController
 {
 
     private final UpgradeCardRepository upgradeCardRepository;
+    private final PlayerRepository playerRepository;
 
-    public UpgradeCardController(UpgradeCardRepository upgradeCardRepository)
+    public UpgradeCardController(UpgradeCardRepository upgradeCardRepository, PlayerRepository playerRepository)
     {
         this.upgradeCardRepository = upgradeCardRepository;
+        this.playerRepository = playerRepository;
     }
 
     @RequestMapping(value = "get/boards/upgradeCards/shop")
@@ -31,13 +35,15 @@ public class UpgradeCardController
     }
 
     @RequestMapping(value = "set/boards/upgradeCards/addToPlayer")
-    public boolean getUpgradeCards(Long gameID, Long playerID, String upgradeCardName, int price)
+    public boolean getUpgradeCards(Long gameID, Long playerID, Long turnID, String upgradeCardName, int price)
     {
         UpgradeCard upgradeCard = new UpgradeCard();
+        Player player = playerRepository.findPlayerByGameIDAndPlayerIDAndTurnID(gameID, Math.toIntExact(playerID), Math.toIntExact(turnID));
         upgradeCard.setGameID(gameID);
         upgradeCard.setPlayerID(playerID);
         upgradeCard.setCardName(upgradeCardName);
         upgradeCard.setPrice(price);
+        player.setEnergyCubes(player.getEnergyCubes() - price);
         upgradeCardRepository.save(upgradeCard);
         return true;
     }
