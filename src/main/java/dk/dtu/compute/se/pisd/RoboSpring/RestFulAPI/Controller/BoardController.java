@@ -66,16 +66,47 @@ public class BoardController
     }
 
     @RequestMapping(value = "get/boards/single")
-    public CompleteGame getBoard(Long gameID, int TurnID, Long playerID)
+    public CompleteGame getBoard(Long gameID, int turnID, Long playerID)
     {
         BoardSaveLoad boardSaveLoad = new BoardSaveLoad(boardRepository, energyRepository, playerRepository,
                 cardsRepository, upgradeCardRepository);
-        CompleteGame completeGame = boardSaveLoad.loadBoard(gameID, TurnID);
+        CompleteGame completeGame = boardSaveLoad.loadBoard(gameID, turnID);
         if (completeGame == null)
         {
             return null;
         }
         List<Card> playerCards = new ArrayList<Card>();
+        if (turnID == 0)
+        {
+            List<Player> players = playerRepository.findPlayersByGameIDAndTurnID(gameID, turnID);
+            boolean toDelete = true;
+            for (Player player : players)
+            {
+                if (player.getPlayerID().equals(playerID))
+                {
+                    playerRepository.delete(player);
+                    player.setHasRetrievedProgrammingPhase(true);
+                    playerRepository.save(player);
+                }
+                if (!player.hasRetrievedProgrammingPhase)
+                {
+                    toDelete = false;
+                }
+            }
+            if (toDelete)
+            {
+                for (int i = 1; i < players.size()*5;i++)
+                {
+                    this.deleteBoard(gameID, turnID);
+                }
+                for (Player player : players)
+                {
+                    playerRepository.delete(player);
+                    player.setHasRetrievedProgrammingPhase(true);
+                    playerRepository.save(player);
+                }
+            }
+        }
         for (Card card : completeGame.getCards())
         {
             if (card.getPlayerID() == playerID)

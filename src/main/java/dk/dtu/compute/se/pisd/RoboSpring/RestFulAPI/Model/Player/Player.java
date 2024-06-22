@@ -34,4 +34,5 @@ public class Player
     public boolean movedByConveyorThisTurn;
     public int energyCubes;
     public boolean playersTurn;
+    public boolean hasRetrievedProgrammingPhase;
 }

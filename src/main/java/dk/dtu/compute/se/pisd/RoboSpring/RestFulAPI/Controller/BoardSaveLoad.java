@@ -50,6 +50,7 @@ public class BoardSaveLoad
         {
             player.setGameID(completeGame.getGameID());
             player.setTurnID(completeGame.getTurnID());
+            player.setHasRetrievedProgrammingPhase(false);
             playerRepository.save(player);
         }
         for (Card card : completeGame.getCards())
