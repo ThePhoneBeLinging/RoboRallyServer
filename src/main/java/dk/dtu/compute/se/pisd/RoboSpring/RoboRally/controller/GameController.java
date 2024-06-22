@@ -207,7 +207,7 @@ public class GameController
                 }
 
                 this.boardSaveLoad.saveBoard(fromGameBoardToServerBoard(board));
-                board.setTurnID(board.getTurnID());
+                board.setTurnID(board.getTurnID() + 1);
             }
             else
             {
