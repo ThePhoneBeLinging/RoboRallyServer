@@ -166,6 +166,8 @@ public class LobbyController
         {
             boardController.deleteBoard(gameID, i);
         }
+        cardsRepository.deleteAll(cardsRepository.findAllByGameID(gameID));
+        upgradeCardRepository.deleteAll(upgradeCardRepository.findActiveUpgradeCardsByGameID(gameID));
         lobbyRepository.deleteAll(lobbyRepository.findLobbiesByGameID(gameID));
         return true;
     }

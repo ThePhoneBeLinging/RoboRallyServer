@@ -50,14 +50,10 @@ public class BoardController
     public boolean deleteBoard(Long gameID, int TurnID)
     {
         List<Player> playerList = playerRepository.findPlayersByGameIDAndTurnID(gameID, TurnID);
-        List<Card> cardList = cardsRepository.findAllByGameID(gameID);
-        cardsRepository.deleteAll(cardList);
         List<EnergyCube> energyCubeList = energyRepository.findEnergyCubesByGameIDAndTurnID(gameID, TurnID);
         playerRepository.deleteAll(playerList);
         energyRepository.deleteAll(energyCubeList);
         Board boardToDelete = boardRepository.findBoardByGameIDAndTurnID(gameID, TurnID);
-        List<UpgradeCard> upgradeCards = upgradeCardRepository.findUpgradeCardsByGameID(gameID);
-        upgradeCardRepository.deleteAll(upgradeCards);
         if (boardToDelete != null)
         {
             boardRepository.delete(boardToDelete);
@@ -99,14 +95,10 @@ public class BoardController
             }
             if (toDelete)
             {
-                List<UpgradeCard> upgradeCards= upgradeCardRepository.findUpgradeCardsByGameID(gameID);
-                List<Card> cards = cardsRepository.findAllByGameID(gameID);
                 for (int i = 1; i < players.size()*5;i++)
                 {
                     this.deleteBoard(gameID, i);
                 }
-                upgradeCardRepository.saveAll(upgradeCards);
-                cardsRepository.saveAll(cards);
             }
         }
         for (Card card : completeGame.getCards())

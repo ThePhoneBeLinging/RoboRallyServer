@@ -5,6 +5,7 @@ import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.CompleteGame;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.EnergyCube;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Player.Card;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Player.Player;
+import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.UpgradeCard;
 import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Repository.*;
 
 import java.util.ArrayList;
@@ -53,22 +54,32 @@ public class BoardSaveLoad
             player.setHasRetrievedProgrammingPhase(false);
             playerRepository.save(player);
         }
-        for (Card card : completeGame.getCards())
-        {
-            card.setGameID(completeGame.getGameID());
-            cardsRepository.save(card);
-        }
-
-        if (completeGame.getUpgradeCards() != null)
-        {
-            upgradeCardRepository.saveAll(completeGame.getUpgradeCards());
-        }
-        else
-        {
-            completeGame.setUpgradeCards(new ArrayList<>());
-        }
+        this.saveCards(completeGame);
         //fromServerBoardToGameBoard(completeGame);
         return completeGame;
+    }
+
+    public void saveCards(CompleteGame completeGame)
+    {
+        List<Card> cardsToSave = new ArrayList<>();
+        List<Card> cardsToDelete = new ArrayList<>();
+        List<Card> cardsOnServer = cardsRepository.findAllByGameID(completeGame.getGameID());
+        List<Card> cardsInCompleteGame = completeGame.getCards();
+        List<UpgradeCard> upgradeCardsToSave = new ArrayList<>();
+        List<UpgradeCard> upgradeCardsToDelete = new ArrayList<>();
+        List<UpgradeCard> upgradeCardsOnServer = upgradeCardRepository.findUpgradeCardsByGameID(completeGame.getGameID());
+        upgradeCardsToSave.addAll(completeGame.getUpgradeCards());
+        upgradeCardsToDelete.addAll(upgradeCardsOnServer);
+        upgradeCardsToDelete.removeAll(completeGame.getUpgradeCards());
+        upgradeCardsToSave.removeAll(upgradeCardsOnServer);
+        upgradeCardRepository.deleteAll(upgradeCardsToDelete);
+        upgradeCardRepository.saveAll(upgradeCardsToSave);
+        cardsToDelete.addAll(cardsOnServer);
+        cardsToDelete.removeAll(completeGame.getCards());
+        cardsToSave.addAll(cardsInCompleteGame);
+        cardsToSave.removeAll(cardsOnServer);
+        cardsRepository.deleteAll(cardsToDelete);
+        cardsRepository.saveAll(cardsToSave);
     }
 
     public CompleteGame loadBoard(Long gameID, int turnID)

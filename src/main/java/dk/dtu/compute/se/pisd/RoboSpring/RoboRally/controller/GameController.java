@@ -179,7 +179,8 @@ public class GameController
                     if (card.command.isInteractive())
                     {
                         startInteractivePhase(currentPlayer);
-                        boardSaveLoad.saveBoard(Util.fromGameBoardToServerBoard(board));
+                        dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.CompleteGame serverCompleteGame = Util.fromGameBoardToServerBoard(board);
+                        boardSaveLoad.saveBoard(serverCompleteGame);
                         return;
                     }
                     Command command = card.command;
