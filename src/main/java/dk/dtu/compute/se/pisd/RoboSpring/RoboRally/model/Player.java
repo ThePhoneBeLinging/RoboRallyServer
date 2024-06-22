@@ -60,6 +60,7 @@ public class Player extends Subject
     private int energyCubes;
     private boolean thisPlayerTurn = false;
     private Long playerID;
+    private boolean thisPlayerWinner = false;
 
     /**
      * @param board the board to which this player belongs
@@ -267,7 +268,7 @@ public class Player extends Subject
         }
 
         if(lastVisitedCheckPoint == board.getBoardElementsWithIndex(Board.CHECKPOINTS_INDEX).size()) {
-            System.out.println("You Win!");
+            thisPlayerWinner = true;
         }
     }
 
