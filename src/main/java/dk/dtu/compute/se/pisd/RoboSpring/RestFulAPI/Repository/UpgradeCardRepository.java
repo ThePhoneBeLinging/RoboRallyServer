@@ -16,4 +16,5 @@ public interface UpgradeCardRepository extends JpaRepository<UpgradeCard, Long>
 
     List<UpgradeCard> findUpgradeCardsByGameID(Long gameID);
 
+    UpgradeCard findUpgradeCardByGameIDAndCardName(Long gameID, String cardName);
 }
