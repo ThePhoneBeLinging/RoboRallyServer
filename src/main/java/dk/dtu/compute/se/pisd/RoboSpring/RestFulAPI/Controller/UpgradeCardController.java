@@ -37,15 +37,12 @@ public class UpgradeCardController
     @RequestMapping(value = "set/boards/upgradeCards/addToPlayer")
     public boolean getUpgradeCards(Long gameID, Long playerID, Long turnID, String upgradeCardName)
     {
-        UpgradeCard upgradeCard = new UpgradeCard();
-        Player player;
-        player = playerRepository.findPlayerByGameIDAndPlayerIDAndTurnID(gameID, Math.toIntExact(playerID), Math.toIntExact(turnID));
-        upgradeCard.setGameID(gameID);
+        UpgradeCard upgradeCard =upgradeCardRepository.findUpgradeCardByGameIDAndCardName(gameID, upgradeCardName);
+        upgradeCardRepository.delete(upgradeCard);
+        Player player = playerRepository.findPlayerByGameIDAndPlayerIDAndTurnID(gameID, Math.toIntExact(playerID), Math.toIntExact(turnID));
+        playerRepository.delete(player);
         upgradeCard.setPlayerID(playerID);
-        upgradeCard.setCardName(upgradeCardName);
-        upgradeCard.setPrice(upgradeCardRepository.findUpgradeCardByGameIDAndCardName(gameID, upgradeCardName).getPrice());
-        playerRepository.delete(playerRepository.findPlayerByGameIDAndPlayerIDAndTurnID(gameID, Math.toIntExact(playerID), Math.toIntExact(turnID)));
-        player.setEnergyCubes(player.getEnergyCubes() - upgradeCardRepository.findUpgradeCardByGameIDAndCardName(gameID, upgradeCardName).getPrice());
+        player.setEnergyCubes(player.getEnergyCubes() - upgradeCard.getPrice());
         playerRepository.save(player);
         upgradeCardRepository.save(upgradeCard);
         return true;
