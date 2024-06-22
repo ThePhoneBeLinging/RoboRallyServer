@@ -38,12 +38,13 @@ public class UpgradeCardController
     public boolean getUpgradeCards(Long gameID, Long playerID, Long turnID, String upgradeCardName)
     {
         UpgradeCard upgradeCard = new UpgradeCard();
-        Player player = playerRepository.findPlayerByGameIDAndPlayerIDAndTurnID(gameID, Math.toIntExact(playerID), Math.toIntExact(turnID));
+        Player player;
+        player = playerRepository.findPlayerByGameIDAndPlayerIDAndTurnID(gameID, Math.toIntExact(playerID), Math.toIntExact(turnID));
         upgradeCard.setGameID(gameID);
         upgradeCard.setPlayerID(playerID);
         upgradeCard.setCardName(upgradeCardName);
         upgradeCard.setPrice(upgradeCardRepository.findUpgradeCardByGameIDAndCardName(gameID, upgradeCardName).getPrice());
-        playerRepository.delete(player);
+        playerRepository.delete(playerRepository.findPlayerByGameIDAndPlayerIDAndTurnID(gameID, Math.toIntExact(playerID), Math.toIntExact(turnID)));
         player.setEnergyCubes(player.getEnergyCubes() - upgradeCardRepository.findUpgradeCardByGameIDAndCardName(gameID, upgradeCardName).getPrice());
         playerRepository.save(player);
         upgradeCardRepository.save(upgradeCard);
