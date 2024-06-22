@@ -43,6 +43,7 @@ public class UpgradeCardController
         upgradeCard.setPlayerID(playerID);
         upgradeCard.setCardName(upgradeCardName);
         upgradeCard.setPrice(upgradeCardRepository.findUpgradeCardByGameIDAndCardName(gameID, upgradeCardName).getPrice());
+        playerRepository.delete(player);
         player.setEnergyCubes(player.getEnergyCubes() - upgradeCardRepository.findUpgradeCardByGameIDAndCardName(gameID, upgradeCardName).getPrice());
         playerRepository.save(player);
         upgradeCardRepository.save(upgradeCard);
