@@ -25,7 +25,7 @@ public class PlayerController
     }
 
     @RequestMapping("players/leave")
-    public boolean leaveGame(Long gameID, int playerID)
+    public boolean leaveGame(Long gameID, Long playerID)
     {
         Player player = playerRepository.findPlayerByGameIDAndPlayerID(gameID, playerID);
         if (player == null)

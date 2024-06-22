@@ -99,15 +99,12 @@ public class BoardController
             }
             if (toDelete)
             {
+                List<UpgradeCard> upgradeCards= upgradeCardRepository.findUpgradeCardsByGameID(gameID);
                 for (int i = 1; i < players.size()*5;i++)
                 {
                     this.deleteBoard(gameID, i);
                 }
-                for (Player player : players)
-                {
-                    playerRepository.delete(player);
-                    playerRepository.save(player);
-                }
+                upgradeCardRepository.saveAll(upgradeCards);
             }
         }
         for (Card card : completeGame.getCards())
