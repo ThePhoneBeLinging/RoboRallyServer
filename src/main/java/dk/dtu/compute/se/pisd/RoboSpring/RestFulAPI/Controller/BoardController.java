@@ -97,12 +97,11 @@ public class BoardController
             {
                 for (int i = 1; i < players.size()*5;i++)
                 {
-                    this.deleteBoard(gameID, turnID);
+                    this.deleteBoard(gameID, i);
                 }
                 for (Player player : players)
                 {
                     playerRepository.delete(player);
-                    player.setHasRetrievedProgrammingPhase(true);
                     playerRepository.save(player);
                 }
             }
