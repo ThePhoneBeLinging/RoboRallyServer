@@ -76,9 +76,11 @@ public class BoardController
             return null;
         }
         List<Card> playerCards = new ArrayList<Card>();
-        if (turnID == 0)
+        int amountOfBoards = boardRepository.findAllByGameID(gameID).size();
+        List<Player> players = playerRepository.findPlayersByGameIDAndTurnID(gameID, turnID);
+        if (turnID == 0 && amountOfBoards > 4 * players.size())
         {
-            List<Player> players = playerRepository.findPlayersByGameIDAndTurnID(gameID, turnID);
+
             boolean toDelete = true;
             for (Player player : players)
             {
