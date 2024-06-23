@@ -469,6 +469,13 @@ public class Player
             {
                 UpgradeCard tempMetalHardener = new UpgradeCard("TEMPORARY METAL HARDENER", 1);
                 this.board.getUpgradeCards().add(tempMetalHardener);
+                for (UpgradeCard upgradeCard : this.upgradeCards)
+                {
+                    if (upgradeCard.getName().equals("TEMPORARY METAL HARDENER"))
+                    {
+                        tempMetalHardener = upgradeCard;
+                    }
+                }
                 this.upgradeCards.remove(tempMetalHardener);
                 return;
             }
