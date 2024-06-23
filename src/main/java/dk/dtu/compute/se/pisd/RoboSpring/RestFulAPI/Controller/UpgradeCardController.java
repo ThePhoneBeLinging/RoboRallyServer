@@ -7,8 +7,6 @@ import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Repository.UpgradeCardReposi
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
 public class UpgradeCardController
 {
@@ -23,7 +21,7 @@ public class UpgradeCardController
     }
 
     @RequestMapping(value = "set/boards/upgradeCards/addToPlayer")
-    public boolean getUpgradeCards(Long gameID, Long playerID, String upgradeCardName)
+    public boolean buyUpgradeCard(Long gameID, Long playerID, String upgradeCardName)
     {
         upgradeCardName = upgradeCardName.replace("%20", " ");
         UpgradeCard upgradeCard = upgradeCardRepository.findUpgradeCardByGameIDAndCardName(gameID, upgradeCardName);
