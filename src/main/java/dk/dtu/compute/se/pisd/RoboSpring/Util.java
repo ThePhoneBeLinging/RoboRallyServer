@@ -66,7 +66,7 @@ public class Util
                             upgradeCard.getPrice());
             for (int i = 0; i < gameBoard.getPlayersNumber(); i++)
             {
-                if (Objects.equals(gameBoard.getPlayer(i), upgradeCard.getPlayerID()))
+                if (Objects.equals(gameBoard.getPlayer(i).getPlayerID(), upgradeCard.getPlayerID()))
                 {
                     gameBoard.getPlayer(i).addUpgradeCard(upgradeCardToAdd);
                 }
