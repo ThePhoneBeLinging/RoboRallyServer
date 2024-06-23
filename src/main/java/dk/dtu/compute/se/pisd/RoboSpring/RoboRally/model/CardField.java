@@ -21,14 +21,12 @@
  */
 package dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model;
 
-import dk.dtu.compute.se.pisd.RoboSpring.observer.Subject;
-
 /**
  * ...
  *
  * @author Ekkart Kindler, ekki@dtu.dk
  */
-public class CardField extends Subject
+public class CardField
 {
 
     final public Player player;
@@ -66,7 +64,7 @@ public class CardField extends Subject
         if (card != this.card)
         {
             this.card = card;
-            notifyChange();
+
         }
     }
 
@@ -88,7 +86,7 @@ public class CardField extends Subject
         if (visible != this.visible)
         {
             this.visible = visible;
-            notifyChange();
+
         }
     }
 }

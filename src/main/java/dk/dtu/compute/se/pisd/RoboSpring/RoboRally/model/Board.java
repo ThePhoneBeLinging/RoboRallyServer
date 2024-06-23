@@ -22,7 +22,6 @@
 package dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model;
 
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.BoardElements.*;
-import dk.dtu.compute.se.pisd.RoboSpring.observer.Subject;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -35,7 +34,7 @@ import static dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Phase.INITIALISA
  *
  * @author Ekkart Kindler, ekki@dtu.dk
  */
-public class Board extends Subject
+public class Board
 {
     public final static int GREEN_CONVEYOR_INDEX = 0;
     public final static int BLUE_CONVEYOR_INDEX = 1;
@@ -180,7 +179,6 @@ public class Board extends Subject
             player.addUpgradeCard(upgradeCard);
             this.upgradeCards.remove(upgradeCard);
             player.setEnergyCubes(player.getEnergyCubes() - upgradeCard.getPrice());
-            notifyChange();
         }
     }
 
@@ -278,7 +276,7 @@ public class Board extends Subject
         if (player.board == this && !players.contains(player))
         {
             players.add(player);
-            notifyChange();
+
         }
     }
 
@@ -317,7 +315,7 @@ public class Board extends Subject
         if (stepMode != this.stepMode)
         {
             this.stepMode = stepMode;
-            notifyChange();
+
         }
     }
 
@@ -440,7 +438,7 @@ public class Board extends Subject
             {
                 player.setThisPlayerTurn(true);
             }
-            notifyChange();
+
         }
     }
 
@@ -462,7 +460,7 @@ public class Board extends Subject
         if (step != this.step)
         {
             this.step = step;
-            notifyChange();
+
         }
     }
 
@@ -475,7 +473,7 @@ public class Board extends Subject
         if (phase != this.phase)
         {
             this.phase = phase;
-            notifyChange();
+
         }
     }
 

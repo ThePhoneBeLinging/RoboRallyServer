@@ -23,7 +23,6 @@ package dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model;
 
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.BoardElements.BoardElement;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.BoardElements.NullBoardElement;
-import dk.dtu.compute.se.pisd.RoboSpring.observer.Subject;
 
 /**
  * ...
@@ -33,7 +32,7 @@ import dk.dtu.compute.se.pisd.RoboSpring.observer.Subject;
 
 // in the code provided to us by the teacher, this class has walls and actions (see fieldAction class for explanation)
 // as arraylists of Heading and FieldAction respectively. Maybe we should do that as well??
-public class Space extends Subject
+public class Space
 {
 
     public final Board board;
@@ -79,7 +78,7 @@ public class Space extends Subject
             this.board.deleteBoardElement(this.boardElement);
         }
         this.boardElement = boardElement;
-        notifyChange();
+
     }
 
     /**
@@ -110,7 +109,7 @@ public class Space extends Subject
             {
                 player.setSpace(this);
             }
-            notifyChange();
+
         }
     }
 /*
@@ -134,7 +133,7 @@ public List<Heading> getWalls() {
         // This is a minor hack; since some views that are registered with the space
         // also need to update when some player attributes change, the player can
         // notify the space of these changes by calling this method.
-        notifyChange();
+
     }
 
 

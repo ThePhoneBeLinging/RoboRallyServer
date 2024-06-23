@@ -21,7 +21,6 @@
  */
 package dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model;
 
-import dk.dtu.compute.se.pisd.RoboSpring.observer.Subject;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -29,7 +28,7 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Ekkart Kindler, ekki@dtu.dk
  */
-public class Card extends Subject
+public class Card
 {
 
     public Command command;

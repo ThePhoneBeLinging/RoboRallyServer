@@ -24,7 +24,6 @@ package dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.controller.MoveController;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.BoardElements.Checkpoint;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.BoardElements.NullBoardElement;
-import dk.dtu.compute.se.pisd.RoboSpring.observer.Subject;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -37,7 +36,7 @@ import static dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Heading.SOUTH;
  *
  * @author Ekkart Kindler, ekki@dtu.dk
  */
-public class Player extends Subject
+public class Player
 {
 
     public static int NO_CARDS = 8;
@@ -133,7 +132,7 @@ public class Player extends Subject
         if (name != null && !name.equals(this.name))
         {
             this.name = name;
-            notifyChange();
+
             if (space != null)
             {
                 space.playerChanged();
@@ -157,7 +156,7 @@ public class Player extends Subject
     public void setColor(String color)
     {
         this.color = color;
-        notifyChange();
+
         if (space != null)
         {
             space.playerChanged();
@@ -191,7 +190,6 @@ public class Player extends Subject
             if (activeCards.command == cmd)
             {
                 activeCards.command = newCommand;
-                activeCards.notifyAll();
             }
         }
         for (Card discardedCards : this.discardedCardsPile.playerCards)
@@ -199,7 +197,6 @@ public class Player extends Subject
             if (discardedCards.command == cmd)
             {
                 discardedCards.command = newCommand;
-                discardedCards.notifyAll();
             }
         }
         for (int i = 0; i < Player.NO_CARDS; i++)
@@ -210,7 +207,6 @@ public class Player extends Subject
                 if (cardField.getProgrammingCard().command == cmd)
                 {
                     cardField.getProgrammingCard().command = newCommand;
-                    cardField.getProgrammingCard().notifyAll();
                 }
             }
         }
@@ -222,7 +218,6 @@ public class Player extends Subject
                 if (cardField.getProgrammingCard().command == cmd)
                 {
                     cardField.getProgrammingCard().command = newCommand;
-                    cardField.getProgrammingCard().notifyAll();
                 }
             }
         }
@@ -266,12 +261,14 @@ public class Player extends Subject
             lastVisitedCheckPoint++;
         }
 
-        if(lastVisitedCheckPoint == board.getBoardElementsWithIndex(Board.CHECKPOINTS_INDEX).size()) {
+        if (lastVisitedCheckPoint == board.getBoardElementsWithIndex(Board.CHECKPOINTS_INDEX).size())
+        {
             hasWon = true;
         }
     }
 
-    public boolean getHasWon() {
+    public boolean getHasWon()
+    {
         return this.hasWon;
     }
 
@@ -492,7 +489,7 @@ public class Player extends Subject
             {
                 space.setPlayer(this);
             }
-            notifyChange();
+
         }
     }
 
@@ -505,7 +502,7 @@ public class Player extends Subject
         if (heading != this.heading)
         {
             this.heading = heading;
-            notifyChange();
+
             if (space != null)
             {
                 space.playerChanged();

@@ -1,8 +1,6 @@
 package dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model;
 
-import dk.dtu.compute.se.pisd.RoboSpring.observer.Subject;
-
-public class UpgradeCard extends Subject
+public class UpgradeCard
 {
 
     private final String name;
