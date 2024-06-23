@@ -35,4 +35,5 @@ public class Player
     public int energyCubes;
     public boolean playersTurn;
     public boolean hasRetrievedProgrammingPhase;
+    public boolean hasWon;
 }

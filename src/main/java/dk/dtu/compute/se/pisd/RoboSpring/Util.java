@@ -185,6 +185,7 @@ public class Util
             serverPlayer.setMovedByConveyorThisTurn(gameBoardPlayer.getMovedByConveyorThisTurn());
             serverPlayer.setEnergyCubes(gameBoardPlayer.getEnergyCubes());
             serverPlayer.setPlayersTurn(gameBoardPlayer.isThisPlayerTurn());
+            serverPlayer.setHasWon(gameBoardPlayer.getHasWon());
             completeServerBoard.getPlayerList().add(serverPlayer);
 
             for (int j = 0; j < dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Player.NO_REGISTERS; j++)
