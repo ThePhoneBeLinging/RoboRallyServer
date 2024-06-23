@@ -4,10 +4,13 @@ package dk.dtu.compute.se.pisd.RoboSpring.Model;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.controller.GameController;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.controller.MoveController;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Board;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.BoardElements.Walls.CornerWall;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Heading;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Player;
-import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.BoardElements.Walls.CornerWall;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test class for the corner wall element.

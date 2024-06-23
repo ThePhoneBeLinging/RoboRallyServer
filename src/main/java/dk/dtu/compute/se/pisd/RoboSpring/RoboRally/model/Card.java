@@ -49,7 +49,7 @@ public class Card extends Subject
      * @return
      * @author Elias, Mustafa & Frederik
      */
-    
+
     /**
      * @return the name of the command represented by this card
      * @author Elias
@@ -64,11 +64,13 @@ public class Card extends Subject
      * @author Elias
      */
 
-    public Command getCommand() {
+    public Command getCommand()
+    {
         return command;
     }
 
-    public void setCommand(Command command) {
+    public void setCommand(Command command)
+    {
         this.command = command;
     }
 }

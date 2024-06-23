@@ -21,9 +21,9 @@
  */
 package dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model;
 
-import dk.dtu.compute.se.pisd.RoboSpring.observer.Subject;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.BoardElements.BoardElement;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.BoardElements.NullBoardElement;
+import dk.dtu.compute.se.pisd.RoboSpring.observer.Subject;
 
 /**
  * ...

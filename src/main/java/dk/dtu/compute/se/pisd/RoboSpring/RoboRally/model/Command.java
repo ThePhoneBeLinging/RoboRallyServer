@@ -35,22 +35,10 @@ public enum Command
 
     // This is a very simplistic way of realizing different commands.
 
-    FORWARD("Fwd"),
-    RIGHT("Turn Right"),
-    LEFT("Turn Left"),
-    FAST_FORWARD("Fast Fwd"),
-    MOVE_THREE("Move 3"),
-    U_TURN("U-Turn"),
-    MOVE_BACK("Move Back"),
-    AGAIN("Again"),
-    POWER_UP("Power Up"),
-    OPTION_LEFT_RIGHT("Left OR Right", LEFT, RIGHT),
-    TROJAN_HORSE("Trojan Horse"),
-    SPAM("SPAM"),
-    VIRUS("Virus"),
-    WORM("Worm"),
-    DONT_MOVE("Dont Move"),
-    OPTION_FORWARD_OR_NOT("Forward or Not", FORWARD, DONT_MOVE),
+    FORWARD("Fwd"), RIGHT("Turn Right"), LEFT("Turn Left"), FAST_FORWARD("Fast Fwd"), MOVE_THREE("Move 3"), U_TURN("U"
+        + "-Turn"), MOVE_BACK("Move Back"), AGAIN("Again"), POWER_UP("Power Up"), OPTION_LEFT_RIGHT("Left OR Right",
+        LEFT, RIGHT), TROJAN_HORSE("Trojan Horse"), SPAM("SPAM"), VIRUS("Virus"), WORM("Worm"),
+    DONT_MOVE("Dont Move"), OPTION_FORWARD_OR_NOT("Forward or Not", FORWARD, DONT_MOVE),
 
     DEATH("You reeboted, you dont get to move");
 

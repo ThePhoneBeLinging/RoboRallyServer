@@ -31,8 +31,8 @@ import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.fileaccess.model.SpaceTemplat
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Board;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.BoardElements.*;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.BoardElements.Conveyors.BlueConveyor;
-import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.BoardElements.Conveyors.GreenConveyor;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.BoardElements.Void;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.BoardElements.Conveyors.GreenConveyor;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.BoardElements.Walls.CornerWall;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.BoardElements.Walls.Wall;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Space;

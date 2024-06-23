@@ -12,7 +12,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UpgradeCard {
+public class UpgradeCard
+{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

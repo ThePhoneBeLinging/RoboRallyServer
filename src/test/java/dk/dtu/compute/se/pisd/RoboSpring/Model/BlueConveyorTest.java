@@ -35,7 +35,7 @@ public class BlueConveyorTest
 
         for (int i = 0; i < 2; i++)
         {
-            Player player = new Player(board,  "Player " + i, moveController);
+            Player player = new Player(board, "Player " + i, moveController);
             board.addPlayer(player);
             player.setSpace(board.getSpace(i, i));
             player.setHeading(Heading.values()[i % Heading.values().length]);

@@ -25,8 +25,8 @@ package dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model;
  * ...
  *
  * @author Ekkart Kindler, ekki@dtu.dk
- *
  */
-public enum Phase {
+public enum Phase
+{
     INITIALISATION, LOBBY, PROGRAMMING, ACTIVATION, PLAYER_INTERACTION
 }

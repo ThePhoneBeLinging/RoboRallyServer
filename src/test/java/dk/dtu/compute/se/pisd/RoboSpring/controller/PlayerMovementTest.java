@@ -1,14 +1,14 @@
 package dk.dtu.compute.se.pisd.RoboSpring.controller;
 
-import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Board;
-import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Player;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.controller.GameController;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.controller.MoveController;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Board;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Heading;
-
-
-
-import org.junit.jupiter.api.*;
+import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Player;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test class for playermovement.
@@ -30,7 +30,8 @@ public class PlayerMovementTest
         gameController = new GameController(board);
         moveController = new MoveController(gameController);
 
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 2; i++)
+        {
             Player player = new Player(board, "Player " + i, moveController);
             board.addPlayer(player);
             player.setSpace(board.getSpace(i, i));

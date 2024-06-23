@@ -28,7 +28,6 @@ import dk.dtu.compute.se.pisd.RoboSpring.observer.Subject;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Command.*;
 import static dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Heading.SOUTH;
@@ -267,7 +266,8 @@ public class Player extends Subject
             lastVisitedCheckPoint++;
         }
 
-        if(lastVisitedCheckPoint == board.getBoardElementsWithIndex(Board.CHECKPOINTS_INDEX).size()) {
+        if (lastVisitedCheckPoint == board.getBoardElementsWithIndex(Board.CHECKPOINTS_INDEX).size())
+        {
             thisPlayerWinner = true;
         }
     }

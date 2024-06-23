@@ -53,27 +53,15 @@ public class Board extends Subject
     private final ArrayList<BoardElement>[] boardElements = new ArrayList[10];
     private final Space[][] spaces;
     private final List<Player> players = new ArrayList<>();
+    ArrayList<EnergyCube> energyCubes = new ArrayList<>();
     private RebootToken[] rebootToken;
     private Player current;
     private Phase phase = INITIALISATION;
     private int step = 0;
     private boolean stepMode;
     private ArrayList<UpgradeCard> upgradeCards = new ArrayList<>();
-    ArrayList<EnergyCube> energyCubes = new ArrayList<>();
-
     private Long gameID;
     private List<String> options;
-
-    public int getTurnID()
-    {
-        return turnID;
-    }
-
-    public void setTurnID(int turnID)
-    {
-        this.turnID = turnID;
-    }
-
     private int turnID;
 
     /**
@@ -149,6 +137,16 @@ public class Board extends Subject
         {
             player.setMovedByConveyorThisTurn(false);
         }
+    }
+
+    public int getTurnID()
+    {
+        return turnID;
+    }
+
+    public void setTurnID(int turnID)
+    {
+        this.turnID = turnID;
     }
 
     public ArrayList<UpgradeCard> getUpgradeCards()
@@ -316,11 +314,6 @@ public class Board extends Subject
             this.stepMode = stepMode;
             notifyChange();
         }
-    }
-
-    public ArrayList<BoardElement> getBoardElementsWithIndex(int index)
-    {
-        return boardElements[index];
     }
 
     /**
@@ -572,19 +565,28 @@ public class Board extends Subject
         return lowestYSpace;
     }
 
-    public Long getGameID() {
+    public ArrayList<BoardElement> getBoardElementsWithIndex(int index)
+    {
+        return boardElements[index];
+    }
+
+    public Long getGameID()
+    {
         return gameID;
     }
 
-    public void setGameID(Long gameID) {
+    public void setGameID(Long gameID)
+    {
         this.gameID = gameID;
     }
 
-    public List<String> getOptions() {
+    public List<String> getOptions()
+    {
         return options;
     }
 
-    public void setOptions(List<String> options) {
+    public void setOptions(List<String> options)
+    {
         this.options = options;
     }
 
@@ -597,7 +599,8 @@ public class Board extends Subject
         return energyCubes;
     }
 
-    public void addEnergyCube(Space space) {
+    public void addEnergyCube(Space space)
+    {
         new EnergyCube(space);
     }
 }

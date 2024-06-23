@@ -40,15 +40,19 @@ public class CardController
     }
 
     @GetMapping(value = "set/interactive/choice")
-    public void setInteractiveChoice(Long gameID, int turnID, Long playerID, int choice){
+    public void setInteractiveChoice(Long gameID, int turnID, Long playerID, int choice)
+    {
         List<Card> chosenOption = cardsRepository.findAllByPlayerIDAndGameIDAndLocation(playerID, gameID, "OPTION");
         cardsRepository.deleteAll(chosenOption);
         Card card = chosenOption.get(choice);
 
-        BoardSaveLoad boardSaveLoad = new BoardSaveLoad(boardRepository, energyRepository, playerRepository, cardsRepository, upgradeCardRepository);
+        BoardSaveLoad boardSaveLoad = new BoardSaveLoad(boardRepository, energyRepository, playerRepository,
+                cardsRepository, upgradeCardRepository);
 
-        dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Board gameBoard = fromServerBoardToGameBoard(boardSaveLoad.loadBoard(gameID, turnID));
-        GameController gameController =  new GameController(gameBoard, boardRepository, energyRepository, playerRepository, cardsRepository, upgradeCardRepository);
+        dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Board gameBoard =
+                fromServerBoardToGameBoard(boardSaveLoad.loadBoard(gameID, turnID));
+        GameController gameController = new GameController(gameBoard, boardRepository, energyRepository,
+                playerRepository, cardsRepository, upgradeCardRepository);
         gameController.executeCommandOptionAndContinue(Command.valueOf(card.getCommand()));
     }
 
