@@ -463,6 +463,16 @@ public class Player
      */
     public void addDamageCardToPile(Command command, int amount)
     {
+        if (command == SPAM)
+        {
+            if (this.checkIfOwnsUpgradeCard("TEMPORARY METAL HARDENER"))
+            {
+                UpgradeCard tempMetalHardener = new UpgradeCard("TEMPORARY METAL HARDENER", 1);
+                this.board.getUpgradeCards().add(tempMetalHardener);
+                this.upgradeCards.remove(tempMetalHardener);
+                return;
+            }
+        }
         for (int i = 0; i < amount; i++)
         {
             this.discardedCardsPile.playerCards.add(new Card(command));
