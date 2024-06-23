@@ -15,6 +15,14 @@ import lombok.Setter;
 public class Player
 {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private Long playerID;
+    private long gameID;
+    private int turnID;
+    private int x;
+    private int y;
     public int lastVisitedCheckpoint;
     public String name;
     public String color;
@@ -24,12 +32,5 @@ public class Player
     public int energyCubes;
     public boolean playersTurn;
     public boolean hasRetrievedProgrammingPhase;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private Long playerID;
-    private long gameID;
-    private int turnID;
-    private int x;
-    private int y;
+    public boolean hasWon;
 }
