@@ -58,23 +58,7 @@ public class Util
                 gameBoard.setCurrentPlayer(gameBoardPlayer);
             }
         }
-        for (UpgradeCard upgradeCard : serverBoard.getUpgradeCards())
-        {
-            dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.UpgradeCard upgradeCardToAdd =
-                    new dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.UpgradeCard(upgradeCard.getCardName(),
-                            upgradeCard.getPrice());
-            for (int i = 0; i < gameBoard.getPlayersNumber(); i++)
-            {
-                if (Objects.equals(gameBoard.getPlayer(i).getPlayerID(), upgradeCard.getPlayerID()))
-                {
-                    gameBoard.getPlayer(i).addUpgradeCard(upgradeCardToAdd);
-                }
-            }
-            if (upgradeCard.getPlayerID() == null)
-            {
-                gameBoard.getUpgradeCards().add(upgradeCardToAdd);
-            }
-        }
+
         for (Card card : serverBoard.getCards())
         {
             dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Card cardToAdd =
@@ -118,6 +102,23 @@ public class Util
                             break;
                     }
                 }
+            }
+        }
+        for (UpgradeCard upgradeCard : serverBoard.getUpgradeCards())
+        {
+            dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.UpgradeCard upgradeCardToAdd =
+                    new dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.UpgradeCard(upgradeCard.getCardName(),
+                            upgradeCard.getPrice());
+            for (int i = 0; i < gameBoard.getPlayersNumber(); i++)
+            {
+                if (Objects.equals(gameBoard.getPlayer(i).getPlayerID(), upgradeCard.getPlayerID()))
+                {
+                    gameBoard.getPlayer(i).addUpgradeCard(upgradeCardToAdd);
+                }
+            }
+            if (upgradeCard.getPlayerID() == null)
+            {
+                gameBoard.getUpgradeCards().add(upgradeCardToAdd);
             }
         }
         for (dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.EnergyCube energyCube : serverBoard.getEnergyCubes())
