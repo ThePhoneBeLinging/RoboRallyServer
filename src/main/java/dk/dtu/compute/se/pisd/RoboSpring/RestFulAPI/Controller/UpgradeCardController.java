@@ -22,18 +22,6 @@ public class UpgradeCardController
         this.playerRepository = playerRepository;
     }
 
-    @RequestMapping(value = "get/boards/upgradeCards/shop")
-    public List<UpgradeCard> getUpgradeCards(Long gameID)
-    {
-        return upgradeCardRepository.findByPlayerIDIsNullAndGameID(gameID);
-    }
-
-    @RequestMapping(value = "get/boards/upgradeCards/active")
-    public List<UpgradeCard> getActiveUpgradeCards(Long gameID, Long playerID)
-    {
-        return upgradeCardRepository.findActiveUpgradeCardsByPlayerIDAndGameID(playerID, gameID);
-    }
-
     @RequestMapping(value = "set/boards/upgradeCards/addToPlayer")
     public boolean getUpgradeCards(Long gameID, Long playerID, String upgradeCardName)
     {
