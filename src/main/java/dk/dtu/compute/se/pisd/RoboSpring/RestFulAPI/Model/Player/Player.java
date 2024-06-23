@@ -1,13 +1,10 @@
 package dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.Player;
 
-import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.UpgradeCard;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.List;
 
 @Entity
 @Table(name = "players")

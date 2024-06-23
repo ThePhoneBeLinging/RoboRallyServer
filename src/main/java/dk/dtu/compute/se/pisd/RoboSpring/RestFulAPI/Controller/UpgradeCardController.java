@@ -37,8 +37,8 @@ public class UpgradeCardController
     @RequestMapping(value = "set/boards/upgradeCards/addToPlayer")
     public boolean getUpgradeCards(Long gameID, Long playerID, String upgradeCardName)
     {
-        upgradeCardName= upgradeCardName.replace("%20", " ");
-        UpgradeCard upgradeCard =upgradeCardRepository.findUpgradeCardByGameIDAndCardName(gameID, upgradeCardName);
+        upgradeCardName = upgradeCardName.replace("%20", " ");
+        UpgradeCard upgradeCard = upgradeCardRepository.findUpgradeCardByGameIDAndCardName(gameID, upgradeCardName);
         upgradeCardRepository.delete(upgradeCard);
         Player player = playerRepository.findPlayerByGameIDAndPlayerIDAndTurnID(gameID, playerID, 0);
         playerRepository.delete(player);

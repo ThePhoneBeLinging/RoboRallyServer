@@ -7,7 +7,10 @@ import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.BoardElements.BoardElem
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.BoardElements.PushPanel;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Heading;
 import dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Player;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test class for the push panel element.

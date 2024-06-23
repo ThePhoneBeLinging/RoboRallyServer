@@ -11,7 +11,8 @@ import java.util.ArrayList;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PlayerRegisters {
+public class PlayerRegisters
+{
     private ArrayList<Integer> registerCards;
     private Long playerID;
     private Long gameID;

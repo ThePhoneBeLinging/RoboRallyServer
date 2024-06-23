@@ -67,7 +67,8 @@ public class BoardSaveLoad
         List<Card> cardsInCompleteGame = completeGame.getCards();
         List<UpgradeCard> upgradeCardsToSave = new ArrayList<>();
         List<UpgradeCard> upgradeCardsToDelete = new ArrayList<>();
-        List<UpgradeCard> upgradeCardsOnServer = upgradeCardRepository.findUpgradeCardsByGameID(completeGame.getGameID());
+        List<UpgradeCard> upgradeCardsOnServer =
+                upgradeCardRepository.findUpgradeCardsByGameID(completeGame.getGameID());
         upgradeCardsToSave.addAll(completeGame.getUpgradeCards());
         upgradeCardsToDelete.addAll(upgradeCardsOnServer);
         upgradeCardsToDelete.removeAll(completeGame.getUpgradeCards());

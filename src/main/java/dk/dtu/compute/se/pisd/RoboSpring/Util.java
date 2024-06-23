@@ -54,7 +54,7 @@ public class Util
             gameBoardPlayer.setEnergyCubes(player.getEnergyCubes());
             gameBoardPlayer.setThisPlayerTurn(player.isPlayersTurn());
 
-            if(gameBoardPlayer.isThisPlayerTurn())
+            if (gameBoardPlayer.isThisPlayerTurn())
             {
                 gameBoard.setCurrentPlayer(gameBoardPlayer);
             }
@@ -204,8 +204,7 @@ public class Util
                 }
 
             }
-            if (gameBoard.getPhase() == Phase.PLAYER_INTERACTION && gameBoard.getOptions() != null
-                    && gameBoard.getCurrentPlayer() == gameBoardPlayer)
+            if (gameBoard.getPhase() == Phase.PLAYER_INTERACTION && gameBoard.getOptions() != null && gameBoard.getCurrentPlayer() == gameBoardPlayer)
             {
                 for (String command : gameBoard.getOptions())
                 {
@@ -258,10 +257,10 @@ public class Util
             serverBoard.setPlayerID(gameBoard.getCurrentPlayer().getPlayerID());
             completeServerBoard.setCommandsToChooseBetween(gameBoard.getOptions());
         }
-        for (dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.BoardElements.EnergyCube energyCube : gameBoard.getEnergyCubes())
+        for (dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.BoardElements.EnergyCube energyCube :
+                gameBoard.getEnergyCubes())
         {
-            EnergyCube serverEnergyCube =
-                    new EnergyCube();
+            EnergyCube serverEnergyCube = new EnergyCube();
             serverEnergyCube.setX(energyCube.getSpace().x);
             serverEnergyCube.setY(energyCube.getSpace().y);
             serverEnergyCube.setGameID(gameBoard.getGameID());

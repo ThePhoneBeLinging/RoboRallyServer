@@ -25,9 +25,9 @@ package dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model;
  * ...
  *
  * @author Ekkart Kindler, ekki@dtu.dk
- *
  */
-public enum Heading {
+public enum Heading
+{
 
     SOUTH, WEST, NORTH, EAST;
 
@@ -35,7 +35,8 @@ public enum Heading {
      * @return
      * @author Elias
      */
-    public Heading next() {
+    public Heading next()
+    {
         return values()[(this.ordinal() + 1) % values().length];
     }
 
@@ -43,7 +44,8 @@ public enum Heading {
      * @return
      * @author Elias
      */
-    public Heading prev() {
+    public Heading prev()
+    {
         return values()[(this.ordinal() + values().length - 1) % values().length];
     }
 }

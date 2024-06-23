@@ -35,32 +35,8 @@ import java.io.InputStream;
 
 // This was provided in the 3rd assignment by the teachers,
 // and it is used to read strings from resources and arbitrary input streams.
-public class IOUtil {
-
-    /**
-     * Reads a string from some InputStream. The solution is based
-     * on google's Guava and a solution from Baeldung:
-     * https://www.baeldung.com/convert-input-stream-to-string#guava
-     *
-     * @param inputStream the input stream
-     * @return the string of the input stream
-     * @author Frederik
-     */
-    public static String readString(InputStream inputStream) {
-
-        ByteSource byteSource = new ByteSource() {
-            @Override
-            public InputStream openStream() throws IOException {
-                return inputStream;
-            }
-        };
-
-        try {
-            return byteSource.asCharSource(Charsets.UTF_8).read();
-        } catch (IOException e) {
-            return "";
-        }
-    }
+public class IOUtil
+{
 
     /**
      * Returns a string from a resource of the project. This method is implemented
@@ -71,10 +47,42 @@ public class IOUtil {
      * @return the string contents of the resource
      * @author Frederik
      */
-    public static String readResource(String relativeResourcePath) {
+    public static String readResource(String relativeResourcePath)
+    {
         ClassLoader classLoader = IOUtil.class.getClassLoader();
         InputStream inputStream = classLoader.getResourceAsStream(relativeResourcePath);
         return IOUtil.readString(inputStream);
+    }
+
+    /**
+     * Reads a string from some InputStream. The solution is based
+     * on google's Guava and a solution from Baeldung:
+     * https://www.baeldung.com/convert-input-stream-to-string#guava
+     *
+     * @param inputStream the input stream
+     * @return the string of the input stream
+     * @author Frederik
+     */
+    public static String readString(InputStream inputStream)
+    {
+
+        ByteSource byteSource = new ByteSource()
+        {
+            @Override
+            public InputStream openStream() throws IOException
+            {
+                return inputStream;
+            }
+        };
+
+        try
+        {
+            return byteSource.asCharSource(Charsets.UTF_8).read();
+        }
+        catch (IOException e)
+        {
+            return "";
+        }
     }
 
 }

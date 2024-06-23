@@ -179,7 +179,8 @@ public class GameController
                     if (card.command.isInteractive())
                     {
                         startInteractivePhase(currentPlayer);
-                        dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.CompleteGame serverCompleteGame = Util.fromGameBoardToServerBoard(board);
+                        dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Model.CompleteGame serverCompleteGame =
+                                Util.fromGameBoardToServerBoard(board);
                         boardSaveLoad.saveBoard(serverCompleteGame);
                         return;
                     }
@@ -223,6 +224,17 @@ public class GameController
         }
     }
 
+    public void startInteractivePhase(Player currentPlayer)
+    {
+        board.setPhase(Phase.PLAYER_INTERACTION);
+        board.setCurrentPlayer(currentPlayer);
+        board.setOptions(new ArrayList<>());
+        for (Command option : currentPlayer.getProgramField(board.getStep()).getProgrammingCard().command.getOptions())
+        {
+            board.getOptions().add(option.toString());
+        }
+    }
+
     /**
      * Starts the programming phase of the game. This method should be called when the game has begun
      *
@@ -262,17 +274,6 @@ public class GameController
         board.setTurnID(0);
     }
 
-    public void startInteractivePhase(Player currentPlayer)
-    {
-        board.setPhase(Phase.PLAYER_INTERACTION);
-        board.setCurrentPlayer(currentPlayer);
-        board.setOptions(new ArrayList<>());
-        for (Command option : currentPlayer.getProgramField(board.getStep()).getProgrammingCard().command.getOptions())
-        {
-            board.getOptions().add(option.toString());
-        }
-    }
-
     /**
      * Executes the command option and continues the program. This method should be called when the player has chosen
      * an option for an interactive command.
@@ -281,7 +282,8 @@ public class GameController
      * @author Emil
      */
 
-    public void executeCommandOptionAndContinue(Command commandOption){
+    public void executeCommandOptionAndContinue(Command commandOption)
+    {
         Player currentPlayer = board.getCurrentPlayer();
         moveController.executeCommand(currentPlayer, commandOption);
         int step = board.getStep();
