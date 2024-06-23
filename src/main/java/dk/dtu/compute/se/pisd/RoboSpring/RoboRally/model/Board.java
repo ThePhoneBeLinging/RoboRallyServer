@@ -110,7 +110,7 @@ public class Board extends Subject
         */
         this.activateBoardElements();
 
-        this.upgradeCards = UpgradeCardsFactory.createUpgradeCards();
+        //this.upgradeCards = UpgradeCardsFactory.createUpgradeCards();
     }
 
     /**
@@ -137,6 +137,11 @@ public class Board extends Subject
         {
             player.setMovedByConveyorThisTurn(false);
         }
+    }
+
+    public void createUpgradeCards()
+    {
+        this.upgradeCards = UpgradeCardsFactory.createUpgradeCards();
     }
 
     public int getTurnID()

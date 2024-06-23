@@ -133,6 +133,7 @@ public class LobbyController
         newGame.setEnergyCubes(new ArrayList<>());
         dk.dtu.compute.se.pisd.RoboSpring.RoboRally.model.Board gameBoard =
                 dk.dtu.compute.se.pisd.RoboSpring.Util.fromServerBoardToGameBoard(newGame);
+        gameBoard.createUpgradeCards();
         List<Player> players = playerRepository.findPlayersByGameIDAndTurnID(gameID, 0);
         playerRepository.deleteAll(players);
         for (int i = 0; i < gameBoard.getPlayersNumber(); i++)
