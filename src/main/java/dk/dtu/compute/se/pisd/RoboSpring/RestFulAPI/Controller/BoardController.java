@@ -79,7 +79,7 @@ public class BoardController
             }
             if (toDelete)
             {
-                for (int i = 1; i < players.size() * 5; i++)
+                for (int i = 1; i < players.size() * 5 + 1; i++)
                 {
                     this.deleteBoard(gameID, i);
                 }
