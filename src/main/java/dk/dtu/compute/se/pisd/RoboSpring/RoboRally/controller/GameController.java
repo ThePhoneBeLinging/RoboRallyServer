@@ -243,6 +243,7 @@ public class GameController
     // XXX: implemented in the current version
     public void startProgrammingPhase()
     {
+        boardSaveLoad.saveBoard(Util.fromGameBoardToServerBoard(board));
         board.setPhase(Phase.PROGRAMMING);
         board.setCurrentPlayer(board.getPlayer(0));
         board.setStep(0);
