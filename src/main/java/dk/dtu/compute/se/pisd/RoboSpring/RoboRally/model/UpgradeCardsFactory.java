@@ -17,7 +17,7 @@ public class UpgradeCardsFactory
 
         ArrayList<UpgradeCard> upgradeCards = new ArrayList<>();
 
-        upgradeCards.add(new UpgradeCard("BRAKES", 3));
+        upgradeCards.add(new UpgradeCard("TEMPORARY METAL HARDENER", 1));
 
         upgradeCards.add(new UpgradeCard("FIREWALL", 3));
 
