@@ -166,50 +166,7 @@ public class Player
     public void addUpgradeCard(@NotNull UpgradeCard upgradeCard)
     {
         this.upgradeCards.add(upgradeCard);
-        if (upgradeCard.getName().equals("BRAKES"))
-        {
-            this.changeCardsOfCertainType(FORWARD, OPTION_FORWARD_OR_NOT);
-        }
-    }
 
-    private void changeCardsOfCertainType(Command cmd, Command newCommand)
-    {
-        for (Card activeCards : this.activeCardsPile.playerCards)
-        {
-            if (activeCards.command == cmd)
-            {
-                activeCards.command = newCommand;
-            }
-        }
-        for (Card discardedCards : this.discardedCardsPile.playerCards)
-        {
-            if (discardedCards.command == cmd)
-            {
-                discardedCards.command = newCommand;
-            }
-        }
-        for (int i = 0; i < Player.NO_CARDS; i++)
-        {
-            CardField cardField = this.getCardField(i);
-            if (cardField != null && cardField.getProgrammingCard() != null)
-            {
-                if (cardField.getProgrammingCard().command == cmd)
-                {
-                    cardField.getProgrammingCard().command = newCommand;
-                }
-            }
-        }
-        for (int i = 0; i < Player.NO_REGISTERS; i++)
-        {
-            CardField cardField = this.getProgramField(i);
-            if (cardField != null && cardField.getProgrammingCard() != null)
-            {
-                if (cardField.getProgrammingCard().command == cmd)
-                {
-                    cardField.getProgrammingCard().command = newCommand;
-                }
-            }
-        }
     }
 
     /**
