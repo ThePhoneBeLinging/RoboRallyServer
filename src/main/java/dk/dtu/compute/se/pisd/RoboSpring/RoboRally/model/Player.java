@@ -170,17 +170,6 @@ public class Player
         {
             this.changeCardsOfCertainType(FORWARD, OPTION_FORWARD_OR_NOT);
         }
-        if (upgradeCard.getName().equals("MEMORY STICK"))
-        {
-            NO_CARDS += 1;
-            CardField[] newCardArr = new CardField[NO_CARDS];
-            if (NO_CARDS - 1 >= 0)
-            {
-                System.arraycopy(this.cards, 0, newCardArr, 0, NO_CARDS - 1);
-            }
-            newCardArr[NO_CARDS - 1] = new CardField(this);
-            this.cards = new CardField[NO_CARDS];
-        }
     }
 
     private void changeCardsOfCertainType(Command cmd, Command newCommand)
