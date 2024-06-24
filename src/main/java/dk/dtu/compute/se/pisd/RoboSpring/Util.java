@@ -165,7 +165,7 @@ public class Util
             serverUpgradeCard.setCardName(upgradeCard.getName());
             serverUpgradeCard.setGameID(gameBoard.getGameID());
             serverUpgradeCard.setPrice(upgradeCard.getPrice());
-            serverUpgradeCard.setPlayerID(null);
+            serverUpgradeCard.setPlayerID(upgradeCard.getPlayerID());
             completeServerBoard.getUpgradeCards().add(serverUpgradeCard);
         }
 

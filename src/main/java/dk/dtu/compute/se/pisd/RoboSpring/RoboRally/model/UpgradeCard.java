@@ -5,6 +5,7 @@ public class UpgradeCard
 
     private final String name;
     private final int price;
+    private Long playerID;
 
     /**
      * @param name
@@ -34,5 +35,15 @@ public class UpgradeCard
     public int getPrice()
     {
         return this.price;
+    }
+
+    public Long getPlayerID()
+    {
+        return playerID;
+    }
+
+    public void setPlayerID(Long playerID)
+    {
+        this.playerID = playerID;
     }
 }
