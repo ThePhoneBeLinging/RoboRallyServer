@@ -70,14 +70,6 @@ public class GameController
     }
 
     /**
-     * Opens the upgrade shop for the current player. This method should be called when the player has pressed the
-     * upgrade button.
-     *
-     * @Author Emil
-     */
-    // XXX: implemented in the current version
-
-    /**
      * Method to finish the programming phase, used after the players have used programming cards.
      *
      * @author Elias
@@ -223,6 +215,13 @@ public class GameController
             assert false;
         }
     }
+
+    /**
+     * Function for setting the server in interactive state, saves the options individually into our database
+     *
+     * @param currentPlayer which player is to make a decision regarding an interactive card.
+     * @author Elias
+     */
 
     public void startInteractivePhase(Player currentPlayer)
     {
