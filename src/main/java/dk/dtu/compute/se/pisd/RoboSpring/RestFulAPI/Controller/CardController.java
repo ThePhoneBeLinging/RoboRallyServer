@@ -39,6 +39,13 @@ public class CardController
         this.energyRepository = energyRepository;
     }
 
+    /**
+     * Based on the gameID, turnID, playerID and choice in the form of an int, you use this endpoint
+     * for choosing an option during interactive phase.
+     *
+     * @param gameID, turnID, playerID, choice
+     * @author Frederik, Emil and Elias
+     */
     @GetMapping(value = "set/interactive/choice")
     public void setInteractiveChoice(Long gameID, int turnID, Long playerID, int choice)
     {
@@ -56,6 +63,14 @@ public class CardController
         gameController.executeCommandOptionAndContinue(Command.valueOf(card.getCommand()));
     }
 
+    /**
+     * Takes an entity of PlayerRegisters, this is in short a list of integers representing the chosen cards, the
+     * game id, and the playerID.
+     * This method takes POST in json format.
+     *
+     * @param cards
+     * @author Frederik, Emil and Elias
+     */
     @PostMapping(value = "set/player/cards")
     public void setPlayerCards(@RequestBody PlayerRegisters cards)
     {

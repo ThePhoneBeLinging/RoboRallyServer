@@ -36,6 +36,10 @@ public class BoardController
         this.upgradeCardRepository = upgradeCardRepository;
     }
 
+    /**
+     * @return returns a list of all boards that are found in our database
+     * @author Elias
+     */
     @GetMapping
     //Specific endpoint for the method
     @RequestMapping(value = "")
@@ -45,6 +49,14 @@ public class BoardController
         return ResponseEntity.ok(boardList);
     }
 
+    /**
+     * Takes gameID, turnID and playerID and returns a completeGame
+     * A complete game is everything you need to set up a board on the playerSide
+     *
+     * @param gameID, turnID and playerID
+     * @return CompleteGame
+     * @author Elias & Mads
+     */
     @RequestMapping(value = "get/boards/single")
     public CompleteGame getBoard(Long gameID, int turnID, Long playerID)
     {
@@ -96,6 +108,13 @@ public class BoardController
         return completeGame;
     }
 
+    /**
+     * Deletes all instances regarding the given gameID and turnID from our database
+     *
+     * @param gameID and turnID
+     * @return CompleteGame
+     * @author Elias & Mads
+     */
     @RequestMapping(value = "set/boards/single/delete")
     public boolean deleteBoard(Long gameID, int TurnID)
     {

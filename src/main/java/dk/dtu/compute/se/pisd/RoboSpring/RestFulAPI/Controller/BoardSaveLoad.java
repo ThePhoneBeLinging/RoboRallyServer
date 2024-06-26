@@ -30,6 +30,10 @@ public class BoardSaveLoad
         this.upgradeCardRepository = upgradeCardRepository;
     }
 
+    /**
+     * @return returns the completeGame that is saved
+     * @author Elias
+     */
     public CompleteGame saveBoard(CompleteGame completeGame)
     {
         // Deletes previous board with same gameID and turnID
