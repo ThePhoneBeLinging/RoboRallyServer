@@ -21,6 +21,9 @@ public class EnergyCubeController
         this.energyRepository = energyRepository;
     }
 
+    /**
+     * @author Elias
+     */
     @GetMapping
     //Specific endpoint for the method
     @RequestMapping(value = "")

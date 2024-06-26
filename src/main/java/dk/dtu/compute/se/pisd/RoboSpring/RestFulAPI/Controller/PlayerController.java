@@ -5,8 +5,6 @@ import dk.dtu.compute.se.pisd.RoboSpring.RestFulAPI.Repository.PlayerRepository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
 
 public class PlayerController
@@ -18,12 +16,12 @@ public class PlayerController
         this.playerRepository = playerRepository;
     }
 
-    @RequestMapping("get/players")
-    public List<Player> getPlayers()
-    {
-        return playerRepository.findAll();
-    }
 
+    /**
+     * @param gameID,playerID playerID to determine who wants to leave and which game to leave.
+     * @return boolean for whether the player has left successfully.
+     * @author Adel
+     */
     @RequestMapping("players/leave")
     public boolean leaveGame(Long gameID, Long playerID)
     {

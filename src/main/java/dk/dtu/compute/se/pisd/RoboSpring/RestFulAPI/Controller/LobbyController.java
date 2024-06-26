@@ -40,6 +40,13 @@ public class LobbyController
         this.upgradeCardRepository = upgradeCardRepository;
     }
 
+    /**
+     * A GET endpoint for creating a lobby,
+     *
+     * @return A lobby with a gameID as well as the playerID that is assigned to the player
+     * (as it is the creator it will be 1)
+     * @author Elias
+     */
     @RequestMapping(value = "lobby/create")
     public Lobby createLobby()
     {
@@ -62,6 +69,11 @@ public class LobbyController
         return joinLobby(gameID);
     }
 
+    /**
+     * @param gameID which gameID you want to join.
+     * @return gameID for the joined lobby and playerID that you have been assigned
+     * @author Elias, Adel, Mustafa and Emil
+     */
     @RequestMapping(value = "lobby/join")
     public Lobby joinLobby(Long gameID)
     {
@@ -94,6 +106,10 @@ public class LobbyController
         return lobby;
     }
 
+    /**
+     * @param gameID,boardName boardName is the name of the json file you want to switch to for the given gameID
+     * @author Elias and Bastrup
+     */
     @RequestMapping(value = "lobby/changeBoard")
     public boolean changeMap(Long gameID, String boardName)
     {
@@ -104,6 +120,11 @@ public class LobbyController
         return true;
     }
 
+    /**
+     * @param gameID for the game you want to start
+     * @return boolean whether the game was created or not
+     * @author Elias, Adel, Frederik and Emil
+     */
     @RequestMapping(value = "lobby/startGame")
     public boolean startGame(Long gameID)
     {
@@ -157,19 +178,10 @@ public class LobbyController
         return true;
     }
 
-    @RequestMapping(value = "lobby/delete")
-    public boolean deleteLobby(Long gameID)
-    {
-        for (int i = 0; i < 31; i++)
-        {
-            boardController.deleteBoard(gameID, i);
-        }
-        cardsRepository.deleteAll(cardsRepository.findAllByGameID(gameID));
-        upgradeCardRepository.deleteAll(upgradeCardRepository.findActiveUpgradeCardsByGameID(gameID));
-        lobbyRepository.deleteAll(lobbyRepository.findLobbiesByGameID(gameID));
-        return true;
-    }
-
+    /**
+     * @return returns a list of all lobbies
+     * @author Elias
+     */
     @RequestMapping(value = "lobby/getAll")
     public List<Long> getLobbies()
     {
@@ -185,12 +197,22 @@ public class LobbyController
         return lobbyToReturn;
     }
 
+    /**
+     * @param gameID to check size for
+     * @return amount of players in lobby.
+     * @author Mustafa
+     */
     @RequestMapping(value = "lobby/size")
     public Long getLobbySize(Long gameID)
     {
         return lobbyRepository.countLobbyObjectsByGameID(gameID);
     }
 
+    /**
+     * @param gameID,playerID to delete
+     * @return boolean specifying whether the lobby was deleted.
+     * @author Adel
+     */
     @RequestMapping(value = "lobby/leave")
     public boolean leaveLobby(Long gameID, Long playerID)
     {

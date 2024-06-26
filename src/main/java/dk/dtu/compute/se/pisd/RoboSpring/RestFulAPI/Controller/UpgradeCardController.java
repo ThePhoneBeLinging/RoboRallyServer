@@ -20,6 +20,14 @@ public class UpgradeCardController
         this.playerRepository = playerRepository;
     }
 
+    /**
+     * Endpoint for buying a upgradeCard
+     *
+     * @param gameID,playerID,upgradeCardName gameID, and player specify the player, and the upgradeCardName
+     *                                        specifies the upgradeCard
+     * @return boolean whether you have bought the card
+     * @author Adel
+     */
     @RequestMapping(value = "set/boards/upgradeCards/addToPlayer")
     public boolean buyUpgradeCard(Long gameID, Long playerID, String upgradeCardName)
     {

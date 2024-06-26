@@ -43,7 +43,7 @@ public class CardController
      * Based on the gameID, turnID, playerID and choice in the form of an int, you use this endpoint
      * for choosing an option during interactive phase.
      *
-     * @param gameID, turnID, playerID, choice
+     * @param gameID,turnID,playerID,choice choice being the integer that the player assigns the cards upon arrival
      * @author Frederik, Emil and Elias
      */
     @GetMapping(value = "set/interactive/choice")

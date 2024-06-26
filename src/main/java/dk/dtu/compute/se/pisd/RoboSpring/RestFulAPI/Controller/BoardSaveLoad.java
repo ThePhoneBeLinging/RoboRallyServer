@@ -31,8 +31,9 @@ public class BoardSaveLoad
     }
 
     /**
+     * @param completeGame CompleteGame that is to be saved in the database
      * @return returns the completeGame that is saved
-     * @author Elias
+     * @author Elias and Frederik
      */
     public CompleteGame saveBoard(CompleteGame completeGame)
     {
@@ -63,6 +64,13 @@ public class BoardSaveLoad
         return completeGame;
     }
 
+    /**
+     * Takes a completeGame and updates the database to only contain cards that are in completeGame.
+     * Uses optimized algorithm that allows us to reduce how many cards are updated in the database.
+     *
+     * @param completeGame that holds the cards that are to be saved.
+     * @author Elias
+     */
     public void saveCards(CompleteGame completeGame)
     {
         List<Card> cardsToSave = new ArrayList<>();
@@ -87,6 +95,11 @@ public class BoardSaveLoad
         cardsRepository.saveAll(cardsToSave);
     }
 
+    /**
+     * @param gameID,turnID To use for assembling a completeGame based on data from our database
+     * @return returns the completeGame assembled by looking up in our database using the gameID and turnID
+     * @author Frederik and Elias
+     */
     public CompleteGame loadBoard(Long gameID, int turnID)
     {
         CompleteGame completeGame = new CompleteGame();
